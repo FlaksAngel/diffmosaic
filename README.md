@@ -1,5 +1,7 @@
 # DiffMosaic
 
+[English](README.md) | [Русская версия](README.ru.md)
+
 **DiffMosaic** is an evidence-based test adequacy analyser for Python pull
 requests. It does not generate tests. Instead, it turns a pull request diff
 into an inspectable report answering a narrower question:
@@ -151,16 +153,19 @@ survived candidates contribute to mutation adequacy. Read the full
 ## Pilot corpus
 
 Research subjects are registered as data, not discovered implicitly at runtime.
-The initial manifest contains a calibration subject only; it is intentionally
-not evidence about third-party projects. Validate it locally without cloning or
-executing any project:
+The current manifest separates one local calibration subject, two executed
+third-party feasibility observations, and recorded exclusions. It is not yet a
+representative study and must not be used to make general effectiveness claims.
+Validate it locally without cloning or executing any project:
 
 ```powershell
 diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
 ```
 
-The [pilot-study protocol](docs/pilot-study-protocol.md) specifies the future
-third-party selection rules, exclusions, metrics and reporting limits.
+The [pilot-study protocol](docs/pilot-study-protocol.md) specifies selection
+rules, exclusions, metrics and reporting limits. The [Russian documentation
+index](docs/ru/README.md) and the [Russian preprint draft](paper/diffmosaic-article-ru.md)
+make the project easier to inspect in an academic setting.
 
 Candidate images have their own reviewed, lock-file-based recipes in
 [`images/`](images/). DiffMosaic does not build them; see the
