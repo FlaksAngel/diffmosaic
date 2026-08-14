@@ -1,0 +1,78 @@
+{
+  "base_revision": "d8eaaba824655046958d1a97f11780de460c3271",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 8.156,
+    "exit_code": 0,
+    "outcome": "passed",
+    "stderr_tail": "",
+    "stdout_tail": "============================= test session starts ==============================\nplatform linux -- Python 3.11.16, pytest-9.1.1, pluggy-1.6.0\ncachedir: /tmp/diffmosaic-pytest-cache\nrootdir: /workspace\nconfigfile: pyproject.toml\ntestpaths: tests\ncollected 495 items\n\ntests/test_appctx.py ...............                                     [  3%]\ntests/test_async.py ........                                             [  4%]\ntests/test_basic.py .................................................... [ 15%]\n........................................................................ [ 29%]\n...........                                                              [ 31%]\ntests/test_blueprints.py ............................................... [ 41%]\n.............                                                            [ 44%]\ntests/test_cli.py ...................................................... [ 54%]\n....                                                                     [ 55%]\ntests/test_config.py ...................                                 [ 59%]\ntests/test_converters.py ..                                              [ 60%]\ntests/test_helpers.py ...................................                [ 67%]\ntests/test_instance_config.py .......                                    [ 68%]\ntests/test_json.py ...............................                       [ 74%]\ntests/test_json_tag.py ..............                                    [ 77%]\ntests/test_logging.py ......                                             [ 78%]\ntests/test_regression.py .                                               [ 78%]\ntests/test_reqctx.py ..........                                          [ 81%]\ntests/test_request.py ...                                                [ 81%]\ntests/test_session_interface.py .                                        [ 81%]\ntests/test_signals.py .......                                            [ 83%]\ntests/test_subclassing.py .                                              [ 83%]\ntests/test_templating.py ................................                [ 89%]\ntests/test_testing.py ..........................                         [ 95%]\ntests/test_user_error_handler.py .........                               [ 96%]\ntests/test_views.py ...............                                      [100%]\n\n============================= 495 passed in 6.27s ==============================\n"
+  },
+  "candidates": [
+    {
+      "candidate_id": "src/flask/cli.py:1075:11:comparison_operator:==-to-!=",
+      "duration_seconds": 8.265,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": " 0x7d40d9d86690>>, <FlaskGroup None>)\n\n    def test_simple(self, invoke):\n        result = invoke([\"routes\"])\n        assert result.exit_code == 0\n>       self.expect_order([\"aaa_post\", \"static\", \"yyy_get_post\"], result.output)\n\ntests/test_cli.py:471: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <test_cli.TestRoutes object at 0x7d40d9bc1110>\norder = ['aaa_post', 'static', 'yyy_get_post']\noutput = 'Endpoint            Methods  Rule                     \\n------------------  -------  -------------------------\\n_auto...t:y>\\n_automatic_options           /static/<path:filename>  \\n_automatic_options           /zzz_post                \\n'\n\n    def expect_order(self, order, output):\n        # skip the header and match the start of each row\n        for expect, line in zip(order, output.splitlines()[2:], strict=False):\n            # do this instead of startswith for nicer pytest output\n>           assert line[: len(expect)] == expect\nE           AssertionError: assert '_automat' == 'aaa_post'\nE             \nE             - aaa_post\nE             + _automat\n\ntests/test_cli.py:466: AssertionError\n_____________________________ TestRoutes.test_sort _____________________________\n\nself = <test_cli.TestRoutes object at 0x7d40d9e7d810>, app = <Flask 'test_cli'>\ninvoke = functools.partial(<bound method CliRunner.invoke of <click.testing.CliRunner object at 0x7d40da5cf750>>, <FlaskGroup None>)\n\n    def test_sort(self, app, invoke):\n        default_output = invoke([\"routes\"]).output\n        endpoint_output = invoke([\"routes\", \"-s\", \"endpoint\"]).output\n        assert default_output == endpoint_output\n>       self.expect_order(\n            [\"static\", \"yyy_get_post\", \"aaa_post\"],\n            invoke([\"routes\", \"-s\", \"methods\"]).output,\n        )\n\ntests/test_cli.py:477: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <test_cli.TestRoutes object at 0x7d40d9e7d810>\norder = ['static', 'yyy_get_post', 'aaa_post']\noutput = 'Endpoint            Methods  Rule                     \\n------------------  -------  -------------------------\\n_auto...t:y>\\n_automatic_options           /static/<path:filename>  \\n_automatic_options           /zzz_post                \\n'\n\n    def expect_order(self, order, output):\n        # skip the header and match the start of each row\n        for expect, line in zip(order, output.splitlines()[2:], strict=False):\n            # do this instead of startswith for nicer pytest output\n>           assert line[: len(expect)] == expect\nE           AssertionError: assert '_autom' == 'static'\nE             \nE             - static\nE             + _autom\n\ntests/test_cli.py:466: AssertionError\n_________________________ TestRoutes.test_all_methods __________________________\n\nself = <test_cli.TestRoutes object at 0x7d40d9bc2790>\ninvoke = functools.partial(<bound method CliRunner.invoke of <click.testing.CliRunner object at 0x7d40d9c3ce10>>, <FlaskGroup None>)\n\n    def test_all_methods(self, invoke):\n        output = invoke([\"routes\"]).output\n        assert \"HEAD\" not in output\n        assert \"OPTIONS\" not in output\n    \n        output = invoke([\"routes\", \"--all-methods\"]).output\n>       assert \"GET, HEAD, OPTIONS, POST\" in output\nE       AssertionError: assert 'GET, HEAD, OPTIONS, POST' in 'Endpoint            Methods  Rule                     \\n------------------  -------  -------------------------\\n_auto...t:y>\\n_automatic_options  OPTIONS  /static/<path:filename>  \\n_automatic_options  OPTIONS  /zzz_post                \\n'\n\ntests/test_cli.py:498: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_cli.py::TestRoutes::test_simple - AssertionError: assert '_...\nFAILED tests/test_cli.py::TestRoutes::test_sort - AssertionError: assert '_au...\nFAILED tests/test_cli.py::TestRoutes::test_all_methods - AssertionError: asse...\n======================== 3 failed, 492 passed in 6.70s =========================\n"
+    },
+    {
+      "candidate_id": "src/flask/cli.py:1078:18:boolean_operator:or-to-and",
+      "duration_seconds": 8.109,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": "============================= test session starts ==============================\nplatform linux -- Python 3.11.16, pytest-9.1.1, pluggy-1.6.0\ncachedir: /tmp/diffmosaic-pytest-cache\nrootdir: /workspace\nconfigfile: pyproject.toml\ntestpaths: tests\ncollected 495 items\n\ntests/test_appctx.py ...............                                     [  3%]\ntests/test_async.py ........                                             [  4%]\ntests/test_basic.py .................................................... [ 15%]\n........................................................................ [ 29%]\n...........                                                              [ 31%]\ntests/test_blueprints.py ............................................... [ 41%]\n.............                                                            [ 44%]\ntests/test_cli.py ...........................................F.......... [ 54%]\n....                                                                     [ 55%]\ntests/test_config.py ...................                                 [ 59%]\ntests/test_converters.py ..                                              [ 60%]\ntests/test_helpers.py ...................................                [ 67%]\ntests/test_instance_config.py .......                                    [ 68%]\ntests/test_json.py ...............................                       [ 74%]\ntests/test_json_tag.py ..............                                    [ 77%]\ntests/test_logging.py ......                                             [ 78%]\ntests/test_regression.py .                                               [ 78%]\ntests/test_reqctx.py ..........                                          [ 81%]\ntests/test_request.py ...                                                [ 81%]\ntests/test_session_interface.py .                                        [ 81%]\ntests/test_signals.py .......                                            [ 83%]\ntests/test_subclassing.py .                                              [ 83%]\ntests/test_templating.py ................................                [ 89%]\ntests/test_testing.py ..........................                         [ 95%]\ntests/test_user_error_handler.py .........                               [ 96%]\ntests/test_views.py ...............                                      [100%]\n\n=================================== FAILURES ===================================\n_________________________ TestRoutes.test_all_methods __________________________\n\nself = <test_cli.TestRoutes object at 0x7de71eed1dd0>\ninvoke = functools.partial(<bound method CliRunner.invoke of <click.testing.CliRunner object at 0x7de71f667a10>>, <FlaskGroup None>)\n\n    def test_all_methods(self, invoke):\n        output = invoke([\"routes\"]).output\n        assert \"HEAD\" not in output\n        assert \"OPTIONS\" not in output\n    \n        output = invoke([\"routes\", \"--all-methods\"]).output\n>       assert \"GET, HEAD, OPTIONS, POST\" in output\nE       AssertionError: assert 'GET, HEAD, OPTIONS, POST' in 'Endpoint      Methods  Rule                     \\n------------  -------  -------------------------\\naaa_post      OPT...                \\nstatic        OPTIONS  /static/<path:filename>  \\nyyy_get_post  OPTIONS  /get_post/<int:x>/<int:y>\\n'\n\ntests/test_cli.py:498: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_cli.py::TestRoutes::test_all_methods - AssertionError: asse...\n======================== 1 failed, 494 passed in 6.50s =========================\n"
+    }
+  ],
+  "head_revision": "a82e942870b6472bb40017349cca772c242eb1ad",
+  "notes": [],
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 48,
+      "end_line": 1075,
+      "expression": "rule.endpoint == \"_automatic_options\"",
+      "id": "src/flask/cli.py:1075:11:comparison_operator:==-to-!=",
+      "kind": "comparison_operator",
+      "line": 1075,
+      "original_operator": "==",
+      "path": "src/flask/cli.py",
+      "replacement_operator": "!=",
+      "symbol": "routes_command"
+    },
+    {
+      "column": 18,
+      "end_column": 39,
+      "end_line": 1078,
+      "expression": "rule.methods or set()",
+      "id": "src/flask/cli.py:1078:18:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 1078,
+      "original_operator": "or",
+      "path": "src/flask/cli.py",
+      "replacement_operator": "and",
+      "symbol": "routes_command"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/flask-automatic-options:a82e942",
+    "image_identity": "diffmosaic/flask-automatic-options@sha256:d5b82d1e06f7581b6e09ec765537f20e6e39ad81d2f0f8a09120dc917cbd6552",
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ]
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 2,
+    "inconclusive": 0,
+    "killed": 2,
+    "mutation_adequacy": 1.0,
+    "survived": 0
+  }
+}

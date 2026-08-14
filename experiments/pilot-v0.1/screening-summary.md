@@ -10,9 +10,10 @@ when the plan contains at least one supported diff-local mutation.
 | Click declaration order | `00e592c` / `047adef` | 0 | Excluded | `click-declaration-order-screening.json` |
 | Flask IPv6 routing | `de8429f` / `7203fea` | 0 | Excluded | `flask-ipv6-routing-screening.json` |
 | pytest exception chain | `a3a62a0` / `0d6fbde` | 0 | Excluded | `pytest-exception-chain-screening.json` |
-| Flask automatic options | `d8eaaba` / `a82e942` | 2 | Eligible candidate | `flask-automatic-options-screening.json` |
+| Flask automatic options | `d8eaaba` / `a82e942` | 2 | Study; result recorded | `flask-automatic-options-screening.json` |
 
 The first three records remain in `corpus/pilot-v0.1.json` with role
 `excluded` and a specific reason. They must not be aggregated as observations
-with zero mutation adequacy. The fourth record is only a candidate until a
-trusted image has a verified baseline and recorded identity.
+with zero mutation adequacy. The fourth record has a trusted image, a verified
+baseline and a separate mutation execution report; it is the first `study`
+subject, not an aggregate result.
