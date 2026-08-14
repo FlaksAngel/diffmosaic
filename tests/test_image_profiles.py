@@ -8,22 +8,20 @@ ROOT = Path(__file__).parents[1]
 def test_image_profiles_match_executable_subject_commits_and_commands() -> None:
     corpus = json.loads((ROOT / "corpus" / "pilot-v0.1.json").read_text(encoding="utf-8"))
     profiles = json.loads((ROOT / "images" / "profiles-v0.1.json").read_text(encoding="utf-8"))
-    executable_subjects = {
+    profiled_subjects = {
         subject["id"]: subject
         for subject in corpus["subjects"]
-        if subject["role"] in {"candidate", "study"}
+        if subject["role"] in {"candidate", "study", "excluded"}
     }
 
     assert profiles["schema_version"] == "0.1"
     assert profiles["source_manifest"] == "corpus/pilot-v0.1.json"
-    assert {profile["subject_id"] for profile in profiles["profiles"]} == set(executable_subjects)
+    assert {profile["subject_id"] for profile in profiles["profiles"]} == set(profiled_subjects)
     for profile in profiles["profiles"]:
-        subject = executable_subjects[profile["subject_id"]]
+        subject = profiled_subjects[profile["subject_id"]]
         assert profile["head_commit"] == subject["head_commit"]
         assert profile["test_command"] == subject["test_command"]
-        assert profile["status"] == (
-            "qualified" if subject["role"] == "study" else "unbuilt"
-        )
+        assert profile["status"] == ("qualified" if subject["docker_image"] else "unbuilt")
         assert profile["uv_group"] in {"tests", "dev"}
         assert isinstance(profile["apt_packages"], list)
         assert all(package.islower() and package.isascii() for package in profile["apt_packages"])

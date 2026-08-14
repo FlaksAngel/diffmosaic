@@ -7,7 +7,7 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.7.0` is an intentionally small research prototype. It parses a
+Version `0.8.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not

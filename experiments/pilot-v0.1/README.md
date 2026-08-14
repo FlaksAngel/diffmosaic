@@ -20,7 +20,8 @@ described in `docs/image-provisioning-protocol.md`.
 
 The mutation plan contains zero candidates because this particular production
 diff has no changed comparison or Boolean connector supported by DiffMosaic
-0.7.0. Therefore its mutation adequacy is `null`: this run establishes a
-reproducible qualifying baseline, not evidence for or against mutation
-effectiveness. The raw JSON records contain bounded test-output tails and were
-reviewed before inclusion.
+0.7.0. It is consequently recorded as an excluded source candidate, not a
+mutation-adequacy study subject. The `click-declaration-order-screening.json`
+record is the static pre-screen; the final execution report establishes a
+reproducible qualifying baseline only. The raw JSON records contain bounded
+test-output tails and were reviewed before inclusion.

@@ -17,7 +17,8 @@ _IDENTIFIER = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 _COMMIT = re.compile(r"^[0-9a-f]{40}$")
 _PYTHON_VERSION = re.compile(r"^3\.(?:1[1-9]|[2-9][0-9])$")
 _VALID_STATUS = {"preliminary", "frozen", "retired"}
-_VALID_ROLES = {"calibration", "candidate", "study"}
+_VALID_ROLES = {"calibration", "candidate", "study", "excluded"}
+_VALID_SCREENING_OUTCOMES = {"eligible", "excluded_no_supported_mutation_site"}
 
 
 @dataclass(frozen=True)
@@ -94,11 +95,12 @@ def _validate_subject(
     else:
         known_ids.add(subject_id)
 
-    if subject.get("role") not in _VALID_ROLES:
+    role = subject.get("role")
+    if role not in _VALID_ROLES:
         _issue(
             issues,
             "invalid_role",
-            "Subject role must be calibration, candidate, or study.",
+            "Subject role must be calibration, candidate, study, or excluded.",
             label,
         )
 
@@ -148,11 +150,100 @@ def _validate_subject(
             "docker_image and docker_image_identity must both be strings or both be null.",
             label,
         )
-    if subject.get("role") == "study" and image_pair_is_null:
+    if role == "study" and image_pair_is_null:
         _issue(
             issues,
             "missing_study_image",
             "A study subject requires a pinned Docker image identity before execution.",
+            label,
+        )
+
+    screening = subject.get("mutation_screening")
+    if screening is not None and not isinstance(screening, dict):
+        _issue(
+            issues,
+            "invalid_mutation_screening",
+            "mutation_screening must be a JSON object when present.",
+            label,
+        )
+    if role == "study" and not isinstance(screening, dict):
+        _issue(
+            issues,
+            "missing_mutation_screening",
+            "A study subject requires a recorded eligible mutation screening.",
+            label,
+        )
+    if isinstance(screening, dict):
+        planner_version = screening.get("planner_version")
+        if not _is_nonempty_string(planner_version):
+            _issue(
+                issues,
+                "missing_screening_planner_version",
+                "mutation_screening must record the planner version.",
+                label,
+            )
+        max_candidates = screening.get("max_candidates")
+        candidate_count = screening.get("candidate_count")
+        if (
+            not isinstance(max_candidates, int)
+            or isinstance(max_candidates, bool)
+            or max_candidates < 1
+        ):
+            _issue(
+                issues,
+                "invalid_screening_candidate_limit",
+                "mutation_screening max_candidates must be a positive integer.",
+                label,
+            )
+        if (
+            not isinstance(candidate_count, int)
+            or isinstance(candidate_count, bool)
+            or candidate_count < 0
+            or isinstance(max_candidates, int)
+            and not isinstance(max_candidates, bool)
+            and candidate_count > max_candidates
+        ):
+            _issue(
+                issues,
+                "invalid_screening_candidate_count",
+                "mutation_screening candidate_count must be between zero and max_candidates.",
+                label,
+            )
+        screening_outcome = screening.get("outcome")
+        if screening_outcome not in _VALID_SCREENING_OUTCOMES:
+            _issue(
+                issues,
+                "invalid_screening_outcome",
+                "mutation_screening outcome must be eligible or excluded_no_supported_mutation_site.",
+                label,
+            )
+        elif screening_outcome == "eligible" and candidate_count == 0:
+            _issue(
+                issues,
+                "eligible_without_candidates",
+                "An eligible screening requires at least one planned candidate.",
+                label,
+            )
+        elif screening_outcome == "excluded_no_supported_mutation_site" and candidate_count != 0:
+            _issue(
+                issues,
+                "excluded_with_candidates",
+                "No-site exclusion requires a zero candidate count.",
+                label,
+            )
+        if role == "study" and screening_outcome != "eligible":
+            _issue(
+                issues,
+                "study_not_eligible_for_mutation_analysis",
+                "A study subject must have an eligible mutation screening.",
+                label,
+            )
+
+    if role == "excluded" and not _is_nonempty_string(subject.get("exclusion_reason")):
+        _issue(
+            issues,
+            "missing_exclusion_reason",
+            "An excluded subject requires a non-empty exclusion_reason.",
             label,
         )
 

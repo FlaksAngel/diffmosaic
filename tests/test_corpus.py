@@ -23,6 +23,12 @@ def _valid_manifest() -> dict[str, object]:
                 "test_command": ["python", "-m", "pytest"],
                 "docker_image": "sample-tests:1",
                 "docker_image_identity": "sha256:" + "c" * 64,
+                "mutation_screening": {
+                    "planner_version": "0.7.0",
+                    "max_candidates": 20,
+                    "candidate_count": 1,
+                    "outcome": "eligible",
+                },
                 "selection_rationale": "Small public fixture selected to exercise the pilot manifest contract.",
             }
         ],
@@ -62,3 +68,25 @@ def test_candidate_can_be_registered_before_a_trusted_image_is_built() -> None:
     report = validate_corpus_data(manifest)
 
     assert report.valid
+
+
+def test_excluded_subject_requires_a_reason_and_zero_site_screening() -> None:
+    manifest = _valid_manifest()
+    subject = manifest["subjects"][0]
+    assert isinstance(subject, dict)
+    subject["role"] = "excluded"
+    subject["docker_image"] = None
+    subject["docker_image_identity"] = None
+    subject["mutation_screening"] = {
+        "planner_version": "0.7.0",
+        "max_candidates": 20,
+        "candidate_count": 0,
+        "outcome": "excluded_no_supported_mutation_site",
+    }
+
+    missing_reason = validate_corpus_data(manifest)
+    assert "missing_exclusion_reason" in {issue.code for issue in missing_reason.issues}
+
+    subject["exclusion_reason"] = "No changed comparison or Boolean connector is supported by the planner."
+    accepted = validate_corpus_data(manifest)
+    assert accepted.valid

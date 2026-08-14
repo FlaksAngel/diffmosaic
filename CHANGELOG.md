@@ -2,6 +2,14 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.8.0 - 2026-08-14
+
+- Added validated mutation-screening metadata and an explicit `excluded` corpus
+  role so zero-site source candidates remain auditable but cannot be mistaken
+  for mutation-adequacy observations.
+- Added the first eligibility-screened Flask candidate and preserved screening
+  reports for all initial source candidates.
+
 ## 0.7.0 - 2026-08-14
 
 - Redirected pytest's cache to the sandbox `/tmp` filesystem so read-only

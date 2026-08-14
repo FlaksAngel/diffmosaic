@@ -1,0 +1,35 @@
+{
+  "base_revision": "d8eaaba824655046958d1a97f11780de460c3271",
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "column": 11,
+      "end_column": 48,
+      "end_line": 1075,
+      "expression": "rule.endpoint == \"_automatic_options\"",
+      "id": "src/flask/cli.py:1075:11:comparison_operator:==-to-!=",
+      "kind": "comparison_operator",
+      "line": 1075,
+      "original_operator": "==",
+      "path": "src/flask/cli.py",
+      "replacement_operator": "!=",
+      "symbol": "routes_command"
+    },
+    {
+      "column": 18,
+      "end_column": 39,
+      "end_line": 1078,
+      "expression": "rule.methods or set()",
+      "id": "src/flask/cli.py:1078:18:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 1078,
+      "original_operator": "or",
+      "path": "src/flask/cli.py",
+      "replacement_operator": "and",
+      "symbol": "routes_command"
+    }
+  ],
+  "head_revision": "a82e942870b6472bb40017349cca772c242eb1ad",
+  "notes": [],
+  "schema_version": "0.1"
+}

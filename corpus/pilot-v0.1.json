@@ -24,7 +24,7 @@
     },
     {
       "id": "click-declaration-order",
-      "role": "study",
+      "role": "excluded",
       "repository_url": "https://github.com/pallets/click",
       "license": "BSD-3-Clause",
       "base_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
@@ -33,11 +33,18 @@
       "test_command": ["python", "-m", "pytest"],
       "docker_image": "diffmosaic/click-declaration-order:047adef",
       "docker_image_identity": "diffmosaic/click-declaration-order@sha256:477ba5092a70eeea2cd79a54ddd5b924076024e548fe59cc8163598650e70aa0",
-      "selection_rationale": "Public Pallets study subject with a fixed non-merge commit that changes src/click/core.py and its focused regression tests; baseline qualification passed in a reviewed local image."
+      "mutation_screening": {
+        "planner_version": "0.7.0",
+        "max_candidates": 20,
+        "candidate_count": 0,
+        "outcome": "excluded_no_supported_mutation_site"
+      },
+      "selection_rationale": "Public Pallets source candidate with a fixed non-merge commit that changes src/click/core.py and its focused regression tests; baseline qualification passed in a reviewed local image.",
+      "exclusion_reason": "The recorded DiffMosaic 0.7.0 plan has no changed comparison or Boolean connector supported by the current mutation operators, so this commit cannot contribute a mutation-adequacy observation."
     },
     {
-      "id": "flask-ipv6-routing-candidate",
-      "role": "candidate",
+      "id": "flask-ipv6-routing",
+      "role": "excluded",
       "repository_url": "https://github.com/pallets/flask",
       "license": "BSD-3-Clause",
       "base_commit": "de8429ffda8cfb54db175529e2bae72a24e1fa7e",
@@ -46,11 +53,18 @@
       "test_command": ["python", "-m", "pytest"],
       "docker_image": null,
       "docker_image_identity": null,
-      "selection_rationale": "Public Pallets project candidate with a fixed non-merge commit that changes src/flask/app.py and a routing regression test."
+      "mutation_screening": {
+        "planner_version": "0.7.0",
+        "max_candidates": 20,
+        "candidate_count": 0,
+        "outcome": "excluded_no_supported_mutation_site"
+      },
+      "selection_rationale": "Public Pallets source candidate with a fixed non-merge commit that changes src/flask/app.py and a routing regression test.",
+      "exclusion_reason": "The recorded DiffMosaic 0.7.0 plan has no changed comparison or Boolean connector supported by the current mutation operators, so this commit is screened out before image preparation."
     },
     {
-      "id": "pytest-exception-chain-candidate",
-      "role": "candidate",
+      "id": "pytest-exception-chain",
+      "role": "excluded",
       "repository_url": "https://github.com/pytest-dev/pytest",
       "license": "MIT",
       "base_commit": "a3a62a0ebd43ec848b979227421e2b7ba93a9dc9",
@@ -59,7 +73,33 @@
       "test_command": ["python", "-m", "pytest"],
       "docker_image": null,
       "docker_image_identity": null,
-      "selection_rationale": "Independent public testing-tool project candidate with a fixed non-merge commit changing exception formatting and its regression test."
+      "mutation_screening": {
+        "planner_version": "0.7.0",
+        "max_candidates": 20,
+        "candidate_count": 0,
+        "outcome": "excluded_no_supported_mutation_site"
+      },
+      "selection_rationale": "Independent public testing-tool source candidate with a fixed non-merge commit changing exception formatting and its regression test.",
+      "exclusion_reason": "The recorded DiffMosaic 0.7.0 plan has no changed comparison or Boolean connector supported by the current mutation operators, so this commit is screened out before image preparation."
+    },
+    {
+      "id": "flask-automatic-options",
+      "role": "candidate",
+      "repository_url": "https://github.com/pallets/flask",
+      "license": "BSD-3-Clause",
+      "base_commit": "d8eaaba824655046958d1a97f11780de460c3271",
+      "head_commit": "a82e942870b6472bb40017349cca772c242eb1ad",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.7.0",
+        "max_candidates": 20,
+        "candidate_count": 2,
+        "outcome": "eligible"
+      },
+      "selection_rationale": "Public Pallets candidate selected by the preregistered static screen: its fixed non-merge commit changes three production modules and two test files, with two diff-local supported mutation sites."
     }
   ]
 }

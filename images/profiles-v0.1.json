@@ -14,7 +14,7 @@
       "status": "qualified"
     },
     {
-      "subject_id": "flask-ipv6-routing-candidate",
+      "subject_id": "flask-ipv6-routing",
       "head_commit": "7203feabf723edae0286ae5dc64fec8ac4c91735",
       "dockerfile": "images/Dockerfile.uv-locked",
       "base_image": "python:3.11-slim",
@@ -25,13 +25,24 @@
       "status": "unbuilt"
     },
     {
-      "subject_id": "pytest-exception-chain-candidate",
+      "subject_id": "pytest-exception-chain",
       "head_commit": "0d6fbdeffa57c796123f62f81f7dd370d9b7ecdc",
       "dockerfile": "images/Dockerfile.uv-locked",
       "base_image": "python:3.11-slim",
       "apt_packages": [],
       "uv_group": "dev",
       "image_tag": "diffmosaic/pytest-exception-chain:0d6fbde",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "unbuilt"
+    },
+    {
+      "subject_id": "flask-automatic-options",
+      "head_commit": "a82e942870b6472bb40017349cca772c242eb1ad",
+      "dockerfile": "images/Dockerfile.uv-locked",
+      "base_image": "python:3.11-slim",
+      "apt_packages": [],
+      "uv_group": "tests",
+      "image_tag": "diffmosaic/flask-automatic-options:a82e942",
       "test_command": ["python", "-m", "pytest"],
       "status": "unbuilt"
     }
