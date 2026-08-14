@@ -7,7 +7,7 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.2.0` is an intentionally small research prototype. It parses a
+Version `0.3.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not
@@ -96,7 +96,35 @@ diffmosaic mutate-plan `
 
 The command only reads Git revisions and prints a plan. It does **not** run
 tests, write mutant files, or execute target-project code. Candidate execution
-will be introduced only with explicit isolation controls.
+uses a separate Docker command with explicit isolation controls.
+
+## Controlled mutation execution
+
+`mutate-run` is opt-in and is intended only for repositories whose tests and
+container image you trust. Before every candidate it creates a clean temporary
+worktree from `git archive <head>`, never from the source checkout. Docker runs
+with no network, a read-only root filesystem, dropped capabilities, a bounded
+process count, CPU/memory limits, and a temporary workspace that is deleted
+after the run.
+
+Prepare a **trusted, prebuilt** Docker image yourself; DiffMosaic never builds
+an image or executes a repository Dockerfile. Then place `--test-command` last:
+
+```powershell
+diffmosaic mutate-run `
+  --repo C:\path\to\trusted-python-project `
+  --base origin/main `
+  --head HEAD `
+  --image trusted-project-tests:latest `
+  --output mutation-results.json `
+  --allow-execution `
+  --test-command python -m pytest
+```
+
+The baseline test run must pass before candidates run. Results are classified
+as `killed`, `survived`, `timeout`, or `infrastructure_error`; only killed and
+survived candidates contribute to mutation adequacy. Read the full
+[execution protocol](docs/mutation-execution-protocol.md) before using it.
 
 ## Research direction
 

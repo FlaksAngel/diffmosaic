@@ -7,6 +7,7 @@ from pathlib import Path
 
 from diffmosaic.models import AnalysisReport
 from diffmosaic.mutation import MutationPlan
+from diffmosaic.runner import MutationExecutionReport
 
 
 def render_json(report: AnalysisReport) -> str:
@@ -129,3 +130,10 @@ def write_mutation_plan(plan: MutationPlan, output: Path, output_format: str) ->
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(rendered, encoding="utf-8")
+
+
+def write_mutation_execution(report: MutationExecutionReport, output: Path) -> None:
+    """Persist one experiment record; logs remain bounded by the runner."""
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report.to_dict(), indent=2, sort_keys=True) + "\n", encoding="utf-8")

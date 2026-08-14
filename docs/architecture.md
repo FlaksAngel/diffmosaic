@@ -15,6 +15,10 @@ Changed new lines -----> Python AST symbol mapping
         |
         +------------> mutation planner (no file writes or execution)
         |
+        +------------> opt-in Docker runner (temporary git archive only)
+        |                 ├─ baseline must pass
+        |                 └─ bounded JSON experiment record
+        |
         v
 Analysis report -----> JSON / Markdown
 ```
@@ -37,4 +41,6 @@ Analysis report -----> JSON / Markdown
 - `reporting.py` — serialises a report without business logic.
 - `coverage.py` — validates and reads pre-generated execution evidence.
 - `mutation.py` — finds and syntactically validates bounded diff-local mutation
-  candidates; execution remains intentionally out of scope.
+  candidates.
+- `runner.py` — opt-in Docker runner over a clean `git archive`; never runs a
+  project unless the caller supplies both a prebuilt image and acknowledgement.

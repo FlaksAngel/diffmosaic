@@ -2,8 +2,8 @@
 
 DiffMosaic uses mutation testing as behavioural evidence, not as a claim that a
 surviving mutant proves a bug. This module deliberately stops at planning and
-source generation. A future runner must execute candidates in a separately
-isolated environment.
+source generation. The separately isolated runner consumes these candidates
+only after an explicit command-line acknowledgement.
 """
 
 from __future__ import annotations

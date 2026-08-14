@@ -24,3 +24,16 @@ or experiment motivated the decision.
   production lines.
 - **Constraint:** candidates are syntactically validated in memory but are not
   written or executed in this iteration.
+
+## 2026-08-14 — Isolated execution protocol
+
+- **Decision:** mutation execution uses a local, pre-pulled Docker image and a
+  fresh temporary `git archive` for every baseline or candidate invocation.
+- **Controls:** no network, read-only container root filesystem, no Linux
+  capabilities, no-new-privileges, bounded CPU/memory/PIDs, finite timeout,
+  no automatic image builds, and a bounded log tail.
+- **Validity control:** candidates are skipped unless the baseline test command
+  passes in the identical sandbox configuration.
+- **Limitation:** Docker controls reduce risk but do not make arbitrary code
+  trustworthy; users must still analyse only repositories and images they are
+  authorised to execute.

@@ -26,6 +26,8 @@ diff-local mutation testing into an explainable test-evidence report.
 - Explicit classification of production versus test paths.
 - Safe reading of an already generated `coverage.py` JSON artefact.
 - Safe planning of bounded, diff-local comparison and boolean mutations.
+- Opt-in Docker execution against a temporary `git archive` worktree, with a
+  passing baseline required before any candidate is evaluated.
 - Deterministic JSON and Markdown reports.
 
 ## Explicit non-goals for version 0.1
@@ -34,7 +36,7 @@ diff-local mutation testing into an explainable test-evidence report.
 - LLM inference or a chat interface.
 - Supporting multiple languages.
 - Running untrusted code.
-- Running mutation candidates before an isolated execution protocol exists.
+- Building Docker images or executing repository Dockerfiles automatically.
 - Claiming a test is "correct" or "complete".
 
 ## Research questions

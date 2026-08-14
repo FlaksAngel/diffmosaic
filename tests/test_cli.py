@@ -129,3 +129,30 @@ def test_cli_creates_mutation_plan_without_dirtying_repository(tmp_path: Path) -
     assert plan["candidates"][0]["original_operator"] == ">"
     assert plan["candidates"][0]["replacement_operator"] == ">="
     assert _git(repo, "status", "--short") == ""
+
+
+def test_cli_refuses_mutation_execution_without_explicit_acknowledgement(tmp_path: Path) -> None:
+    output = tmp_path / "experiment.json"
+
+    exit_code = main(
+        [
+            "mutate-run",
+            "--repo",
+            str(tmp_path),
+            "--base",
+            "HEAD~1",
+            "--head",
+            "HEAD",
+            "--image",
+            "trusted-tests:latest",
+            "--output",
+            str(output),
+            "--test-command",
+            "python",
+            "-m",
+            "pytest",
+        ]
+    )
+
+    assert exit_code == 2
+    assert not output.exists()

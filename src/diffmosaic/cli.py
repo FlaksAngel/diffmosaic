@@ -10,12 +10,14 @@ from diffmosaic.analyzer import analyse_repository
 from diffmosaic.coverage import CoverageDataError
 from diffmosaic.diff import GitReadError
 from diffmosaic.mutation import plan_repository_mutations
+from diffmosaic.runner import DockerSandboxConfig, MutationExecutionError, run_mutation_plan
 from diffmosaic.reporting import (
     render_json,
     render_markdown,
     render_mutation_plan_json,
     render_mutation_plan_markdown,
     write_mutation_plan,
+    write_mutation_execution,
     write_report,
 )
 
@@ -66,6 +68,32 @@ def _build_parser() -> argparse.ArgumentParser:
         help="plan format (default: json)",
     )
     mutation.add_argument("--output", type=Path, help="write plan to this path instead of stdout")
+
+    execute = subparsers.add_parser(
+        "mutate-run",
+        help="run planned mutations in an explicitly enabled Docker sandbox",
+    )
+    execute.add_argument("--repo", type=Path, required=True, help="path to a local Git repository")
+    execute.add_argument("--base", required=True, help="base Git revision, for example origin/main")
+    execute.add_argument("--head", required=True, help="head Git revision, for example HEAD")
+    execute.add_argument("--image", required=True, help="trusted Docker image already available locally")
+    execute.add_argument("--output", type=Path, required=True, help="write experiment JSON here")
+    execute.add_argument("--max-candidates", type=int, default=20)
+    execute.add_argument("--timeout-seconds", type=int, default=120)
+    execute.add_argument("--memory-limit", default="1g")
+    execute.add_argument("--cpu-limit", type=float, default=1.0)
+    execute.add_argument("--pids-limit", type=int, default=256)
+    execute.add_argument(
+        "--allow-execution",
+        action="store_true",
+        help="required acknowledgement: this runs the supplied test command in Docker",
+    )
+    execute.add_argument(
+        "--test-command",
+        nargs=argparse.REMAINDER,
+        required=True,
+        help="test command arguments; this option must be last",
+    )
     return parser
 
 
@@ -106,6 +134,36 @@ def main(argv: list[str] | None = None) -> int:
                 else render_mutation_plan_markdown(plan)
             )
             print(rendered, end="")
+        return 0
+
+    if args.command == "mutate-run":
+        if not args.allow_execution:
+            print(
+                "diffmosaic: mutation execution is disabled; pass --allow-execution after reviewing the protocol.",
+                file=sys.stderr,
+            )
+            return 2
+        try:
+            plan = plan_repository_mutations(
+                str(args.repo),
+                args.base,
+                args.head,
+                max_candidates=args.max_candidates,
+            )
+            config = DockerSandboxConfig(
+                image=args.image,
+                test_command=tuple(args.test_command),
+                timeout_seconds=args.timeout_seconds,
+                memory_limit=args.memory_limit,
+                cpu_limit=args.cpu_limit,
+                pids_limit=args.pids_limit,
+            )
+            report = run_mutation_plan(args.repo, plan, config)
+        except (GitReadError, MutationExecutionError, OSError, ValueError) as exc:
+            print(f"diffmosaic: {exc}", file=sys.stderr)
+            return 1
+
+        write_mutation_execution(report, args.output)
         return 0
 
     return 2

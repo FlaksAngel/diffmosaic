@@ -2,6 +2,13 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.3.0 — 2026-08-14
+
+- Added opt-in Docker execution for planned mutations.
+- Runs each baseline/candidate in a fresh temporary `git archive` workspace.
+- Requires a prebuilt local image and records bounded experiment JSON.
+- Added isolation controls and an execution protocol.
+
 ## 0.2.0 — 2026-08-14
 
 - Added a safe, deterministic `mutate-plan` command for diff-local Python
