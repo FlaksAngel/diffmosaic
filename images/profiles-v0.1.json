@@ -45,6 +45,17 @@
       "image_tag": "diffmosaic/flask-automatic-options:a82e942",
       "test_command": ["python", "-m", "pytest"],
       "status": "qualified"
+    },
+    {
+      "subject_id": "pytest-option-destination",
+      "head_commit": "532b20103ecf9972f752353f20088c5cc878003b",
+      "dockerfile": "images/Dockerfile.uv-locked",
+      "base_image": "python:3.11-slim",
+      "apt_packages": [],
+      "uv_group": "dev",
+      "image_tag": "diffmosaic/pytest-option-destination:532b201",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "unbuilt"
     }
   ]
 }

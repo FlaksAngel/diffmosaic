@@ -11,9 +11,11 @@ when the plan contains at least one supported diff-local mutation.
 | Flask IPv6 routing | `de8429f` / `7203fea` | 0 | Excluded | `flask-ipv6-routing-screening.json` |
 | pytest exception chain | `a3a62a0` / `0d6fbde` | 0 | Excluded | `pytest-exception-chain-screening.json` |
 | Flask automatic options | `d8eaaba` / `a82e942` | 2 | Study; result recorded | `flask-automatic-options-screening.json` |
+| pytest option destination | `8d40684` / `532b201` | 2 | Eligible candidate | `pytest-option-destination-screening.json` |
 
 The first three records remain in `corpus/pilot-v0.1.json` with role
 `excluded` and a specific reason. They must not be aggregated as observations
 with zero mutation adequacy. The fourth record has a trusted image, a verified
 baseline and a separate mutation execution report; it is the first `study`
-subject, not an aggregate result.
+subject, not an aggregate result. The fifth record is a second-community
+candidate until its image and baseline are qualified.

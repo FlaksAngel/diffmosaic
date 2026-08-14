@@ -175,7 +175,7 @@ def test_cli_validates_committed_calibration_manifest(tmp_path: Path) -> None:
     report = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert report["valid"] is True
-    assert report["subject_count"] == 5
+    assert report["subject_count"] == 6
 
 
 def test_cli_prioritizes_symbols_without_dirtying_repository(tmp_path: Path) -> None:

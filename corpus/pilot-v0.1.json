@@ -100,6 +100,25 @@
         "outcome": "eligible"
       },
       "selection_rationale": "Public Pallets candidate selected by the preregistered static screen: its fixed non-merge commit changes three production modules and two test files, with two diff-local supported mutation sites."
+    },
+    {
+      "id": "pytest-option-destination",
+      "role": "candidate",
+      "repository_url": "https://github.com/pytest-dev/pytest",
+      "license": "MIT",
+      "base_commit": "8d40684d1f997e62758785aebb3132c2f5b712e1",
+      "head_commit": "532b20103ecf9972f752353f20088c5cc878003b",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.8.0",
+        "max_candidates": 20,
+        "candidate_count": 2,
+        "outcome": "eligible"
+      },
+      "selection_rationale": "Independent pytest-dev candidate selected by the preregistered static screen: its fixed non-merge commit changes option parsing production code and a focused parser regression test, with two diff-local supported mutation sites."
     }
   ]
 }

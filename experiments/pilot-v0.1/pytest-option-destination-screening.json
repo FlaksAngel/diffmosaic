@@ -1,0 +1,35 @@
+{
+  "base_revision": "8d40684d1f997e62758785aebb3132c2f5b712e1",
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "column": 11,
+      "end_column": 46,
+      "end_line": 365,
+      "expression": "self.parser and \"dest\" not in attrs",
+      "id": "src/_pytest/config/argparsing.py:365:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 365,
+      "original_operator": "and",
+      "path": "src/_pytest/config/argparsing.py",
+      "replacement_operator": "or",
+      "symbol": "OptionGroup.addoption"
+    },
+    {
+      "column": 23,
+      "end_column": 42,
+      "end_line": 369,
+      "expression": "option.dest == dest",
+      "id": "src/_pytest/config/argparsing.py:369:23:comparison_operator:==-to-!=",
+      "kind": "comparison_operator",
+      "line": 369,
+      "original_operator": "==",
+      "path": "src/_pytest/config/argparsing.py",
+      "replacement_operator": "!=",
+      "symbol": "OptionGroup.addoption"
+    }
+  ],
+  "head_revision": "532b20103ecf9972f752353f20088c5cc878003b",
+  "notes": [],
+  "schema_version": "0.1"
+}
