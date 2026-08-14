@@ -1,0 +1,19 @@
+diff --git a/catalog.py b/catalog.py
+index 70a4b0f..e90b931 100644
+--- a/catalog.py
++++ b/catalog.py
+@@ -4,0 +5,2 @@ def calculate_total(subtotal: Decimal, discount: Decimal) -> Decimal:
++    if discount > Decimal("1"):
++        raise ValueError("discount cannot exceed 100%")
+@@ -7,0 +10 @@
++DEFAULT_CURRENCY = "RUB"
+diff --git a/tests/test_catalog.py b/tests/test_catalog.py
+index 14ca5ae..13cb34a 100644
+--- a/tests/test_catalog.py
++++ b/tests/test_catalog.py
+@@ -4,0 +5,5 @@ def test_calculate_total():
++
++def test_rejects_discount_above_one():
++    with pytest.raises(ValueError):
++        calculate_total(Decimal("10"), Decimal("1.1"))
++
