@@ -2,6 +2,13 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.5.0 - 2026-08-14
+
+- Added reviewed, lock-file-based image profiles for the three public pilot
+  candidates.
+- Added a separate image-provisioning protocol; DiffMosaic still never builds
+  images or executes target-project Dockerfiles.
+
 ## 0.4.0 - 2026-08-14
 
 - Added data-only pilot-corpus validation with exact commit, image-identity and

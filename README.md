@@ -143,6 +143,10 @@ diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
 The [pilot-study protocol](docs/pilot-study-protocol.md) specifies the future
 third-party selection rules, exclusions, metrics and reporting limits.
 
+Candidate images have their own reviewed, lock-file-based recipes in
+[`images/`](images/). DiffMosaic does not build them; see the
+[image-provisioning protocol](docs/image-provisioning-protocol.md).
+
 ## Research direction
 
 The project will evaluate whether transparent diff and test signals can rank

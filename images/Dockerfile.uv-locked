@@ -1,0 +1,23 @@
+# Build this recipe only from a verified checkout at the profile's head_commit.
+# DiffMosaic never invokes Docker build; the resulting image identity is reviewed
+# and recorded manually before a candidate becomes a study subject.
+
+ARG PYTHON_IMAGE=python:3.11-slim
+FROM ${PYTHON_IMAGE}
+
+ARG UV_GROUP
+
+ENV VIRTUAL_ENV=/opt/diffmosaic-venv
+ENV UV_PROJECT_ENVIRONMENT=/opt/diffmosaic-venv
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
+ENV PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /workspace
+COPY . /workspace
+
+RUN test -n "${UV_GROUP}" \
+    && python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir uv \
+    && uv sync --locked --group "${UV_GROUP}"
+
+CMD ["python", "-m", "pytest"]
