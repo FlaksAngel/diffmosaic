@@ -49,3 +49,20 @@ failures and the Boolean mutation caused one. This gives mutation adequacy
 `2 / (2 + 0) = 1.0` for this one revision. It is a per-revision observation,
 not an estimate for Flask or Python projects generally; the protocol requires
 at least six eligible study subjects before any aggregate interpretation.
+
+## pytest option-destination baseline exclusion
+
+The static plan for `8d40684d1f997e62758785aebb3132c2f5b712e1` to
+`532b20103ecf9972f752353f20088c5cc878003b` contained two eligible sites and
+is preserved in `pytest-option-destination-screening.json`. The image build
+was itself reproducible only with the reviewed
+`SETUPTOOLS_SCM_PRETEND_VERSION=9.2.0.dev0` input, whose final identity is
+`diffmosaic/pytest-option-destination@sha256:6ab76681451d2b71132f568ce8b9ba39ed987a2ff481643f1850c7578be1eb0e`.
+
+`pytest-option-destination.json` records the unsuccessful baseline rather than
+hiding it. `setuptools-scm` generated `src/_pytest/_version.py` during the
+image build, but the file is untracked and therefore absent from the clean
+runtime `git archive`; import then raises `ModuleNotFoundError`. DiffMosaic did
+not inject that generated file into the archive, and it skipped both mutations.
+This subject is excluded from mutation-adequacy analysis under the documented
+runner scope.

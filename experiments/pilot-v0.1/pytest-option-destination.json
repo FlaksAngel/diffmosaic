@@ -1,0 +1,63 @@
+{
+  "base_revision": "8d40684d1f997e62758785aebb3132c2f5b712e1",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 1.25,
+    "exit_code": 1,
+    "outcome": "failed",
+    "stderr_tail": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 189, in _run_module_as_main\n  File \"<frozen runpy>\", line 148, in _get_module_details\n  File \"<frozen runpy>\", line 112, in _get_module_details\n  File \"/workspace/src/pytest/__init__.py\", line 11, in <module>\n    from _pytest.assertion import register_assert_rewrite\n  File \"/workspace/src/_pytest/assertion/__init__.py\", line 12, in <module>\n    from _pytest.assertion import rewrite\n  File \"/workspace/src/_pytest/assertion/rewrite.py\", line 43, in <module>\n    from _pytest._version import version\nModuleNotFoundError: No module named '_pytest._version'\n",
+    "stdout_tail": ""
+  },
+  "candidates": [],
+  "head_revision": "532b20103ecf9972f752353f20088c5cc878003b",
+  "notes": [
+    "Baseline did not pass; mutation candidates were not executed."
+  ],
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 46,
+      "end_line": 365,
+      "expression": "self.parser and \"dest\" not in attrs",
+      "id": "src/_pytest/config/argparsing.py:365:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 365,
+      "original_operator": "and",
+      "path": "src/_pytest/config/argparsing.py",
+      "replacement_operator": "or",
+      "symbol": "OptionGroup.addoption"
+    },
+    {
+      "column": 23,
+      "end_column": 42,
+      "end_line": 369,
+      "expression": "option.dest == dest",
+      "id": "src/_pytest/config/argparsing.py:369:23:comparison_operator:==-to-!=",
+      "kind": "comparison_operator",
+      "line": 369,
+      "original_operator": "==",
+      "path": "src/_pytest/config/argparsing.py",
+      "replacement_operator": "!=",
+      "symbol": "OptionGroup.addoption"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/pytest-option-destination:532b201",
+    "image_identity": "diffmosaic/pytest-option-destination@sha256:6ab76681451d2b71132f568ce8b9ba39ed987a2ff481643f1850c7578be1eb0e",
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ]
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 0,
+    "inconclusive": 0,
+    "killed": 0,
+    "mutation_adequacy": null,
+    "survived": 0
+  }
+}

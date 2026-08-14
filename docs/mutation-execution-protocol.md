@@ -39,9 +39,11 @@ For pytest commands it also redirects the pytest cache to `/tmp`, so projects
 that treat cache-write warnings as errors remain compatible with the read-only
 workspace.
 Projects whose tests require a writable source tree are outside this runner's
-current scope. Each invocation receives a random Docker container name; if the
-host-side timeout expires, DiffMosaic force-removes that named container before
-returning the `timeout` result.
+current scope. Projects that require an untracked source file generated during
+image preparation are also outside scope: a clean `git archive` deliberately
+does not inherit build-context artefacts. Each invocation receives a random
+Docker container name; if the host-side timeout expires, DiffMosaic
+force-removes that named container before returning the `timeout` result.
 
 ## Baseline and outcomes
 

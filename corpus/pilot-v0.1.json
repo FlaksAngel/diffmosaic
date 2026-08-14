@@ -103,7 +103,7 @@
     },
     {
       "id": "pytest-option-destination",
-      "role": "study",
+      "role": "excluded",
       "repository_url": "https://github.com/pytest-dev/pytest",
       "license": "MIT",
       "base_commit": "8d40684d1f997e62758785aebb3132c2f5b712e1",
@@ -118,7 +118,8 @@
         "candidate_count": 2,
         "outcome": "eligible"
       },
-      "selection_rationale": "Independent pytest-dev candidate selected by the preregistered static screen: its fixed non-merge commit changes option parsing production code and a focused parser regression test, with two diff-local supported mutation sites."
+      "selection_rationale": "Independent pytest-dev candidate selected by the preregistered static screen: its fixed non-merge commit changes option parsing production code and a focused parser regression test, with two diff-local supported mutation sites.",
+      "exclusion_reason": "The qualified image builds only after setuptools-scm generates src/_pytest/_version.py, but that untracked file is absent from the runner's clean git archive and the baseline cannot import pytest. No mutations were executed."
     }
   ]
 }

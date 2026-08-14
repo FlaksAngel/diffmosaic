@@ -64,7 +64,8 @@ Include only subjects that meet all of these conditions:
 
 Exclude generated code, commits that only change documentation or tests,
 projects whose tests require credentials or network access, commits with zero
-supported mutation sites, and any project whose licensing conditions are
+supported mutation sites, projects that require an untracked generated source
+file at archive runtime, and any project whose licensing conditions are
 unclear. Record exclusions and the reason in a later corpus version rather
 than replacing failed candidates silently.
 
