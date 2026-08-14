@@ -13,6 +13,8 @@ Changed new lines -----> Python AST symbol mapping
         |
         +------------> optional coverage.json reader (no code execution)
         |
+        +------------> mutation planner (no file writes or execution)
+        |
         v
 Analysis report -----> JSON / Markdown
 ```
@@ -34,4 +36,5 @@ Analysis report -----> JSON / Markdown
 - `analyzer.py` — assembles raw evidence into a domain report.
 - `reporting.py` — serialises a report without business logic.
 - `coverage.py` — validates and reads pre-generated execution evidence.
-- `mutation.py` — planned: isolated diff-local mutation runs.
+- `mutation.py` — finds and syntactically validates bounded diff-local mutation
+  candidates; execution remains intentionally out of scope.

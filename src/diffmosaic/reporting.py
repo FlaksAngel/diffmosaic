@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from diffmosaic.models import AnalysisReport
+from diffmosaic.mutation import MutationPlan
 
 
 def render_json(report: AnalysisReport) -> str:
@@ -78,5 +79,53 @@ def write_report(report: AnalysisReport, output: Path, output_format: str) -> No
     """Write one report file, creating only explicitly requested parent folders."""
 
     rendered = render_json(report) if output_format == "json" else render_markdown(report)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(rendered, encoding="utf-8")
+
+
+def render_mutation_plan_json(plan: MutationPlan) -> str:
+    return json.dumps(plan.to_dict(), indent=2, sort_keys=True) + "\n"
+
+
+def render_mutation_plan_markdown(plan: MutationPlan) -> str:
+    lines = [
+        "# DiffMosaic mutation plan",
+        "",
+        f"- Base revision: `{plan.base_revision}`",
+        f"- Head revision: `{plan.head_revision}`",
+        f"- Candidate count: {len(plan.candidates)}",
+        "",
+        "This plan does not execute project code. Each item is a candidate for a future isolated runner.",
+        "",
+        "## Candidates",
+        "",
+    ]
+    if plan.candidates:
+        for candidate in plan.candidates:
+            site = candidate.site
+            lines.extend(
+                [
+                    f"### `{site.identifier}`",
+                    "",
+                    f"- Symbol: `{site.symbol or '<module>'}`",
+                    f"- Expression: `{site.expression}`",
+                    f"- Mutation: `{site.original_operator}` → `{site.replacement_operator}`",
+                    "",
+                ]
+            )
+    else:
+        lines.extend(["No supported mutation sites were found in changed production code.", ""])
+
+    if plan.notes:
+        lines.extend(["## Notes", "", *(f"- {note}" for note in plan.notes), ""])
+    return "\n".join(lines)
+
+
+def write_mutation_plan(plan: MutationPlan, output: Path, output_format: str) -> None:
+    rendered = (
+        render_mutation_plan_json(plan)
+        if output_format == "json"
+        else render_mutation_plan_markdown(plan)
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(rendered, encoding="utf-8")

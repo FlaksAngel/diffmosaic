@@ -12,3 +12,15 @@ or experiment motivated the decision.
   coverage, mutation testing, or any predictive scoring.
 - **Next evidence needed:** evaluate symbol mapping on fixture projects and a
   small, manually inspected pilot corpus.
+
+## 2026-08-14 — Mutation planning before mutation execution
+
+- **Decision:** implement an AST-based mutation planner before any test runner.
+- **Reason:** an inspectable, bounded candidate set is required to validate
+  which source changes would be tested. It also avoids silently executing code
+  from repositories being studied.
+- **Initial operators:** comparison boundaries (`==`, `!=`, `<`, `<=`, `>`,
+  `>=`) and Boolean connectors (`and`, `or`) whose AST spans overlap changed
+  production lines.
+- **Constraint:** candidates are syntactically validated in memory but are not
+  written or executed in this iteration.

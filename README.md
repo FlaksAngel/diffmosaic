@@ -7,7 +7,7 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.1.0` is an intentionally small research prototype. It parses a
+Version `0.2.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not
@@ -16,7 +16,7 @@ run tests or execute code in the analysed repository.
 ## Status and scope
 
 - **Supported:** local Git repositories, Python source files, `pytest`-style
-  test paths, JSON/Markdown reports.
+  test paths, JSON/Markdown reports, and safe planning of diff-local mutations.
 - **Not yet supported:** remote GitHub API access, test execution, mutation
   testing, GitHub Actions integration, or automatic test generation.
 
@@ -79,6 +79,24 @@ catalog.py::calculate_total (function, lines 4-11)
 An unmapped line is not silently discarded: module-level statements, deleted
 code, or syntax that cannot be associated with a symbol are reported
 explicitly.
+
+## Mutation planning
+
+DiffMosaic can identify small operator mutations only where production Python
+code changed. It supports comparison boundary mutations such as `>` → `>=`
+and boolean mutations such as `and` → `or`.
+
+```powershell
+diffmosaic mutate-plan `
+  --repo C:\path\to\python-project `
+  --base origin/main `
+  --head HEAD `
+  --format markdown
+```
+
+The command only reads Git revisions and prints a plan. It does **not** run
+tests, write mutant files, or execute target-project code. Candidate execution
+will be introduced only with explicit isolation controls.
 
 ## Research direction
 
