@@ -11,14 +11,17 @@ Before a build, check all of the following:
 1. the source URL and commit match `corpus/pilot-v0.1.json`;
 2. the profile refers to the same `head_commit` and has `status: unbuilt`;
 3. the source checkout contains the committed `uv.lock` file;
-4. any profile `apt_packages` are necessary for the declared test command and
+4. the profile `uv_group` is declared in a standard PEP 735
+   `dependency-groups` table; the current recipe does not interpret legacy
+   Poetry groups;
+5. any profile `apt_packages` are necessary for the declared test command and
    have been reviewed as package names rather than copied from target code;
-5. a non-null `setuptools_scm_pretend_version` is consistent with the exact
+6. a non-null `setuptools_scm_pretend_version` is consistent with the exact
    source revision's reviewed version scheme; it is not an arbitrary build
    environment variable;
-6. the Dockerfile has been read and contains no unreviewed project-specific
+7. the Dockerfile has been read and contains no unreviewed project-specific
    command; and
-7. the build machine and Docker daemon are approved for this work.
+8. the build machine and Docker daemon are approved for this work.
 
 ## Build and qualification
 

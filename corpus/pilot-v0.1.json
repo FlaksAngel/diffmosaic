@@ -142,7 +142,7 @@
     },
     {
       "id": "textual-multiple-keys",
-      "role": "candidate",
+      "role": "excluded",
       "repository_url": "https://github.com/Textualize/textual",
       "license": "MIT",
       "base_commit": "182277f69011ba0b9665a9a1b1b0c3e89630e913",
@@ -157,7 +157,8 @@
         "candidate_count": 9,
         "outcome": "eligible"
       },
-      "selection_rationale": "Independent Textualize candidate selected by the preregistered static screen: its fixed non-merge commit changes XTerm key parsing and a focused parser regression test, with nine diff-local supported mutation sites."
+      "selection_rationale": "Independent Textualize candidate selected by the preregistered static screen: its fixed non-merge commit changes XTerm key parsing and a focused parser regression test, with nine diff-local supported mutation sites.",
+      "exclusion_reason": "The reviewed image recipe accepts PEP 735 dependency-groups, but this revision declares its test dependencies through a legacy Poetry group; uv sync --locked --group dev cannot prepare the baseline environment. No image or test execution was produced."
     }
   ]
 }

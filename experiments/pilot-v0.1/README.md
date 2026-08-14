@@ -86,3 +86,13 @@ The exact runtime image is
 As with the Flask result, this is a per-revision observation. It must not be
 pooled into a conclusion while the pilot has only two study observations from
 one maintainer community.
+
+## Textual multiple-keys image-preparation exclusion
+
+`textual-multiple-keys-screening.json` records nine eligible static mutation
+sites for the fixed Textual revision. It was not executed. Although the project
+has `uv.lock`, its test dependencies are declared in a legacy Poetry group,
+which the deliberately narrow `uv sync --locked --group` image recipe does not
+interpret. The attempted image preparation produced no image and no baseline;
+the subject is recorded as an exclusion rather than silently dropped or built
+using an unreviewed second dependency manager.
