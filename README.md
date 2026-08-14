@@ -186,8 +186,6 @@ python -m diffmosaic --help
 ```
 
 Contributions and discussion are welcome once the research protocol is frozen.
-Please do not add LLM-backed test generation to the core analyser: the central
-claim is about inspectable evidence, not generated suggestions.
 
 ## License
 
