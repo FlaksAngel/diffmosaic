@@ -103,15 +103,15 @@
     },
     {
       "id": "pytest-option-destination",
-      "role": "candidate",
+      "role": "study",
       "repository_url": "https://github.com/pytest-dev/pytest",
       "license": "MIT",
       "base_commit": "8d40684d1f997e62758785aebb3132c2f5b712e1",
       "head_commit": "532b20103ecf9972f752353f20088c5cc878003b",
       "python_version": "3.11",
       "test_command": ["python", "-m", "pytest"],
-      "docker_image": null,
-      "docker_image_identity": null,
+      "docker_image": "diffmosaic/pytest-option-destination:532b201",
+      "docker_image_identity": "diffmosaic/pytest-option-destination@sha256:6ab76681451d2b71132f568ce8b9ba39ed987a2ff481643f1850c7578be1eb0e",
       "mutation_screening": {
         "planner_version": "0.8.0",
         "max_candidates": 20,

@@ -60,7 +60,7 @@
       "uv_group": "dev",
       "image_tag": "diffmosaic/pytest-option-destination:532b201",
       "test_command": ["python", "-m", "pytest"],
-      "status": "unbuilt"
+      "status": "qualified"
     }
   ]
 }
