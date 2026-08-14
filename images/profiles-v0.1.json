@@ -44,7 +44,7 @@
       "uv_group": "tests",
       "image_tag": "diffmosaic/flask-automatic-options:a82e942",
       "test_command": ["python", "-m", "pytest"],
-      "status": "unbuilt"
+      "status": "qualified"
     }
   ]
 }

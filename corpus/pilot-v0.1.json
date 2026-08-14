@@ -84,15 +84,15 @@
     },
     {
       "id": "flask-automatic-options",
-      "role": "candidate",
+      "role": "study",
       "repository_url": "https://github.com/pallets/flask",
       "license": "BSD-3-Clause",
       "base_commit": "d8eaaba824655046958d1a97f11780de460c3271",
       "head_commit": "a82e942870b6472bb40017349cca772c242eb1ad",
       "python_version": "3.11",
       "test_command": ["python", "-m", "pytest"],
-      "docker_image": null,
-      "docker_image_identity": null,
+      "docker_image": "diffmosaic/flask-automatic-options:a82e942",
+      "docker_image_identity": "diffmosaic/flask-automatic-options@sha256:d5b82d1e06f7581b6e09ec765537f20e6e39ad81d2f0f8a09120dc917cbd6552",
       "mutation_screening": {
         "planner_version": "0.7.0",
         "max_candidates": 20,
