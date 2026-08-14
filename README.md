@@ -163,9 +163,8 @@ diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
 ```
 
 The [pilot-study protocol](docs/pilot-study-protocol.md) specifies selection
-rules, exclusions, metrics and reporting limits. The [Russian documentation
-index](docs/ru/README.md) and the [Russian preprint draft](paper/diffmosaic-article-ru.md)
-make the project easier to inspect in an academic setting.
+rules, exclusions, metrics and reporting limits. A [Russian documentation
+index](docs/ru/README.md) is available for product users.
 
 Candidate images have their own reviewed, lock-file-based recipes in
 [`images/`](images/). DiffMosaic does not build them; see the
@@ -186,8 +185,6 @@ python -m diffmosaic --help
 ```
 
 Contributions and discussion are welcome once the research protocol is frozen.
-Please do not add LLM-backed test generation to the core analyser: the central
-claim is about inspectable evidence, not generated suggestions.
 
 ## License
 
