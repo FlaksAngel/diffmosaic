@@ -23,6 +23,9 @@ For each profile, use a fresh source directory and replace the values below
 with that profile's repository URL, head SHA, package list, group and tag.
 `apt_packages` is normally empty; it records a reviewed system dependency such
 as Click's `less` pager.
+`setuptools_scm_pretend_version` is normally null. When present, it is the
+reviewed version supplied only to setuptools-scm for an editable build whose
+Docker context deliberately lacks Git metadata.
 
 ```powershell
 git clone https://github.com/example/project.git C:\research\project-source
@@ -31,6 +34,7 @@ git -C C:\research\project-source rev-parse HEAD
 
 docker build --pull=false `
   --build-arg APT_PACKAGES=<space-separated-reviewed-packages> `
+  --build-arg SETUPTOOLS_SCM_PRETEND_VERSION=<profile-value-or-empty> `
   --build-arg UV_GROUP=<tests-or-dev> `
   --tag <image-tag> `
   --file C:\path\to\diffmosaic\images\Dockerfile.uv-locked `

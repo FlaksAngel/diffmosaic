@@ -2,6 +2,12 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.9.0 - 2026-08-14
+
+- Added a reviewed, narrowly scoped `setuptools-scm` version input to image
+  profiles for projects whose editable build cannot access Git metadata in a
+  Docker build context.
+
 ## 0.8.0 - 2026-08-14
 
 - Added validated mutation-screening metadata and an explicit `excluded` corpus

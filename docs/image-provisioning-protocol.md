@@ -13,9 +13,12 @@ Before a build, check all of the following:
 3. the source checkout contains the committed `uv.lock` file;
 4. any profile `apt_packages` are necessary for the declared test command and
    have been reviewed as package names rather than copied from target code;
-5. the Dockerfile has been read and contains no unreviewed project-specific
+5. a non-null `setuptools_scm_pretend_version` is consistent with the exact
+   source revision's reviewed version scheme; it is not an arbitrary build
+   environment variable;
+6. the Dockerfile has been read and contains no unreviewed project-specific
    command; and
-6. the build machine and Docker daemon are approved for this work.
+7. the build machine and Docker daemon are approved for this work.
 
 ## Build and qualification
 
