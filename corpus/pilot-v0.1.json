@@ -123,15 +123,15 @@
     },
     {
       "id": "click-color-validation",
-      "role": "candidate",
+      "role": "study",
       "repository_url": "https://github.com/pallets/click",
       "license": "BSD-3-Clause",
       "base_commit": "7925a3410d7098c28cfca3b2baa6c852666bbd14",
       "head_commit": "07c909f23f0f83b5ca137c167b9a134d66201f67",
       "python_version": "3.11",
       "test_command": ["python", "-m", "pytest"],
-      "docker_image": null,
-      "docker_image_identity": null,
+      "docker_image": "diffmosaic/click-color-validation:07c909f",
+      "docker_image_identity": "diffmosaic/click-color-validation@sha256:80f9c137b1a8669e26a81f2bb861988e6b663282e437d2f860a540ec92a4fca2",
       "mutation_screening": {
         "planner_version": "0.9.0",
         "max_candidates": 20,

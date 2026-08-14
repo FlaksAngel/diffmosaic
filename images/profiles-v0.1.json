@@ -72,7 +72,7 @@
       "uv_group": "tests",
       "image_tag": "diffmosaic/click-color-validation:07c909f",
       "test_command": ["python", "-m", "pytest"],
-      "status": "unbuilt"
+      "status": "qualified"
     }
   ]
 }
