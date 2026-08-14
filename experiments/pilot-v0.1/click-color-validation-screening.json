@@ -1,0 +1,74 @@
+{
+  "base_revision": "7925a3410d7098c28cfca3b2baa6c852666bbd14",
+  "candidate_count": 5,
+  "candidates": [
+    {
+      "column": 7,
+      "end_column": 55,
+      "end_line": 574,
+      "expression": "isinstance(color, str) and color in _ansi_colors",
+      "id": "src/click/termui.py:574:7:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 574,
+      "original_operator": "and",
+      "path": "src/click/termui.py",
+      "replacement_operator": "or",
+      "symbol": "_interpret_color"
+    },
+    {
+      "column": 9,
+      "end_column": 63,
+      "end_line": 579,
+      "expression": "isinstance(color, int) and not isinstance(color, bool)",
+      "id": "src/click/termui.py:579:9:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 579,
+      "original_operator": "and",
+      "path": "src/click/termui.py",
+      "replacement_operator": "or",
+      "symbol": "_interpret_color"
+    },
+    {
+      "column": 8,
+      "end_column": 9,
+      "end_line": 589,
+      "expression": "isinstance(color, (tuple, list))\n        and len(color) == 3\n        and all(\n            isinstance(c, int) and not isinstance(c, bool) and 0 <= c <= 255\n            for c in color\n        )",
+      "id": "src/click/termui.py:584:8:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 584,
+      "original_operator": "and",
+      "path": "src/click/termui.py",
+      "replacement_operator": "or",
+      "symbol": "_interpret_color"
+    },
+    {
+      "column": 12,
+      "end_column": 27,
+      "end_line": 585,
+      "expression": "len(color) == 3",
+      "id": "src/click/termui.py:585:12:comparison_operator:==-to-!=",
+      "kind": "comparison_operator",
+      "line": 585,
+      "original_operator": "==",
+      "path": "src/click/termui.py",
+      "replacement_operator": "!=",
+      "symbol": "_interpret_color"
+    },
+    {
+      "column": 12,
+      "end_column": 76,
+      "end_line": 587,
+      "expression": "isinstance(c, int) and not isinstance(c, bool) and 0 <= c <= 255",
+      "id": "src/click/termui.py:587:12:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 587,
+      "original_operator": "and",
+      "path": "src/click/termui.py",
+      "replacement_operator": "or",
+      "symbol": "_interpret_color"
+    }
+  ],
+  "head_revision": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+  "notes": [],
+  "schema_version": "0.1"
+}

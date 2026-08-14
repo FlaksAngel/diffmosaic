@@ -120,6 +120,25 @@
       },
       "selection_rationale": "Independent pytest-dev candidate selected by the preregistered static screen: its fixed non-merge commit changes option parsing production code and a focused parser regression test, with two diff-local supported mutation sites.",
       "exclusion_reason": "The qualified image builds only after setuptools-scm generates src/_pytest/_version.py, but that untracked file is absent from the runner's clean git archive and the baseline cannot import pytest. No mutations were executed."
+    },
+    {
+      "id": "click-color-validation",
+      "role": "candidate",
+      "repository_url": "https://github.com/pallets/click",
+      "license": "BSD-3-Clause",
+      "base_commit": "7925a3410d7098c28cfca3b2baa6c852666bbd14",
+      "head_commit": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.9.0",
+        "max_candidates": 20,
+        "candidate_count": 5,
+        "outcome": "eligible"
+      },
+      "selection_rationale": "Public Pallets Click candidate selected by the preregistered static screen: its fixed non-merge commit changes color validation in production code and a focused style regression test, with five diff-local supported mutation sites."
     }
   ]
 }

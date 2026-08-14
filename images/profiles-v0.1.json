@@ -61,6 +61,18 @@
       "image_tag": "diffmosaic/pytest-option-destination:532b201",
       "test_command": ["python", "-m", "pytest"],
       "status": "qualified"
+    },
+    {
+      "subject_id": "click-color-validation",
+      "head_commit": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+      "dockerfile": "images/Dockerfile.uv-locked",
+      "base_image": "python:3.11-slim",
+      "apt_packages": ["less"],
+      "setuptools_scm_pretend_version": null,
+      "uv_group": "tests",
+      "image_tag": "diffmosaic/click-color-validation:07c909f",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "unbuilt"
     }
   ]
 }
