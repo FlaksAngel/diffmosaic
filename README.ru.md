@@ -128,8 +128,6 @@ diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
 - [Навигация по документации](docs/ru/README.md)
 - [Руководство разработчика: как применять в PR](docs/ru/guide-developer.md)
 - [Научный протокол и текущие ограничения](docs/ru/research-protocol.md)
-- [Сценарий демонстрации преподавателю](docs/ru/presentation-guide.md)
-- [Черновик русскоязычной статьи](paper/diffmosaic-article-ru.md)
 
 ## Для разработки проекта
 
