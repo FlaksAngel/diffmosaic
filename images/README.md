@@ -12,7 +12,7 @@ step before a candidate becomes an executable study subject.
 - The checkout is treated as build input only. Do not use your personal working
   tree or any directory containing credentials.
 
-The six current profiles depend on each project's committed `uv.lock`. They
+The seven current profiles depend on each project's committed `uv.lock`. They
 install their declared `tests` or `dev` dependency group into `/opt`, rather
 than a `.venv` inside `/workspace`. This matters because the mutation runner
 replaces `/workspace` with a fresh read-only archive during every invocation.

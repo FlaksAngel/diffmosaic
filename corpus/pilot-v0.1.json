@@ -139,6 +139,25 @@
         "outcome": "eligible"
       },
       "selection_rationale": "Public Pallets Click candidate selected by the preregistered static screen: its fixed non-merge commit changes color validation in production code and a focused style regression test, with five diff-local supported mutation sites."
+    },
+    {
+      "id": "textual-multiple-keys",
+      "role": "candidate",
+      "repository_url": "https://github.com/Textualize/textual",
+      "license": "MIT",
+      "base_commit": "182277f69011ba0b9665a9a1b1b0c3e89630e913",
+      "head_commit": "508dbbd2a619938c7c3b17e4129b4d612f1b7f25",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.9.0",
+        "max_candidates": 20,
+        "candidate_count": 9,
+        "outcome": "eligible"
+      },
+      "selection_rationale": "Independent Textualize candidate selected by the preregistered static screen: its fixed non-merge commit changes XTerm key parsing and a focused parser regression test, with nine diff-local supported mutation sites."
     }
   ]
 }
