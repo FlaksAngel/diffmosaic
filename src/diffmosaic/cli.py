@@ -7,17 +7,21 @@ import sys
 from pathlib import Path
 
 from diffmosaic.analyzer import analyse_repository
+from diffmosaic.corpus import validate_corpus_manifest
 from diffmosaic.coverage import CoverageDataError
 from diffmosaic.diff import GitReadError
 from diffmosaic.mutation import plan_repository_mutations
 from diffmosaic.runner import DockerSandboxConfig, MutationExecutionError, run_mutation_plan
 from diffmosaic.reporting import (
     render_json,
+    render_corpus_validation_json,
+    render_corpus_validation_markdown,
     render_markdown,
     render_mutation_plan_json,
     render_mutation_plan_markdown,
     write_mutation_plan,
     write_mutation_execution,
+    write_corpus_validation,
     write_report,
 )
 
@@ -68,6 +72,19 @@ def _build_parser() -> argparse.ArgumentParser:
         help="plan format (default: json)",
     )
     mutation.add_argument("--output", type=Path, help="write plan to this path instead of stdout")
+
+    corpus = subparsers.add_parser(
+        "corpus-validate",
+        help="validate a data-only, version-pinned pilot corpus manifest",
+    )
+    corpus.add_argument("--manifest", type=Path, required=True, help="path to a local corpus JSON")
+    corpus.add_argument(
+        "--format",
+        choices=("json", "markdown"),
+        default="json",
+        help="validation format (default: json)",
+    )
+    corpus.add_argument("--output", type=Path, help="write validation to this path instead of stdout")
 
     execute = subparsers.add_parser(
         "mutate-run",
@@ -135,6 +152,19 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(rendered, end="")
         return 0
+
+    if args.command == "corpus-validate":
+        report = validate_corpus_manifest(args.manifest)
+        if args.output:
+            write_corpus_validation(report, args.output, args.format)
+        else:
+            rendered = (
+                render_corpus_validation_json(report)
+                if args.format == "json"
+                else render_corpus_validation_markdown(report)
+            )
+            print(rendered, end="")
+        return 0 if report.valid else 1
 
     if args.command == "mutate-run":
         if not args.allow_execution:

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from diffmosaic.corpus import CorpusValidationReport
 from diffmosaic.models import AnalysisReport
 from diffmosaic.mutation import MutationPlan
 from diffmosaic.runner import MutationExecutionReport
@@ -137,3 +138,47 @@ def write_mutation_execution(report: MutationExecutionReport, output: Path) -> N
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report.to_dict(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def render_corpus_validation_json(report: CorpusValidationReport) -> str:
+    return json.dumps(report.to_dict(), indent=2, sort_keys=True) + "\n"
+
+
+def render_corpus_validation_markdown(report: CorpusValidationReport) -> str:
+    data = report.to_dict()
+    summary = data["summary"]
+    lines = [
+        "# DiffMosaic corpus validation",
+        "",
+        f"- Study id: `{data['study_id'] or 'unavailable'}`",
+        f"- Subject count: {data['subject_count']}",
+        f"- Valid: {'yes' if data['valid'] else 'no'}",
+        f"- Errors: {summary['errors']}",
+        f"- Warnings: {summary['warnings']}",
+        "",
+        "## Findings",
+        "",
+    ]
+    issues = data["issues"]
+    if issues:
+        for issue in issues:
+            subject = f" (`{issue['subject_id']}`)" if issue["subject_id"] else ""
+            lines.append(f"- [{issue['severity']}] `{issue['code']}`{subject}: {issue['message']}")
+        lines.append("")
+    else:
+        lines.extend(["No validation findings.", ""])
+    return "\n".join(lines)
+
+
+def write_corpus_validation(
+    report: CorpusValidationReport,
+    output: Path,
+    output_format: str,
+) -> None:
+    rendered = (
+        render_corpus_validation_json(report)
+        if output_format == "json"
+        else render_corpus_validation_markdown(report)
+    )
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(rendered, encoding="utf-8")

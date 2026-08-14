@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1",
+  "study_id": "diffmosaic-pilot-v0-1",
+  "status": "preliminary",
+  "inclusion_criteria": [
+    "The subject is a public Python repository with a documented permissive license.",
+    "The selected head commit changes production Python code and has a distinct parent commit.",
+    "The test command is explicit, reproducible, and suitable for execution in a prebuilt trusted image.",
+    "Selection rationale and every revision are recorded before interpreting results."
+  ],
+  "subjects": [
+    {
+      "id": "diffmosaic-runner-calibration",
+      "role": "calibration",
+      "repository_url": "https://github.com/FlaksAngel/diffmosaic",
+      "license": "MIT",
+      "base_commit": "5be747d0c9a9634b58c1e4e9849882d4d9530bc1",
+      "head_commit": "4b64adbf02353ac5a220ef0b31d481756083a954",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "selection_rationale": "Calibration subject for checking the manifest, report schema, and controlled runner before collecting third-party study results."
+    },
+    {
+      "id": "click-declaration-order-candidate",
+      "role": "candidate",
+      "repository_url": "https://github.com/pallets/click",
+      "license": "BSD-3-Clause",
+      "base_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+      "head_commit": "047adef258fc25566163ffc3efd14effc0ef7352",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "selection_rationale": "Public Pallets project candidate with a fixed non-merge commit that changes src/click/core.py and its focused regression tests."
+    },
+    {
+      "id": "flask-ipv6-routing-candidate",
+      "role": "candidate",
+      "repository_url": "https://github.com/pallets/flask",
+      "license": "BSD-3-Clause",
+      "base_commit": "de8429ffda8cfb54db175529e2bae72a24e1fa7e",
+      "head_commit": "7203feabf723edae0286ae5dc64fec8ac4c91735",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "selection_rationale": "Public Pallets project candidate with a fixed non-merge commit that changes src/flask/app.py and a routing regression test."
+    },
+    {
+      "id": "pytest-exception-chain-candidate",
+      "role": "candidate",
+      "repository_url": "https://github.com/pytest-dev/pytest",
+      "license": "MIT",
+      "base_commit": "a3a62a0ebd43ec848b979227421e2b7ba93a9dc9",
+      "head_commit": "0d6fbdeffa57c796123f62f81f7dd370d9b7ecdc",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "selection_rationale": "Independent public testing-tool project candidate with a fixed non-merge commit changing exception formatting and its regression test."
+    }
+  ]
+}

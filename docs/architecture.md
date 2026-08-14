@@ -16,8 +16,10 @@ Changed new lines -----> Python AST symbol mapping
         +------------> mutation planner (no file writes or execution)
         |
         +------------> opt-in Docker runner (temporary git archive only)
-        |                 ├─ baseline must pass
-        |                 └─ bounded JSON experiment record
+        |                 |-- baseline must pass
+        |                 `-- bounded JSON experiment record
+        |
+        +------------> offline corpus-manifest validator (no fetch or execution)
         |
         v
 Analysis report -----> JSON / Markdown
@@ -31,16 +33,20 @@ Analysis report -----> JSON / Markdown
    are reported as unmapped.
 3. **No repository mutation.** Analysis uses `git diff` and `git show` only.
 4. **Deterministic output.** Identical revisions and configuration produce the
-   same output, excluding no timestamp or machine-specific paths.
+   same output, excluding timestamps and machine-specific paths.
+5. **Declared research inputs.** Corpus subjects, commit IDs, test commands
+   and image identities are versioned as data before their outcomes are read.
 
-## Planned modules
+## Components
 
-- `diff.py` — parses unified Git diffs and reads source revisions.
-- `symbols.py` — maps source locations to Python functions and methods.
-- `analyzer.py` — assembles raw evidence into a domain report.
-- `reporting.py` — serialises a report without business logic.
-- `coverage.py` — validates and reads pre-generated execution evidence.
-- `mutation.py` — finds and syntactically validates bounded diff-local mutation
+- `diff.py` parses unified Git diffs and reads source revisions.
+- `symbols.py` maps source locations to Python functions and methods.
+- `analyzer.py` assembles raw evidence into a domain report.
+- `reporting.py` serialises reports without business logic.
+- `coverage.py` validates and reads pre-generated execution evidence.
+- `mutation.py` finds and syntactically validates bounded diff-local mutation
   candidates.
-- `runner.py` — opt-in Docker runner over a clean `git archive`; never runs a
-  project unless the caller supplies both a prebuilt image and acknowledgement.
+- `runner.py` is an opt-in Docker runner over a clean `git archive`; it never
+  runs a project unless the caller supplies a prebuilt image and acknowledgement.
+- `corpus.py` validates a local version-pinned registry and never fetches,
+  installs, or executes the projects it describes.

@@ -156,3 +156,23 @@ def test_cli_refuses_mutation_execution_without_explicit_acknowledgement(tmp_pat
 
     assert exit_code == 2
     assert not output.exists()
+
+
+def test_cli_validates_committed_calibration_manifest(tmp_path: Path) -> None:
+    root = Path(__file__).parents[1]
+    output = tmp_path / "corpus-validation.json"
+
+    exit_code = main(
+        [
+            "corpus-validate",
+            "--manifest",
+            str(root / "corpus" / "pilot-v0.1.json"),
+            "--output",
+            str(output),
+        ]
+    )
+
+    report = json.loads(output.read_text(encoding="utf-8"))
+    assert exit_code == 0
+    assert report["valid"] is True
+    assert report["subject_count"] == 4

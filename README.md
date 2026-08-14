@@ -7,18 +7,21 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.3.0` is an intentionally small research prototype. It parses a
+Version `0.4.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not
-run tests or execute code in the analysed repository.
+run tests or execute code in the analysed repository during analysis or
+mutation planning. A separate opt-in Docker runner can execute pre-planned
+mutations under documented controls.
 
 ## Status and scope
 
 - **Supported:** local Git repositories, Python source files, `pytest`-style
-  test paths, JSON/Markdown reports, and safe planning of diff-local mutations.
-- **Not yet supported:** remote GitHub API access, test execution, mutation
-  testing, GitHub Actions integration, or automatic test generation.
+  test paths, JSON/Markdown reports, safe planning of diff-local mutations,
+  controlled Docker execution, and validation of version-pinned corpus data.
+- **Not yet supported:** remote GitHub API access, automatic project setup,
+  GitHub Actions integration for target projects, or automatic test generation.
 
 Keeping the first version narrow makes every claim and experiment auditable.
 
@@ -125,6 +128,20 @@ The baseline test run must pass before candidates run. Results are classified
 as `killed`, `survived`, `timeout`, or `infrastructure_error`; only killed and
 survived candidates contribute to mutation adequacy. Read the full
 [execution protocol](docs/mutation-execution-protocol.md) before using it.
+
+## Pilot corpus
+
+Research subjects are registered as data, not discovered implicitly at runtime.
+The initial manifest contains a calibration subject only; it is intentionally
+not evidence about third-party projects. Validate it locally without cloning or
+executing any project:
+
+```powershell
+diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
+```
+
+The [pilot-study protocol](docs/pilot-study-protocol.md) specifies the future
+third-party selection rules, exclusions, metrics and reporting limits.
 
 ## Research direction
 
