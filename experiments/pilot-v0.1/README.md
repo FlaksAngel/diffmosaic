@@ -66,3 +66,23 @@ runtime `git archive`; import then raises `ModuleNotFoundError`. DiffMosaic did
 not inject that generated file into the archive, and it skipped both mutations.
 This subject is excluded from mutation-adequacy analysis under the documented
 runner scope.
+
+## Click color-validation mutation result
+
+The source revisions are `7925a3410d7098c28cfca3b2baa6c852666bbd14` (base)
+and `07c909f23f0f83b5ca137c167b9a134d66201f67` (head). The static plan in
+`click-color-validation-screening.json` identifies five changed Boolean or
+comparison sites in `src/click/termui.py::_interpret_color`.
+
+`click-color-validation.json` records a passing full-suite baseline: 1749
+passed, 24 skipped, 31000 deselected and 1 xfailed in 8.06 s of pytest time
+(11.125 s wall time). All five mutations were killed, giving `5 / (5 + 0) =
+1.0` for this revision. The failures are concentrated in the changed
+`tests/test_utils/test_style.py` behaviour: the five mutants produced 9, 37,
+28, 13 and 10 failures respectively.
+
+The exact runtime image is
+`diffmosaic/click-color-validation@sha256:80f9c137b1a8669e26a81f2bb861988e6b663282e437d2f860a540ec92a4fca2`.
+As with the Flask result, this is a per-revision observation. It must not be
+pooled into a conclusion while the pilot has only two study observations from
+one maintainer community.

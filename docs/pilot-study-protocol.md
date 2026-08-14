@@ -42,12 +42,13 @@ that was not suitable for the planned analysis; it is not silently removed.
 
 The first three third-party source candidates are retained as exclusions after
 screening found zero sites for the prototype's two mutation operators. A later
-Flask commit is the first eligible `study` subject; its selection report was
-committed before image preparation and its image identity before execution. A
-single study subject is not a mutation-adequacy study set. Before interpreting
-outcomes, freeze at least six eligible `study` subjects from at least three
-maintainer communities, selected using the same rules. This is still
-exploratory evidence, not a representative sample.
+Flask commit and a Click commit are the first two eligible `study` subjects;
+their selection reports were committed before image preparation and image
+identities before execution. Two subjects from the same maintainer community
+are not a mutation-adequacy study set. Before interpreting outcomes, freeze at
+least six eligible `study` subjects from at least three maintainer communities,
+selected using the same rules. This is still exploratory evidence, not a
+representative sample.
 
 ## Inclusion and exclusion
 

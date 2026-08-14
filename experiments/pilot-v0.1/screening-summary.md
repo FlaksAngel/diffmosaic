@@ -12,7 +12,7 @@ when the plan contains at least one supported diff-local mutation.
 | pytest exception chain | `a3a62a0` / `0d6fbde` | 0 | Excluded | `pytest-exception-chain-screening.json` |
 | Flask automatic options | `d8eaaba` / `a82e942` | 2 | Study; result recorded | `flask-automatic-options-screening.json` |
 | pytest option destination | `8d40684` / `532b201` | 2 | Excluded after baseline | `pytest-option-destination-screening.json` |
-| Click color validation | `7925a34` / `07c909f` | 5 | Eligible candidate | `click-color-validation-screening.json` |
+| Click color validation | `7925a34` / `07c909f` | 5 | Study; result recorded | `click-color-validation-screening.json` |
 
 The first three records remain in `corpus/pilot-v0.1.json` with role
 `excluded` and a specific reason. They must not be aggregated as observations
@@ -21,4 +21,6 @@ baseline and a separate mutation execution report; it is the first `study`
 subject, not an aggregate result. The fifth record is a second-community
 source candidate excluded after its baseline exposed an untracked generated
 source-file dependency under the clean archive model. The sixth record is a
-second Pallets candidate until its image and baseline are qualified.
+second Pallets study subject with a separate mutation execution report. The
+pilot has two study observations from one maintainer community and remains too
+small for aggregate interpretation.
