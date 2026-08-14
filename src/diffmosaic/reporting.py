@@ -8,6 +8,7 @@ from pathlib import Path
 from diffmosaic.corpus import CorpusValidationReport
 from diffmosaic.models import AnalysisReport
 from diffmosaic.mutation import MutationPlan
+from diffmosaic.priority import PriorityReport
 from diffmosaic.runner import MutationExecutionReport
 
 
@@ -180,5 +181,51 @@ def write_corpus_validation(
         if output_format == "json"
         else render_corpus_validation_markdown(report)
     )
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(rendered, encoding="utf-8")
+
+
+def render_priority_json(report: PriorityReport) -> str:
+    return json.dumps(report.to_dict(), indent=2, sort_keys=True) + "\n"
+
+
+def render_priority_markdown(report: PriorityReport) -> str:
+    data = report.to_dict()
+    summary = data["summary"]
+    lines = [
+        "# DiffMosaic review priorities",
+        "",
+        "This is a fixed-rule review queue, not a defect prediction.",
+        "",
+        f"- Base revision: `{data['base_revision']}`",
+        f"- Head revision: `{data['head_revision']}`",
+        f"- Baseline: no test file changed = {data['baseline']['no_test_file_changed']}",
+        f"- High / medium / low: {summary['high_priority']} / {summary['medium_priority']} / {summary['low_priority']}",
+        "",
+        "## Symbols",
+        "",
+    ]
+    if report.items:
+        for item in report.items:
+            symbol = item.changed_symbol.symbol
+            lines.extend(
+                [
+                    f"### `{symbol.path}::{symbol.qualified_name}` - {item.level} ({item.score})",
+                    "",
+                    f"- Changed lines: {', '.join(str(line) for line in item.changed_symbol.changed_lines)}",
+                    *(
+                        f"- +{reason.weight} `{reason.code}`: {reason.explanation}"
+                        for reason in item.reasons
+                    ),
+                    "",
+                ]
+            )
+    else:
+        lines.extend(["No changed production symbols were available for prioritisation.", ""])
+    return "\n".join(lines)
+
+
+def write_priority(report: PriorityReport, output: Path, output_format: str) -> None:
+    rendered = render_priority_json(report) if output_format == "json" else render_priority_markdown(report)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(rendered, encoding="utf-8")

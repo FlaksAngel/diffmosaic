@@ -11,6 +11,7 @@ from diffmosaic.corpus import validate_corpus_manifest
 from diffmosaic.coverage import CoverageDataError
 from diffmosaic.diff import GitReadError
 from diffmosaic.mutation import plan_repository_mutations
+from diffmosaic.priority import prioritise_report
 from diffmosaic.runner import DockerSandboxConfig, MutationExecutionError, run_mutation_plan
 from diffmosaic.reporting import (
     render_json,
@@ -19,9 +20,12 @@ from diffmosaic.reporting import (
     render_markdown,
     render_mutation_plan_json,
     render_mutation_plan_markdown,
+    render_priority_json,
+    render_priority_markdown,
     write_mutation_plan,
     write_mutation_execution,
     write_corpus_validation,
+    write_priority,
     write_report,
 )
 
@@ -51,6 +55,26 @@ def _build_parser() -> argparse.ArgumentParser:
         help="report format (default: json)",
     )
     analyse.add_argument("--output", type=Path, help="write report to this path instead of stdout")
+
+    prioritise = subparsers.add_parser(
+        "prioritize",
+        help="rank changed symbols for review using fixed evidence-gap rules",
+    )
+    prioritise.add_argument("--repo", type=Path, required=True, help="path to a local Git repository")
+    prioritise.add_argument("--base", required=True, help="base Git revision, for example origin/main")
+    prioritise.add_argument("--head", required=True, help="head Git revision, for example HEAD")
+    prioritise.add_argument(
+        "--coverage-json",
+        type=Path,
+        help="optional coverage.py JSON created beforehand in a trusted environment",
+    )
+    prioritise.add_argument(
+        "--format",
+        choices=("json", "markdown"),
+        default="json",
+        help="priority-report format (default: json)",
+    )
+    prioritise.add_argument("--output", type=Path, help="write priorities to this path instead of stdout")
 
     mutation = subparsers.add_parser(
         "mutate-plan",
@@ -127,6 +151,25 @@ def main(argv: list[str] | None = None) -> int:
             write_report(report, args.output, args.format)
         else:
             rendered = render_json(report) if args.format == "json" else render_markdown(report)
+            print(rendered, end="")
+        return 0
+
+    if args.command == "prioritize":
+        try:
+            analysis = analyse_repository(args.repo, args.base, args.head, args.coverage_json)
+        except (CoverageDataError, GitReadError, OSError) as exc:
+            print(f"diffmosaic: {exc}", file=sys.stderr)
+            return 1
+
+        report = prioritise_report(analysis)
+        if args.output:
+            write_priority(report, args.output, args.format)
+        else:
+            rendered = (
+                render_priority_json(report)
+                if args.format == "json"
+                else render_priority_markdown(report)
+            )
             print(rendered, end="")
         return 0
 

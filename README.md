@@ -7,7 +7,7 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.4.0` is an intentionally small research prototype. It parses a
+Version `0.6.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not
@@ -24,6 +24,25 @@ mutations under documented controls.
   GitHub Actions integration for target projects, or automatic test generation.
 
 Keeping the first version narrow makes every claim and experiment auditable.
+
+## Review prioritisation
+
+`prioritize` applies fixed, documented evidence-gap rules to changed symbols.
+It produces a review queue, not a defect prediction: every score is a sum of
+visible reasons, and missing coverage remains an unknown rather than a failed
+test result.
+
+```powershell
+diffmosaic prioritize `
+  --repo C:\path\to\python-project `
+  --base origin/main `
+  --head HEAD `
+  --coverage-json C:\path\to\coverage.json `
+  --format markdown
+```
+
+The exact rules, limitations and evaluation plan are in the
+[review-prioritisation protocol](docs/review-prioritisation.md).
 
 ## Quick start
 

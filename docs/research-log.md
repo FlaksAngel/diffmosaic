@@ -51,3 +51,13 @@ Rationale:
   path but must never be presented as independent evidence;
 - selection and exclusion rules should be fixed before examining outcomes to
   reduce convenient post-hoc choices.
+
+## 2026-08-14 - Prioritise evidence gaps, not predicted bugs
+
+- **Decision:** add a small, fixed-rule review queue before collecting any
+  training data or considering a learned model.
+- **Reason:** each priority can be traced to missing/partial coverage evidence
+  or a visible test-path baseline. This makes the initial hypothesis testable
+  without treating a score as an oracle.
+- **Constraint:** weights are protocol data. Any alteration requires a new
+  evaluation version and disclosure, rather than post-hoc tuning on the pilot.

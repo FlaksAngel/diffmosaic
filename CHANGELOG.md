@@ -2,6 +2,12 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.6.0 - 2026-08-14
+
+- Added the explainable `prioritize` command for deterministic review queues.
+- Added a fixed-rule protocol that distinguishes evidence gaps from defect
+  predictions and exposes every score contribution.
+
 ## 0.5.0 - 2026-08-14
 
 - Added reviewed, lock-file-based image profiles for the three public pilot

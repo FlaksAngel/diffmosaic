@@ -176,3 +176,42 @@ def test_cli_validates_committed_calibration_manifest(tmp_path: Path) -> None:
     assert exit_code == 0
     assert report["valid"] is True
     assert report["subject_count"] == 4
+
+
+def test_cli_prioritizes_symbols_without_dirtying_repository(tmp_path: Path) -> None:
+    repo = tmp_path / "sample-repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "config", "user.email", "tests@diffmosaic.invalid")
+    _git(repo, "config", "user.name", "DiffMosaic tests")
+    source = repo / "logic.py"
+    source.write_text("def accepted(value):\n    return value > 0\n", encoding="utf-8")
+    _git(repo, "add", "logic.py")
+    _git(repo, "commit", "-m", "base")
+    source.write_text(
+        "def accepted(value):\n    if value > 10:\n        return False\n    return value > 0\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "logic.py")
+    _git(repo, "commit", "-m", "add upper bound")
+
+    output = tmp_path / "priorities.json"
+    exit_code = main(
+        [
+            "prioritize",
+            "--repo",
+            str(repo),
+            "--base",
+            "HEAD~1",
+            "--head",
+            "HEAD",
+            "--output",
+            str(output),
+        ]
+    )
+
+    report = json.loads(output.read_text(encoding="utf-8"))
+    assert exit_code == 0
+    assert report["baseline"]["no_test_file_changed"] is True
+    assert report["items"][0]["review_level"] == "medium"
+    assert _git(repo, "status", "--short") == ""

@@ -44,6 +44,8 @@ Analysis report -----> JSON / Markdown
 - `analyzer.py` assembles raw evidence into a domain report.
 - `reporting.py` serialises reports without business logic.
 - `coverage.py` validates and reads pre-generated execution evidence.
+- `priority.py` produces a fixed-rule, evidence-gap review queue from an
+  analysis report; it has no learned model or hidden score.
 - `mutation.py` finds and syntactically validates bounded diff-local mutation
   candidates.
 - `runner.py` is an opt-in Docker runner over a clean `git archive`; it never

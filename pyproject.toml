@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "diffmosaic"
-version = "0.5.0"
+version = "0.6.0"
 description = "Evidence-based test adequacy analysis for Python pull requests."
 readme = "README.md"
 requires-python = ">=3.11"
