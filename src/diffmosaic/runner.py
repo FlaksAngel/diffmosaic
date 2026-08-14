@@ -149,6 +149,8 @@ def build_docker_command(
         "/tmp:rw,nosuid,nodev,noexec,size=64m",
         "--env",
         "PYTHONDONTWRITEBYTECODE=1",
+        "--env",
+        "PYTEST_ADDOPTS=-o cache_dir=/tmp/diffmosaic-pytest-cache",
         "--mount",
         mount,
         "--workdir",

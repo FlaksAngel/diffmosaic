@@ -2,6 +2,11 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.7.0 - 2026-08-14
+
+- Redirected pytest's cache to the sandbox `/tmp` filesystem so read-only
+  workspaces do not turn cache warnings into baseline failures.
+
 ## 0.6.0 - 2026-08-14
 
 - Added the explainable `prioritize` command for deterministic review queues.

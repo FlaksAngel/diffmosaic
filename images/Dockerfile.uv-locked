@@ -5,6 +5,7 @@
 ARG PYTHON_IMAGE=python:3.11-slim
 FROM ${PYTHON_IMAGE}
 
+ARG APT_PACKAGES=""
 ARG UV_GROUP
 
 ENV VIRTUAL_ENV=/opt/diffmosaic-venv
@@ -15,7 +16,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /workspace
 COPY . /workspace
 
-RUN test -n "${UV_GROUP}" \
+RUN if [ -n "${APT_PACKAGES}" ]; then \
+        apt-get update \
+        && apt-get install --no-install-recommends --yes ${APT_PACKAGES} \
+        && rm -rf /var/lib/apt/lists/*; \
+    fi \
+    && test -n "${UV_GROUP}" \
     && python -m pip install --no-cache-dir --upgrade pip \
     && python -m pip install --no-cache-dir uv \
     && uv sync --locked --group "${UV_GROUP}"

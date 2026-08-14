@@ -3,7 +3,7 @@ message: "If you use DiffMosaic, please cite the software release that produced 
 title: "DiffMosaic: Evidence-Based Test Adequacy Analysis for Python Pull Requests"
 type: software
 license: MIT
-version: 0.6.0
+version: 0.7.0
 date-released: 2026-08-14
 authors:
   - name: "DiffMosaic contributors"

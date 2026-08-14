@@ -35,6 +35,9 @@ file only in that directory, then invokes Docker with these controls:
 
 The original repository is never modified. The test process may write only to
 the constrained `/tmp` filesystem; DiffMosaic disables Python bytecode writes.
+For pytest commands it also redirects the pytest cache to `/tmp`, so projects
+that treat cache-write warnings as errors remain compatible with the read-only
+workspace.
 Projects whose tests require a writable source tree are outside this runner's
 current scope. Each invocation receives a random Docker container name; if the
 host-side timeout expires, DiffMosaic force-removes that named container before

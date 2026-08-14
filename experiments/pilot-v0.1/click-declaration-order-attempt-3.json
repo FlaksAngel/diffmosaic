@@ -1,0 +1,34 @@
+{
+  "base_revision": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 10.922,
+    "exit_code": 0,
+    "outcome": "passed",
+    "stderr_tail": "",
+    "stdout_tail": "sts/test_command_decorators.py .........                               [ 11%]\ntests/test_commands.py ................................................. [ 14%]\n......................................................                   [ 17%]\ntests/test_compat.py ................................................... [ 19%]\n........................................................................ [ 23%]\n....................................................                     [ 25%]\ntests/test_context.py ..............................                     [ 27%]\ntests/test_custom_classes.py ......                                      [ 27%]\ntests/test_defaults.py ...........................................       [ 29%]\ntests/test_deprecations.py ............................                  [ 31%]\ntests/test_formatting.py .....................................           [ 33%]\ntests/test_imports.py .                                                  [ 33%]\ntests/test_info_dict.py ............................                     [ 34%]\ntests/test_normalization.py ...                                          [ 34%]\ntests/test_options.py .................................................. [ 37%]\n........................................................................ [ 41%]\n........................................................................ [ 44%]\n........................................................................ [ 48%]\n........................................................................ [ 51%]\n........................................................................ [ 55%]\n........................................................................ [ 59%]\n........................................................................ [ 62%]\n........................................................................ [ 66%]\n....................                                                     [ 67%]\ntests/test_parser.py .......                                             [ 67%]\ntests/test_shell_completion.py ......................................... [ 69%]\n.................                                                        [ 70%]\ntests/test_stream_lifecycle.py ........................                  [ 72%]\ntests/test_termui.py ............................................sssssss [ 74%]\nssssssssssssss................ss........................................ [ 78%]\n........................................................................ [ 81%]\n.................................................                        [ 84%]\ntests/test_testing.py .................................s...........      [ 86%]\ntests/test_types.py .............................................        [ 88%]\ntests/test_utils/test_KeepOpenFile.py .                                  [ 88%]\ntests/test_utils/test_LazyFile.py .                                      [ 89%]\ntests/test_utils/test__detect_program_name.py ......                     [ 89%]\ntests/test_utils/test__expand_args.py .                                  [ 89%]\ntests/test_utils/test_confirm.py ..                                      [ 89%]\ntests/test_utils/test_echo.py ......                                     [ 89%]\ntests/test_utils/test_echo_via_pager.py ................................ [ 91%]\n.............................                                            [ 92%]\ntests/test_utils/test_format_filename.py .                               [ 92%]\ntests/test_utils/test_make_default_short_help.py ..............          [ 93%]\ntests/test_utils/test_open_file.py ...........                           [ 94%]\ntests/test_utils/test_prompt.py .........                                [ 94%]\ntests/test_utils/test_sentinel.py .                                      [ 94%]\ntests/test_utils/test_style.py ......................................... [ 96%]\n................................................................         [100%]\n\n======== 1953 passed, 24 skipped, 31000 deselected, 1 xfailed in 7.98s =========\n"
+  },
+  "candidates": [],
+  "head_revision": "047adef258fc25566163ffc3efd14effc0ef7352",
+  "notes": [],
+  "planned_candidates": [],
+  "sandbox": {
+    "image": "diffmosaic/click-declaration-order:047adef",
+    "image_identity": "diffmosaic/click-declaration-order@sha256:477ba5092a70eeea2cd79a54ddd5b924076024e548fe59cc8163598650e70aa0",
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ]
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 0,
+    "inconclusive": 0,
+    "killed": 0,
+    "mutation_adequacy": null,
+    "survived": 0
+  }
+}

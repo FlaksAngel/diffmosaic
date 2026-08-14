@@ -1,0 +1,36 @@
+{
+  "base_revision": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 11.625,
+    "exit_code": 1,
+    "outcome": "failed",
+    "stderr_tail": "",
+    "stdout_tail": "n\",\n                expected_stdout=\"hello\\n\",\n                expected_stderr=\"\",\n                expected_error=None,\n            ),\n            EchoViaPagerTest(\n                description=\"Writing to stderr during generator execution\",\n                test_input=lambda: _test_gen_func_echo(file=sys.stderr),\n                expected_pager=\"testtest\\n\",\n                expected_stdout=\"\",\n                expected_stderr=\"hello\\n\",\n                expected_error=None,\n            ),\n        ],\n    )\n    def test_echo_via_pager(monkeypatch, capfd, pager_cmd, test, tmp_path):\n        monkeypatch.setitem(os.environ, \"PAGER\", pager_cmd)\n        monkeypatch.setattr(click._termui_impl, \"isatty\", lambda x: True)\n    \n        test_input = test.test_input()\n        expected_pager = test.expected_pager\n        expected_stdout = test.expected_stdout\n        expected_stderr = test.expected_stderr\n        expected_error = test.expected_error\n    \n        check_raise = pytest.raises(expected_error) if expected_error else nullcontext()\n    \n        pager_out_tmp = tmp_path / \"pager_out.txt\"\n        with pager_out_tmp.open(\"w\") as f:\n            force_subprocess_stdout = patch.object(\n                subprocess,\n                \"Popen\",\n                partial(subprocess.Popen, stdout=f),\n            )\n            with force_subprocess_stdout:\n                with check_raise:\n                    click.echo_via_pager(test_input)\n    \n        out, err = capfd.readouterr()\n    \n        pager = pager_out_tmp.read_text()\n    \n>       assert pager == expected_pager, (\n            f\"Unexpected pager output in test case '{test.description}'\"\n        )\nE       AssertionError: Unexpected pager output in test case 'Writing to stderr during generator execution'\nE       assert '' == 'testtest\\n'\nE         \nE         - testtest\n\ntests/test_utils/test_echo_via_pager.py:182: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test0-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test0- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test0- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test1-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test1- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test1- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test2-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test2- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test2- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test3-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test3- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test3- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test4-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test4- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test4- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test7-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test7- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test7- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test8-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test8- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test8- less ]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test9-less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test9- less]\nFAILED tests/test_utils/test_echo_via_pager.py::test_echo_via_pager[test9- less ]\n=== 24 failed, 1929 passed, 24 skipped, 31000 deselected, 1 xfailed in 8.65s ===\n"
+  },
+  "candidates": [],
+  "head_revision": "047adef258fc25566163ffc3efd14effc0ef7352",
+  "notes": [
+    "Baseline did not pass; mutation candidates were not executed."
+  ],
+  "planned_candidates": [],
+  "sandbox": {
+    "image": "diffmosaic/click-declaration-order:047adef",
+    "image_identity": "diffmosaic/click-declaration-order@sha256:2d91ab575b040806a5a7ffc35e2dac2802f4d05c35ab405d92806098497e177d",
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ]
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 0,
+    "inconclusive": 0,
+    "killed": 0,
+    "mutation_adequacy": null,
+    "survived": 0
+  }
+}

@@ -29,6 +29,7 @@ def test_docker_command_contains_fixed_isolation_controls(tmp_path: Path) -> Non
     assert "--read-only" in command
     assert command[command.index("--cap-drop") + 1] == "ALL"
     assert "no-new-privileges:true" in command
+    assert "PYTEST_ADDOPTS=-o cache_dir=/tmp/diffmosaic-pytest-cache" in command
     assert "type=bind,source=" in command[command.index("--mount") + 1]
     assert command[command.index("--mount") + 1].endswith(",target=/workspace,readonly")
     assert command[-4:] == ["trusted-tests:latest", "python", "-m", "pytest"]

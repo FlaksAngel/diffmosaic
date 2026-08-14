@@ -23,17 +23,17 @@
       "selection_rationale": "Calibration subject for checking the manifest, report schema, and controlled runner before collecting third-party study results."
     },
     {
-      "id": "click-declaration-order-candidate",
-      "role": "candidate",
+      "id": "click-declaration-order",
+      "role": "study",
       "repository_url": "https://github.com/pallets/click",
       "license": "BSD-3-Clause",
       "base_commit": "00e592cea702e0b2caa0dee42489fdb1c22cd845",
       "head_commit": "047adef258fc25566163ffc3efd14effc0ef7352",
       "python_version": "3.11",
       "test_command": ["python", "-m", "pytest"],
-      "docker_image": null,
-      "docker_image_identity": null,
-      "selection_rationale": "Public Pallets project candidate with a fixed non-merge commit that changes src/click/core.py and its focused regression tests."
+      "docker_image": "diffmosaic/click-declaration-order:047adef",
+      "docker_image_identity": "diffmosaic/click-declaration-order@sha256:477ba5092a70eeea2cd79a54ddd5b924076024e548fe59cc8163598650e70aa0",
+      "selection_rationale": "Public Pallets study subject with a fixed non-merge commit that changes src/click/core.py and its focused regression tests; baseline qualification passed in a reviewed local image."
     },
     {
       "id": "flask-ipv6-routing-candidate",

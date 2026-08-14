@@ -20,7 +20,9 @@ replaces `/workspace` with a fresh read-only archive during every invocation.
 ## Controlled build procedure
 
 For each profile, use a fresh source directory and replace the values below
-with that profile's repository URL, head SHA, group and tag:
+with that profile's repository URL, head SHA, package list, group and tag.
+`apt_packages` is normally empty; it records a reviewed system dependency such
+as Click's `less` pager.
 
 ```powershell
 git clone https://github.com/example/project.git C:\research\project-source
@@ -28,6 +30,7 @@ git -C C:\research\project-source checkout --detach <head-commit>
 git -C C:\research\project-source rev-parse HEAD
 
 docker build --pull=false `
+  --build-arg APT_PACKAGES=<space-separated-reviewed-packages> `
   --build-arg UV_GROUP=<tests-or-dev> `
   --tag <image-tag> `
   --file C:\path\to\diffmosaic\images\Dockerfile.uv-locked `
