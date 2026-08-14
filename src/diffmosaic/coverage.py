@@ -61,10 +61,10 @@ def _read_executed_lines(path: str, raw_file_data: Any) -> frozenset[int]:
         raise CoverageDataError(f"Coverage entry for {path!r} must be an object.")
     raw_lines = raw_file_data.get("executed_lines")
     if not isinstance(raw_lines, list) or not all(
-        isinstance(line, int) and line > 0 for line in raw_lines
+        isinstance(line, int) and line >= 0 for line in raw_lines
     ):
         raise CoverageDataError(
-            f"Coverage entry for {path!r} must contain positive integer executed_lines."
+            f"Coverage entry for {path!r} must contain a list of non-negative integer executed_lines."
         )
     return frozenset(raw_lines)
 

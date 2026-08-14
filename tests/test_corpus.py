@@ -90,3 +90,15 @@ def test_excluded_subject_requires_a_reason_and_zero_site_screening() -> None:
     subject["exclusion_reason"] = "No changed comparison or Boolean connector is supported by the planner."
     accepted = validate_corpus_data(manifest)
     assert accepted.valid
+
+
+def test_missing_study_screening_is_a_validation_error_not_a_crash() -> None:
+    manifest = _valid_manifest()
+    subject = manifest["subjects"][0]
+    assert isinstance(subject, dict)
+    subject.pop("mutation_screening")
+
+    report = validate_corpus_data(manifest)
+
+    assert not report.valid
+    assert "missing_mutation_screening" in {issue.code for issue in report.issues}

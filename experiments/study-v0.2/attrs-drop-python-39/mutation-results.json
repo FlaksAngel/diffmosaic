@@ -1,0 +1,65 @@
+{
+  "base_revision": "c1c1e0e25f855be68caf1d1a1dfa832a25acbf58",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 13.047,
+    "exit_code": 0,
+    "outcome": "passed",
+    "stderr_tail": "",
+    "stdout_tail": "      [ 10%]\ntests/test_converters.py ......................................          [ 12%]\ntests/test_dunders.py .................................................. [ 16%]\n.................................................                        [ 19%]\ntests/test_filters.py .................................                  [ 22%]\ntests/test_funcs.py .................................................... [ 25%]\n.                                                                        [ 25%]\ntests/test_functional.py ............................................... [ 29%]\n........................................................................ [ 34%]\n........................................................................ [ 39%]\n........................................................................ [ 44%]\n........................................................................ [ 49%]\n........................................................................ [ 54%]\nsss                                                                      [ 54%]\ntests/test_hooks.py ....................                                 [ 56%]\ntests/test_import.py ...                                                 [ 56%]\ntests/test_init_subclass.py ....                                         [ 56%]\ntests/test_make.py ..................................................... [ 60%]\n........................................................................ [ 65%]\n........................................................................ [ 70%]\n........................................................................ [ 75%]\n...........                                                              [ 76%]\ntests/test_next_gen.py ....................................              [ 79%]\ntests/test_packaging.py ......                                           [ 79%]\ntests/test_pattern_matching.py .....                                     [ 80%]\ntests/test_pyright.py sss                                                [ 80%]\ntests/test_setattr.py ............................x..................    [ 83%]\ntests/test_slots.py ..............s..................................... [ 87%]\n..                                                                       [ 87%]\ntests/test_utils.py ..                                                   [ 87%]\ntests/test_validators.py ............................................... [ 90%]\n........................................................................ [ 96%]\n.................................................                        [ 99%]\ntests/test_version_info.py .......                                       [100%]\n\n=============================== warnings summary ===============================\ntests/test_3rd_party.py::TestCloudpickleCompat::test_repr\n  /opt/diffmosaic-venv/lib/python3.11/site-packages/hypothesis/_settings.py:847: HypothesisWarning: The database setting is not configured, and the default location is unusable - falling back to an in-memory database for this session.  path=PosixPath('/workspace/.hypothesis/examples')\n    self._fallback.database if self._database is not_set else self._database\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [2] tests/test_annotations.py:437: Python 3.14 changed annotation evaluation behavior.\nSKIPPED [1] tests/test_functional.py:786: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:795: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:809: requires Python 3.13+\nSKIPPED [1] tests/test_pyright.py:35: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:89: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:117: Requires pyright.\nSKIPPED [1] tests/test_slots.py:517: slots without weakref_slot should only work on PyPy\nXFAIL tests/test_setattr.py::TestSetAttr::test_slotted_confused\n============ 1401 passed, 9 skipped, 1 xfailed, 1 warning in 11.16s ============\n"
+  },
+  "candidates": [
+    {
+      "candidate_id": "src/attr/_make.py:1602:11:boolean_operator:and-to-or",
+      "duration_seconds": 12.907,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": "atchArgs object at 0x79ed95a444d0>\n\n    def test_match_args_argument(self):\n        \"\"\"\n        match_args being False with inheritance.\n        \"\"\"\n    \n        @attr.define(match_args=False)\n        class X:\n            a = attr.field()\n    \n>       assert \"__match_args__\" not in X.__dict__\nE       AssertionError: assert '__match_args__' not in mappingproxy({'__module__': 'tests.test_make', '__doc__': None, '__attrs_attrs__': (Attribute(name='a', default=NOTHIN...s__': ('a', '__weakref__'), 'a': <member 'a' of 'X' objects>, '__weakref__': <attribute '__weakref__' of 'X' objects>})\nE        +  where mappingproxy({'__module__': 'tests.test_make', '__doc__': None, '__attrs_attrs__': (Attribute(name='a', default=NOTHIN...s__': ('a', '__weakref__'), 'a': <member 'a' of 'X' objects>, '__weakref__': <attribute '__weakref__' of 'X' objects>}) = <class 'tests.test_make.TestMatchArgs.test_match_args_argument.<locals>.X'>.__dict__\n\ntests/test_make.py:3171: AssertionError\n________________________ TestMatchArgs.test_make_class _________________________\n\nself = <tests.test_make.TestMatchArgs object at 0x79ed95a449d0>\n\n    def test_make_class(self):\n        \"\"\"\n        match_args generation with make_class.\n        \"\"\"\n    \n        C1 = make_class(\"C1\", [\"a\", \"b\"])\n        assert (\"a\", \"b\") == C1.__match_args__\n    \n        C1 = make_class(\"C1\", [\"a\", \"b\"], match_args=False)\n>       assert not hasattr(C1, \"__match_args__\")\nE       AssertionError: assert not True\nE        +  where True = hasattr(<class 'tests.test_make.C1'>, '__match_args__')\n\ntests/test_make.py:3206: AssertionError\n_________________ TestPatternMatching.test_explicit_match_args _________________\n\nself = <tests.test_pattern_matching.TestPatternMatching object at 0x79ed95ca3b90>\n\n    def test_explicit_match_args(self):\n        \"\"\"\n        Does not overwrite a manually set empty __match_args__.\n        \"\"\"\n    \n        ma = ()\n    \n        @attr.define\n        class C:\n            a = attr.field()\n            __match_args__ = ma\n    \n        c = C(a=1)\n    \n        msg = r\"C\\(\\) accepts 0 positional sub-patterns \\(1 given\\)\"\n>       with pytest.raises(TypeError, match=msg):\nE       Failed: DID NOT RAISE TypeError\n\ntests/test_pattern_matching.py:50: Failed\n=============================== warnings summary ===============================\ntests/test_3rd_party.py::TestCloudpickleCompat::test_repr\n  /opt/diffmosaic-venv/lib/python3.11/site-packages/hypothesis/_settings.py:847: HypothesisWarning: The database setting is not configured, and the default location is unusable - falling back to an in-memory database for this session.  path=PosixPath('/workspace/.hypothesis/examples')\n    self._fallback.database if self._database is not_set else self._database\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [2] tests/test_annotations.py:437: Python 3.14 changed annotation evaluation behavior.\nSKIPPED [1] tests/test_functional.py:786: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:795: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:809: requires Python 3.13+\nSKIPPED [1] tests/test_pyright.py:35: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:89: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:117: Requires pyright.\nSKIPPED [1] tests/test_slots.py:517: slots without weakref_slot should only work on PyPy\nXFAIL tests/test_setattr.py::TestSetAttr::test_slotted_confused\nFAILED tests/test_make.py::TestMatchArgs::test_explicit_match_args - Assertio...\nFAILED tests/test_make.py::TestMatchArgs::test_match_args_attr_set[False] - A...\nFAILED tests/test_make.py::TestMatchArgs::test_match_args_argument - Assertio...\nFAILED tests/test_make.py::TestMatchArgs::test_make_class - AssertionError: a...\nFAILED tests/test_pattern_matching.py::TestPatternMatching::test_explicit_match_args\n======= 5 failed, 1396 passed, 9 skipped, 1 xfailed, 1 warning in 11.06s =======\n"
+    }
+  ],
+  "head_revision": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 71,
+      "end_line": 1602,
+      "expression": "match_args and not _has_own_attribute(cls, \"__match_args__\")",
+      "id": "src/attr/_make.py:1602:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 1602,
+      "original_operator": "and",
+      "path": "src/attr/_make.py",
+      "replacement_operator": "or",
+      "symbol": "attrs.wrap"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/attrs-drop-python-39:9b98a73",
+    "image_identity": "diffmosaic/attrs-drop-python-39@sha256:8e158abc70c27d0561875fc9fe5b3605d5cb1d4a017c517c80e0b0186de24345",
+    "limits": {
+      "cpu_limit": 1.0,
+      "memory_limit": "1g",
+      "pids_limit": 256,
+      "timeout_seconds": 120
+    },
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ],
+    "working_directory": "/workspace"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 1,
+    "inconclusive": 0,
+    "killed": 1,
+    "mutation_adequacy": 1.0,
+    "survived": 0
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "base_revision": "d3a98cf05ab15769003dcca3eae91cdd6504b83b",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 13.0,
+    "exit_code": 0,
+    "outcome": "passed",
+    "stderr_tail": "",
+    "stdout_tail": "........................          [ 12%]\ntests/test_dunders.py .................................................. [ 16%]\n.................................................                        [ 19%]\ntests/test_filters.py .................................                  [ 22%]\ntests/test_funcs.py .................................................... [ 25%]\n.                                                                        [ 26%]\ntests/test_functional.py ............................................... [ 29%]\n........................................................................ [ 34%]\n........................................................................ [ 39%]\n........................................................................ [ 44%]\n........................................................................ [ 49%]\n........................................................................ [ 54%]\nsss                                                                      [ 55%]\ntests/test_hooks.py ....................                                 [ 56%]\ntests/test_import.py ...                                                 [ 56%]\ntests/test_init_subclass.py ....                                         [ 57%]\ntests/test_make.py ..................................................... [ 60%]\n........................................................................ [ 65%]\n........................................................................ [ 71%]\n........................................................................ [ 76%]\n....s.......                                                             [ 77%]\ntests/test_next_gen.py ....................................              [ 79%]\ntests/test_packaging.py ......                                           [ 80%]\ntests/test_pattern_matching.py .....                                     [ 80%]\ntests/test_pyright.py sss                                                [ 80%]\ntests/test_setattr.py ............................x..................    [ 83%]\ntests/test_slots.py ..............s..................................... [ 87%]\n..                                                                       [ 87%]\ntests/test_utils.py ..                                                   [ 87%]\ntests/test_validators.py ............................................... [ 91%]\n........................................................................ [ 96%]\n............................................                             [ 99%]\ntests/test_version_info.py .......                                       [100%]\n\n=============================== warnings summary ===============================\ntests/test_3rd_party.py::TestCloudpickleCompat::test_repr\n  /opt/diffmosaic-venv/lib/python3.11/site-packages/hypothesis/_settings.py:728: HypothesisWarning: The database setting is not configured, and the default location is unusable - falling back to an in-memory database for this session.  path=PosixPath('/workspace/.hypothesis/examples')\n    self._fallback.database if self._database is not_set else self._database\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [2] tests/test_annotations.py:437: Python 3.14 changed annotation evaluation behavior.\nSKIPPED [1] tests/test_functional.py:786: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:795: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:809: requires Python 3.13+\nSKIPPED [1] tests/test_make.py:3083: Pre-3.10 only.\nSKIPPED [1] tests/test_pyright.py:35: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:83: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:111: Requires pyright.\nSKIPPED [1] tests/test_slots.py:517: slots without weakref_slot should only work on PyPy\nXFAIL tests/test_setattr.py::TestSetAttr::test_slotted_confused\n=========== 1396 passed, 10 skipped, 1 xfailed, 1 warning in 11.03s ============\n"
+  },
+  "candidates": [
+    {
+      "candidate_id": "src/attr/_compat.py:121:15:comparison_operator:not in-to-in",
+      "duration_seconds": 14.547,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": "spect.isgeneratorfunction(f)\n        except TypeError:\n            return inspect.isgeneratorfunction(f)\n>       return _IS_GENERATOR_RESULTS[f]\n               ^^^^^^^^^^^^^^^^^^^^^^^^\nE       KeyError: <function pipe.<locals>.wrapped_pipe at 0x7ff73e228e00>\n\nsrc/attr/_compat.py:82: KeyError\n______________________ TestDisableValidators.test_default ______________________\n\nself = <tests.test_validators.TestDisableValidators object at 0x7ff73c48ba50>\n\n    def test_default(self):\n        \"\"\"\n        Run validators by default.\n        \"\"\"\n>       assert _config._run_validators is True\nE       assert False is True\nE        +  where False = _config._run_validators\n\ntests/test_validators.py:52: AssertionError\n=============================== warnings summary ===============================\ntests/test_3rd_party.py::TestCloudpickleCompat::test_repr\n  /opt/diffmosaic-venv/lib/python3.11/site-packages/hypothesis/_settings.py:728: HypothesisWarning: The database setting is not configured, and the default location is unusable - falling back to an in-memory database for this session.  path=PosixPath('/workspace/.hypothesis/examples')\n    self._fallback.database if self._database is not_set else self._database\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nSKIPPED [2] tests/test_annotations.py:437: Python 3.14 changed annotation evaluation behavior.\nSKIPPED [1] tests/test_functional.py:786: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:795: requires Python 3.13+\nSKIPPED [1] tests/test_functional.py:809: requires Python 3.13+\nSKIPPED [1] tests/test_make.py:3083: Pre-3.10 only.\nSKIPPED [1] tests/test_pyright.py:35: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:83: Requires pyright.\nSKIPPED [1] tests/test_pyright.py:111: Requires pyright.\nSKIPPED [1] tests/test_slots.py:517: slots without weakref_slot should only work on PyPy\nFAILED tests/test_compat.py::TestLazyIsGenerator::test_is_generator - KeyErro...\nFAILED tests/test_compat.py::TestLazyIsGenerator::test_is_not_generator - Key...\nFAILED tests/test_next_gen.py::TestNextGen::test_validates - KeyError: <funct...\nFAILED tests/test_next_gen.py::TestNextGen::test_converts_and_validates_by_default\nFAILED tests/test_setattr.py::TestSetAttr::test_change - KeyError: <function ...\nFAILED tests/test_setattr.py::TestSetAttr::test_change_with_generator_hook - ...\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_hook_executes_after_yielding\nFAILED tests/test_setattr.py::TestSetAttr::test_frozen_attribute - KeyError: ...\nFAILED tests/test_setattr.py::TestSetAttr::test_validator[validate] - KeyErro...\nFAILED tests/test_setattr.py::TestSetAttr::test_validator[on_setattr1] - KeyE...\nFAILED tests/test_setattr.py::TestSetAttr::test_validator[wrapped_pipe] - Key...\nFAILED tests/test_setattr.py::TestSetAttr::test_pipe - KeyError: <function pi...\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_hook_not_called_in_init\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_hook_with_define - ...\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_hook_class_level - ...\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_pre_yield_exception\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_post_yield_exception\nFAILED tests/test_setattr.py::TestSetAttr::test_generator_yields_multiple_times\nFAILED tests/test_setattr.py::TestSetAttr::test_make_class - KeyError: <funct...\nFAILED tests/test_setattr.py::TestSetAttr::test_no_validator_no_converter - K...\nFAILED tests/test_setattr.py::TestSetAttr::test_validate_respects_run_validators_config\nFAILED tests/test_setattr.py::TestSetAttr::test_slotted_confused - KeyError: ...\nFAILED tests/test_setattr.py::TestSetAttr::test_setattr_converter_piped - Key...\nFAILED tests/test_validators.py::TestDisableValidators::test_default - assert...\n=========== 24 failed, 1373 passed, 10 skipped, 1 warning in 12.67s ============\n"
+    }
+  ],
+  "head_revision": "4b5b295bb815bf845fa3570bf63781a88212db40",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "planned_candidates": [
+    {
+      "column": 15,
+      "end_column": 45,
+      "end_line": 121,
+      "expression": "f not in _IS_GENERATOR_RESULTS",
+      "id": "src/attr/_compat.py:121:15:comparison_operator:not in-to-in",
+      "kind": "comparison_operator",
+      "line": 121,
+      "original_operator": "not in",
+      "path": "src/attr/_compat.py",
+      "replacement_operator": "in",
+      "symbol": "_lazy_is_generator.is_gen"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/attrs-on-setattr-generators:4b5b295",
+    "image_identity": "diffmosaic/attrs-on-setattr-generators@sha256:69ea58b0d3d87b29987f66c3b54f262b64c7af44cdd21f37ead78e7464c0c161",
+    "limits": {
+      "cpu_limit": 1.0,
+      "memory_limit": "1g",
+      "pids_limit": 256,
+      "timeout_seconds": 120
+    },
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ],
+    "working_directory": "/workspace"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 1,
+    "inconclusive": 0,
+    "killed": 1,
+    "mutation_adequacy": 1.0,
+    "survived": 0
+  }
+}

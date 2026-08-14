@@ -45,3 +45,27 @@ def test_load_coverage_json_rejects_missing_executed_lines(tmp_path: Path) -> No
 
     with pytest.raises(CoverageDataError, match="executed_lines"):
         load_coverage_json(report)
+
+
+def test_load_coverage_json_accepts_a_file_with_no_executed_lines(tmp_path: Path) -> None:
+    report = tmp_path / "coverage.json"
+    report.write_text(
+        json.dumps({"files": {"tests/not_collected.py": {"executed_lines": []}}}),
+        encoding="utf-8",
+    )
+
+    coverage = load_coverage_json(report)
+
+    assert coverage.match("tests/not_collected.py").executed_lines == frozenset()
+
+
+def test_load_coverage_json_accepts_coverage_pys_empty_file_sentinel(tmp_path: Path) -> None:
+    report = tmp_path / "coverage.json"
+    report.write_text(
+        json.dumps({"files": {"tests/__init__.py": {"executed_lines": [0]}}}),
+        encoding="utf-8",
+    )
+
+    coverage = load_coverage_json(report)
+
+    assert coverage.match("tests/__init__.py").executed_lines == frozenset({0})

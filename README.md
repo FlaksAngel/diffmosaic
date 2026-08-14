@@ -9,13 +9,15 @@ into an inspectable report answering a narrower question:
 > Which changed Python symbols have little evidence that the test suite checks
 > their new behaviour?
 
-Version `0.9.0` is an intentionally small research prototype. It parses a
+Version `0.10.0` is an intentionally small research prototype. It parses a
 local Git diff, classifies production and test changes, maps changed lines to
 Python symbols through the AST, and emits deterministic JSON or Markdown
 reports. It can also read an existing `coverage.py` JSON artefact; it does not
 run tests or execute code in the analysed repository during analysis or
 mutation planning. A separate opt-in Docker runner can execute pre-planned
-mutations under documented controls.
+mutations under documented controls. Its working directory is also recorded:
+the default read-only `/workspace`, or the limited `/tmp` tmpfs for a reviewed
+test that needs a temporary relative file.
 
 ## Status and scope
 
@@ -107,14 +109,16 @@ explicitly.
 ## Mutation planning
 
 DiffMosaic can identify small operator mutations only where production Python
-code changed. It supports comparison boundary mutations such as `>` → `>=`
-and boolean mutations such as `and` → `or`.
+code changed. Its legacy `v0.1` operator set supports comparison boundaries and
+Boolean connectors. The versioned `v0.2` set additionally supports identity,
+membership and `+/-` mutations; record the selected set with every experiment.
 
 ```powershell
 diffmosaic mutate-plan `
   --repo C:\path\to\python-project `
   --base origin/main `
   --head HEAD `
+  --operator-set v0.2 `
   --format markdown
 ```
 
@@ -131,6 +135,11 @@ with no network, a read-only root filesystem, dropped capabilities, a bounded
 process count, CPU/memory limits, and a temporary workspace that is deleted
 after the run.
 
+The source archive is always mounted read-only at `/workspace`. `--workdir`
+defaults to that directory. Use `--workdir /tmp` only for a reviewed command
+that names its tests through absolute `/workspace/...` paths and needs a
+relative temporary file; the choice is persisted in the JSON report.
+
 Prepare a **trusted, prebuilt** Docker image yourself; DiffMosaic never builds
 an image or executes a repository Dockerfile. Then place `--test-command` last:
 
@@ -141,6 +150,7 @@ diffmosaic mutate-run `
   --head HEAD `
   --image trusted-project-tests:latest `
   --output mutation-results.json `
+  --workdir /workspace `
   --allow-execution `
   --test-command python -m pytest
 ```
@@ -166,6 +176,12 @@ The [pilot-study protocol](docs/pilot-study-protocol.md) specifies selection
 rules, exclusions, metrics and reporting limits. A [Russian documentation
 index](docs/ru/README.md) is available for product users.
 
+The next protocol, [study v0.2](docs/study-v0.2-protocol.md), defines a frozen
+symbol-level evaluation with artifact checksums, explicit operator sets and an
+opt-in reproduction command. Its committed manifest is in `preliminary`
+status with checksum-pinned sampled subjects and two complete attrs study
+records; it contains no aggregate claim yet.
+
 Candidate images have their own reviewed, lock-file-based recipes in
 [`images/`](images/). DiffMosaic does not build them; see the
 [image-provisioning protocol](docs/image-provisioning-protocol.md).
@@ -176,6 +192,18 @@ The project will evaluate whether transparent diff and test signals can rank
 pull requests with weak behavioural test evidence better than simple baselines,
 such as "no test file changed". The experimental protocol, data schema, and
 limitations are kept in [`docs/`](docs/).
+
+For a frozen v0.2 corpus, validate every local artifact before generating an
+aggregate table:
+
+```powershell
+diffmosaic corpus-validate --manifest corpus\study-v0.2.json --verify-artifacts --format markdown
+diffmosaic evaluate --manifest corpus\study-v0.2.json --format markdown --output study-results.md
+```
+
+`evaluate` deliberately rejects the preliminary manifest. First use `screen`
+to record an outcome-blind history window; only a later frozen corpus with all
+execution artifacts can be aggregated.
 
 ## Development
 

@@ -1,0 +1,36 @@
+{
+  "base_revision": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "column": 11,
+      "end_column": 64,
+      "end_line": 34,
+      "expression": "isinstance(obj, SupportsRead) or hasattr(obj, \"read\")",
+      "id": "src/requests/_types.py:34:11:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 34,
+      "original_operator": "or",
+      "path": "src/requests/_types.py",
+      "replacement_operator": "and",
+      "symbol": "has_read"
+    },
+    {
+      "column": 23,
+      "end_column": 72,
+      "end_line": 641,
+      "expression": "isinstance(data, basestring) or _t.has_read(data)",
+      "id": "src/requests/models.py:641:23:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 641,
+      "original_operator": "or",
+      "path": "src/requests/models.py",
+      "replacement_operator": "and",
+      "symbol": "PreparedRequest.prepare_body"
+    }
+  ],
+  "head_revision": "6f66281a1d6326b1b9c4ac09ca30de0fc4e6ef43",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "schema_version": "0.1"
+}

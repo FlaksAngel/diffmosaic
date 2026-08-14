@@ -1,0 +1,325 @@
+{
+  "base_revision": "d3a98cf05ab15769003dcca3eae91cdd6504b83b",
+  "baseline": {
+    "no_test_file_changed": false
+  },
+  "head_revision": "4b5b295bb815bf845fa3570bf63781a88212db40",
+  "items": [
+    {
+      "changed_lines": [
+        162,
+        163,
+        164
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "attrib",
+      "reasons": [
+        {
+          "code": "no_changed_line_executed",
+          "explanation": "Coverage was supplied, but it records none of this symbol's changed lines as executed.",
+          "weight": 3
+        }
+      ],
+      "review_level": "medium",
+      "review_score": 3
+    },
+    {
+      "changed_lines": [
+        111,
+        112,
+        113,
+        114,
+        336,
+        337,
+        338
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_next_gen.py",
+      "qualified_name": "define",
+      "reasons": [
+        {
+          "code": "no_changed_line_executed",
+          "explanation": "Coverage was supplied, but it records none of this symbol's changed lines as executed.",
+          "weight": 3
+        }
+      ],
+      "review_level": "medium",
+      "review_score": 3
+    },
+    {
+      "changed_lines": [
+        579,
+        583,
+        584,
+        585,
+        586,
+        602,
+        603,
+        604
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_next_gen.py",
+      "qualified_name": "field",
+      "reasons": [
+        {
+          "code": "no_changed_line_executed",
+          "explanation": "Coverage was supplied, but it records none of this symbol's changed lines as executed.",
+          "weight": 3
+        }
+      ],
+      "review_level": "medium",
+      "review_score": 3
+    },
+    {
+      "changed_lines": [
+        15,
+        16,
+        17
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/setters.py",
+      "qualified_name": "pipe",
+      "reasons": [
+        {
+          "code": "no_changed_line_executed",
+          "explanation": "Coverage was supplied, but it records none of this symbol's changed lines as executed.",
+          "weight": 3
+        }
+      ],
+      "review_level": "medium",
+      "review_score": 3
+    },
+    {
+      "changed_lines": [
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        127,
+        128
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          109,
+          128
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_compat.py",
+      "qualified_name": "_lazy_is_generator",
+      "reasons": [
+        {
+          "code": "partial_changed_line_execution",
+          "explanation": "Coverage was supplied, but it records only some changed lines as executed.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    },
+    {
+      "changed_lines": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          117,
+          118,
+          120,
+          121,
+          122,
+          123,
+          124,
+          126
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_compat.py",
+      "qualified_name": "_lazy_is_generator.is_gen",
+      "reasons": [
+        {
+          "code": "partial_changed_line_execution",
+          "explanation": "Coverage was supplied, but it records only some changed lines as executed.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    },
+    {
+      "changed_lines": [
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1218
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1178
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.add_setattr",
+      "reasons": [
+        {
+          "code": "partial_changed_line_execution",
+          "explanation": "Coverage was supplied, but it records only some changed lines as executed.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    },
+    {
+      "changed_lines": [
+        1195,
+        1197,
+        1199,
+        1200,
+        1201,
+        1202,
+        1203,
+        1204,
+        1205,
+        1206,
+        1207,
+        1208,
+        1209,
+        1210,
+        1211,
+        1212,
+        1213,
+        1214,
+        1217
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1195,
+          1197,
+          1199,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205,
+          1206,
+          1207,
+          1208,
+          1210,
+          1211,
+          1212,
+          1214,
+          1217
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.add_setattr.__setattr__",
+      "reasons": [
+        {
+          "code": "partial_changed_line_execution",
+          "explanation": "Coverage was supplied, but it records only some changed lines as executed.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    },
+    {
+      "changed_lines": [
+        133,
+        134,
+        135,
+        136
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "missing"
+      },
+      "kind": "function",
+      "path": "typing-examples/baseline.py",
+      "qualified_name": "gen_on_setattr_hook",
+      "reasons": [
+        {
+          "code": "coverage_evidence_unavailable",
+          "explanation": "Coverage evidence is unavailable for this symbol.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    },
+    {
+      "changed_lines": [
+        152
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "missing"
+      },
+      "kind": "class",
+      "path": "typing-examples/baseline.py",
+      "qualified_name": "ValidatedSetter2",
+      "reasons": [
+        {
+          "code": "coverage_evidence_unavailable",
+          "explanation": "Coverage evidence is unavailable for this symbol.",
+          "weight": 1
+        }
+      ],
+      "review_level": "low",
+      "review_score": 1
+    }
+  ],
+  "limitations": [
+    "A score prioritises review; it does not estimate defect probability.",
+    "Test-path changes are a repository-level heuristic and are not linked to a symbol.",
+    "Missing or ambiguous coverage is absence of evidence, not evidence that code was untested."
+  ],
+  "method": "fixed-rule review prioritisation; not a defect prediction",
+  "schema_version": "0.1",
+  "summary": {
+    "changed_production_symbols": 10,
+    "high_priority": 0,
+    "low_priority": 6,
+    "medium_priority": 4,
+    "unmapped_changed_lines": 10
+  }
+}

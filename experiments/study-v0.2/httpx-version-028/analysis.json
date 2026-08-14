@@ -1,0 +1,513 @@
+{
+  "base_revision": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+  "changed_files": [
+    {
+      "changed_new_lines": [
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        18,
+        20,
+        26
+      ],
+      "changed_old_line_count": 11,
+      "new_path": "CHANGELOG.md",
+      "old_path": "CHANGELOG.md"
+    },
+    {
+      "changed_new_lines": [
+        54,
+        139,
+        183,
+        219,
+        255,
+        295,
+        336,
+        377,
+        415
+      ],
+      "changed_old_line_count": 9,
+      "new_path": "httpx/_api.py",
+      "old_path": "httpx/_api.py"
+    },
+    {
+      "changed_new_lines": [
+        36,
+        648,
+        649,
+        650,
+        692,
+        693,
+        705,
+        706,
+        722,
+        723,
+        724,
+        735,
+        736,
+        745,
+        746,
+        747,
+        754,
+        755,
+        1362,
+        1363,
+        1406,
+        1407,
+        1420,
+        1421,
+        1436,
+        1437,
+        1438,
+        1449,
+        1450,
+        1459,
+        1460,
+        1461,
+        1468,
+        1469
+      ],
+      "changed_old_line_count": 7,
+      "new_path": "httpx/_client.py",
+      "old_path": "httpx/_client.py"
+    },
+    {
+      "changed_new_lines": [
+        3,
+        7,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        47,
+        48,
+        50,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        70
+      ],
+      "changed_old_line_count": 9,
+      "new_path": "httpx/_config.py",
+      "old_path": "httpx/_config.py"
+    },
+    {
+      "changed_new_lines": [
+        56,
+        138,
+        139,
+        140,
+        153,
+        282,
+        283,
+        284,
+        297
+      ],
+      "changed_old_line_count": 5,
+      "new_path": "httpx/_transports/default.py",
+      "old_path": "httpx/_transports/default.py"
+    },
+    {
+      "changed_new_lines": [
+        60
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "httpx/_types.py",
+      "old_path": "httpx/_types.py"
+    }
+  ],
+  "changed_symbols": [
+    {
+      "changed_lines": [
+        54
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 120,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "request",
+      "start_line": 39
+    },
+    {
+      "changed_lines": [
+        139
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 171,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "stream",
+      "start_line": 124
+    },
+    {
+      "changed_lines": [
+        183
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 207,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "get",
+      "start_line": 174
+    },
+    {
+      "changed_lines": [
+        219
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 243,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "options",
+      "start_line": 210
+    },
+    {
+      "changed_lines": [
+        255
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 279,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "head",
+      "start_line": 246
+    },
+    {
+      "changed_lines": [
+        295
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 320,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "post",
+      "start_line": 282
+    },
+    {
+      "changed_lines": [
+        336
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 361,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "put",
+      "start_line": 323
+    },
+    {
+      "changed_lines": [
+        377
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 402,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "patch",
+      "start_line": 364
+    },
+    {
+      "changed_lines": [
+        415
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 438,
+      "kind": "function",
+      "path": "httpx/_api.py",
+      "qualified_name": "delete",
+      "start_line": 405
+    },
+    {
+      "changed_lines": [
+        648,
+        649,
+        650,
+        692,
+        693,
+        705,
+        706
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 718,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "Client.__init__",
+      "start_line": 641
+    },
+    {
+      "changed_lines": [
+        722,
+        723,
+        724,
+        735,
+        736
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 740,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "Client._init_transport",
+      "start_line": 720
+    },
+    {
+      "changed_lines": [
+        745,
+        746,
+        747,
+        754,
+        755
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 760,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "Client._init_proxy_transport",
+      "start_line": 742
+    },
+    {
+      "changed_lines": [
+        1362,
+        1363,
+        1406,
+        1407,
+        1420,
+        1421
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 1432,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "AsyncClient.__init__",
+      "start_line": 1355
+    },
+    {
+      "changed_lines": [
+        1436,
+        1437,
+        1438,
+        1449,
+        1450
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 1454,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "AsyncClient._init_transport",
+      "start_line": 1434
+    },
+    {
+      "changed_lines": [
+        1459,
+        1460,
+        1461,
+        1468,
+        1469
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 1474,
+      "kind": "function",
+      "path": "httpx/_client.py",
+      "qualified_name": "AsyncClient._init_proxy_transport",
+      "start_line": 1456
+    },
+    {
+      "changed_lines": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        47,
+        48,
+        50,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        70
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          23,
+          29,
+          34,
+          36,
+          40,
+          57,
+          59,
+          70
+        ],
+        "status": "available"
+      },
+      "end_line": 70,
+      "kind": "function",
+      "path": "httpx/_config.py",
+      "qualified_name": "create_ssl_context",
+      "start_line": 23
+    },
+    {
+      "changed_lines": [
+        138,
+        139,
+        140,
+        153
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          153
+        ],
+        "status": "available"
+      },
+      "end_line": 215,
+      "kind": "function",
+      "path": "httpx/_transports/default.py",
+      "qualified_name": "HTTPTransport.__init__",
+      "start_line": 136
+    },
+    {
+      "changed_lines": [
+        282,
+        283,
+        284,
+        297
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 359,
+      "kind": "function",
+      "path": "httpx/_transports/default.py",
+      "qualified_name": "AsyncHTTPTransport.__init__",
+      "start_line": 280
+    }
+  ],
+  "changed_test_files": [],
+  "head_revision": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+  "notes": [],
+  "schema_version": "0.1",
+  "summary": {
+    "changed_files": 6,
+    "changed_production_symbols": 18,
+    "changed_test_files": 0,
+    "unmapped_changed_lines": 5
+  },
+  "unmapped_changes": [
+    {
+      "line": 36,
+      "path": "httpx/_client.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 3,
+      "path": "httpx/_config.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 7,
+      "path": "httpx/_config.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 56,
+      "path": "httpx/_transports/default.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 60,
+      "path": "httpx/_types.py",
+      "reason": "outside_named_python_symbol"
+    }
+  ]
+}

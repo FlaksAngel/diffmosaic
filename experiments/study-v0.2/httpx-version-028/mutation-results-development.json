@@ -1,0 +1,88 @@
+{
+  "base_revision": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 2.281,
+    "exit_code": 0,
+    "outcome": "passed",
+    "stderr_tail": "",
+    "stdout_tail": "............................                                             [100%]\n28 passed in 0.45s\n"
+  },
+  "candidates": [
+    {
+      "candidate_id": "httpx/_config.py:34:11:boolean_operator:and-to-or",
+      "duration_seconds": 2.11,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": "d_ssl_config_cert_and_encrypted_key(\n        cert_pem_file, cert_encrypted_private_key_file, password\n    ):\n>       context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:54: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:21: in create_ssl_context\n    ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...'8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_and_encrypted_key[password1] (call)'})\nkey = 'SSL_CERT_FILE'\n\n>   ???\nE   KeyError: 'SSL_CERT_FILE'\n\n<frozen os>:679: KeyError\n______________ test_load_ssl_config_cert_and_key_invalid_password ______________\n\ncert_pem_file = '/tmp/tmpca0ca111.pem'\ncert_encrypted_private_key_file = '/tmp/tmp_n6ksv81.pem'\n\n    def test_load_ssl_config_cert_and_key_invalid_password(\n        cert_pem_file, cert_encrypted_private_key_file\n    ):\n        with pytest.raises(ssl.SSLError):\n>           context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:64: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:21: in create_ssl_context\n    ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...N': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_and_key_invalid_password (call)'})\nkey = 'SSL_CERT_FILE'\n\n>   ???\nE   KeyError: 'SSL_CERT_FILE'\n\n<frozen os>:679: KeyError\n_________________ test_load_ssl_config_cert_without_key_raises _________________\n\ncert_pem_file = '/tmp/tmpca0ca111.pem'\n\n    def test_load_ssl_config_cert_without_key_raises(cert_pem_file):\n        with pytest.raises(ssl.SSLError):\n>           context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:72: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:21: in create_ssl_context\n    ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...VERSION': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_without_key_raises (call)'})\nkey = 'SSL_CERT_FILE'\n\n>   ???\nE   KeyError: 'SSL_CERT_FILE'\n\n<frozen os>:679: KeyError\n_______________________ test_SSLContext_with_get_request _______________________\n\nserver = <tests.conftest.TestServer object at 0x7ed27bf72e90>\ncert_pem_file = '/tmp/tmpca0ca111.pem'\n\n    def test_SSLContext_with_get_request(server, cert_pem_file):\n>       context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:83: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:21: in create_ssl_context\n    ctx = ssl.create_default_context(cafile=os.environ['SSL_CERT_FILE'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...t', 'PYTEST_VERSION': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_SSLContext_with_get_request (call)'})\nkey = 'SSL_CERT_FILE'\n\n>   ???\nE   KeyError: 'SSL_CERT_FILE'\n\n<frozen os>:679: KeyError\n---------------------------- Captured stderr setup -----------------------------\nINFO:     Started server process [1]\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\n11 failed, 17 passed in 0.64s\n"
+    },
+    {
+      "candidate_id": "httpx/_config.py:36:13:boolean_operator:and-to-or",
+      "duration_seconds": 2.125,
+      "exit_code": 1,
+      "outcome": "killed",
+      "stderr_tail": "",
+      "stdout_tail": "def test_load_ssl_config_cert_and_encrypted_key(\n        cert_pem_file, cert_encrypted_private_key_file, password\n    ):\n>       context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:54: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:23: in create_ssl_context\n    ctx = ssl.create_default_context(capath=os.environ['SSL_CERT_DIR'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...'8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_and_encrypted_key[password1] (call)'})\nkey = 'SSL_CERT_DIR'\n\n>   ???\nE   KeyError: 'SSL_CERT_DIR'\n\n<frozen os>:679: KeyError\n______________ test_load_ssl_config_cert_and_key_invalid_password ______________\n\ncert_pem_file = '/tmp/tmp7y6k8z20.pem'\ncert_encrypted_private_key_file = '/tmp/tmpcmbfiqex.pem'\n\n    def test_load_ssl_config_cert_and_key_invalid_password(\n        cert_pem_file, cert_encrypted_private_key_file\n    ):\n        with pytest.raises(ssl.SSLError):\n>           context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:64: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:23: in create_ssl_context\n    ctx = ssl.create_default_context(capath=os.environ['SSL_CERT_DIR'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...N': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_and_key_invalid_password (call)'})\nkey = 'SSL_CERT_DIR'\n\n>   ???\nE   KeyError: 'SSL_CERT_DIR'\n\n<frozen os>:679: KeyError\n_________________ test_load_ssl_config_cert_without_key_raises _________________\n\ncert_pem_file = '/tmp/tmp7y6k8z20.pem'\n\n    def test_load_ssl_config_cert_without_key_raises(cert_pem_file):\n        with pytest.raises(ssl.SSLError):\n>           context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:72: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:23: in create_ssl_context\n    ctx = ssl.create_default_context(capath=os.environ['SSL_CERT_DIR'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...VERSION': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_load_ssl_config_cert_without_key_raises (call)'})\nkey = 'SSL_CERT_DIR'\n\n>   ???\nE   KeyError: 'SSL_CERT_DIR'\n\n<frozen os>:679: KeyError\n_______________________ test_SSLContext_with_get_request _______________________\n\nserver = <tests.conftest.TestServer object at 0x71fc89c52f90>\ncert_pem_file = '/tmp/tmp7y6k8z20.pem'\n\n    def test_SSLContext_with_get_request(server, cert_pem_file):\n>       context = httpx.create_ssl_context()\n\n/workspace/tests/test_config.py:83: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/workspace/httpx/_config.py:23: in create_ssl_context\n    ctx = ssl.create_default_context(capath=os.environ['SSL_CERT_DIR'])\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = environ({'PATH': '/opt/diffmosaic-venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin...t', 'PYTEST_VERSION': '8.3.3', 'PYTEST_CURRENT_TEST': 'tests/test_config.py::test_SSLContext_with_get_request (call)'})\nkey = 'SSL_CERT_DIR'\n\n>   ???\nE   KeyError: 'SSL_CERT_DIR'\n\n<frozen os>:679: KeyError\n---------------------------- Captured stderr setup -----------------------------\nINFO:     Started server process [1]\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\n11 failed, 17 passed in 0.65s\n"
+    }
+  ],
+  "head_revision": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 56,
+      "end_line": 34,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_FILE\")",
+      "id": "httpx/_config.py:34:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 34,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    },
+    {
+      "column": 13,
+      "end_column": 57,
+      "end_line": 36,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_DIR\")",
+      "id": "httpx/_config.py:36:13:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 36,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/httpx-version-028:80960fa",
+    "image_identity": "diffmosaic/httpx-version-028@sha256:25fa8f3a7594168566de00615d5a813ec3034a87199cdaeb95a2986e5e5b4433",
+    "limits": {
+      "cpu_limit": 1.0,
+      "memory_limit": "1g",
+      "pids_limit": 256,
+      "timeout_seconds": 120
+    },
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest",
+      "/workspace/tests/test_config.py",
+      "-q"
+    ],
+    "working_directory": "/tmp"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 2,
+    "inconclusive": 0,
+    "killed": 2,
+    "mutation_adequacy": 1.0,
+    "survived": 0
+  }
+}

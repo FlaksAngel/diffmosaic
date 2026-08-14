@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.2",
+  "source_manifest": "corpus/study-v0.2.json",
+  "profiles": [
+    {
+      "subject_id": "attrs-drop-python-39",
+      "head_commit": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+      "dockerfile": "images/Dockerfile.uv-locked",
+      "base_image": "python:3.11-slim",
+      "uv_group": "cov",
+      "setuptools_scm_pretend_version": "26.1.1.dev52",
+      "image_tag": "diffmosaic/attrs-drop-python-39:9b98a73",
+      "image_identity": "diffmosaic/attrs-drop-python-39@sha256:8e158abc70c27d0561875fc9fe5b3605d5cb1d4a017c517c80e0b0186de24345",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "qualified"
+    },
+    {
+      "subject_id": "attrs-on-setattr-generators",
+      "head_commit": "4b5b295bb815bf845fa3570bf63781a88212db40",
+      "dockerfile": "images/Dockerfile.uv-locked",
+      "base_image": "python:3.11-slim",
+      "uv_group": "cov",
+      "setuptools_scm_pretend_version": "26.1.1.dev47",
+      "image_tag": "diffmosaic/attrs-on-setattr-generators:4b5b295",
+      "image_identity": "diffmosaic/attrs-on-setattr-generators@sha256:69ea58b0d3d87b29987f66c3b54f262b64c7af44cdd21f37ead78e7464c0c161",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "qualified"
+    },
+    {
+      "subject_id": "httpx-version-028",
+      "head_commit": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+      "dockerfile": "images/Dockerfile.pip-requirements",
+      "base_image": "python:3.11-slim",
+      "requirements_file": "requirements.txt",
+      "image_tag": "diffmosaic/httpx-version-028:80960fa",
+      "image_identity": "diffmosaic/httpx-version-028@sha256:25fa8f3a7594168566de00615d5a813ec3034a87199cdaeb95a2986e5e5b4433",
+      "test_command": ["python", "-m", "pytest", "/workspace/tests/test_config.py", "-q"],
+      "working_directory": "/tmp",
+      "status": "built"
+    },
+    {
+      "subject_id": "httpx-extensions-annotation",
+      "head_commit": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+      "dockerfile": "images/Dockerfile.pip-requirements",
+      "base_image": "python:3.11-slim",
+      "requirements_file": "requirements.txt",
+      "image_tag": "diffmosaic/httpx-extensions-annotation:a33c878",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "unbuilt"
+    },
+    {
+      "subject_id": "jinja-loader-separator",
+      "head_commit": "997f7f524396d616edf8a62d21fb5d8dac6c7814",
+      "status": "deferred",
+      "deferred_reason": "This historical revision has no reviewed pinned dependency recipe in the source tree."
+    },
+    {
+      "subject_id": "requests-protocol-hasattr",
+      "head_commit": "6f66281a1d6326b1b9c4ac09ca30de0fc4e6ef43",
+      "dockerfile": "images/Dockerfile.pip-requirements",
+      "base_image": "python:3.11-slim",
+      "requirements_file": "requirements-dev.txt",
+      "image_tag": "diffmosaic/requests-protocol-hasattr:6f66281",
+      "image_identity": "diffmosaic/requests-protocol-hasattr@sha256:9794561cbdb76f667185752567e5564f41ff90654cbb0b2c252f5f69cfeb42f0",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "built"
+    },
+    {
+      "subject_id": "requests-file-wrapper-detection",
+      "head_commit": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+      "dockerfile": "images/Dockerfile.pip-requirements",
+      "base_image": "python:3.11-slim",
+      "requirements_file": "requirements-dev.txt",
+      "image_tag": "diffmosaic/requests-file-wrapper-detection:6f205ff",
+      "test_command": ["python", "-m", "pytest"],
+      "status": "unbuilt"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "base_revision": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+  "candidate_count": 2,
+  "candidates": [
+    {
+      "column": 11,
+      "end_column": 56,
+      "end_line": 34,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_FILE\")",
+      "id": "httpx/_config.py:34:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 34,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    },
+    {
+      "column": 13,
+      "end_column": 57,
+      "end_line": 36,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_DIR\")",
+      "id": "httpx/_config.py:36:13:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 36,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    }
+  ],
+  "head_revision": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "schema_version": "0.1"
+}

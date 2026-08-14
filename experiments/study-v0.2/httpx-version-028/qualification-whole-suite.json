@@ -1,0 +1,71 @@
+{
+  "base_revision": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 10.781,
+    "exit_code": 1,
+    "outcome": "failed",
+    "stderr_tail": "",
+    "stdout_tail": " \n\n    @contextlib.contextmanager\n    def map_httpcore_exceptions() -> typing.Iterator[None]:\n        global HTTPCORE_EXC_MAP\n        if len(HTTPCORE_EXC_MAP) == 0:\n            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()\n        try:\n            yield\n        except Exception as exc:\n            mapped_exc = None\n    \n            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():\n                if not isinstance(exc, from_exc):\n                    continue\n                # We want to map to the most specific exception we can find.\n                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to\n                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.\n                if mapped_exc is None or issubclass(to_exc, mapped_exc):\n                    mapped_exc = to_exc\n    \n            if mapped_exc is None:  # pragma: no cover\n                raise\n    \n            message = str(exc)\n>           raise mapped_exc(message) from exc\nE           httpx.ConnectError: [Errno -3] Temporary failure in name resolution\n\nhttpx/_transports/default.py:118: ConnectError\n__________________________ test_load_ssl_with_keylog ___________________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x745aad6a7e10>\n\n    def test_load_ssl_with_keylog(monkeypatch: typing.Any) -> None:\n        monkeypatch.setenv(\"SSLKEYLOGFILE\", \"test\")\n>       context = httpx.create_ssl_context()\n\ntests/test_config.py:25: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nhttpx/_config.py:40: in create_ssl_context\n    ctx = ssl.create_default_context(cafile=certifi.where())\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npurpose = <Purpose.SERVER_AUTH: _ASN1Object(nid=129, shortname='serverAuth', longname='TLS Web Server Authentication', oid='1.3.6.1.5.5.7.3.1')>\n\n    def create_default_context(purpose=Purpose.SERVER_AUTH, *, cafile=None,\n                               capath=None, cadata=None):\n        \"\"\"Create a SSLContext object with default settings.\n    \n        NOTE: The protocol and settings may change anytime without prior\n              deprecation. The values represent a fair balance between maximum\n              compatibility and security.\n        \"\"\"\n        if not isinstance(purpose, _ASN1Object):\n            raise TypeError(purpose)\n    \n        # SSLContext sets OP_NO_SSLv2, OP_NO_SSLv3, OP_NO_COMPRESSION,\n        # OP_CIPHER_SERVER_PREFERENCE, OP_SINGLE_DH_USE and OP_SINGLE_ECDH_USE\n        # by default.\n        if purpose == Purpose.SERVER_AUTH:\n            # verify certs and host name in client mode\n            context = SSLContext(PROTOCOL_TLS_CLIENT)\n            context.verify_mode = CERT_REQUIRED\n            context.check_hostname = True\n        elif purpose == Purpose.CLIENT_AUTH:\n            context = SSLContext(PROTOCOL_TLS_SERVER)\n        else:\n            raise ValueError(purpose)\n    \n        if cafile or capath or cadata:\n            context.load_verify_locations(cafile, capath, cadata)\n        elif context.verify_mode != CERT_NONE:\n            # no explicit cafile, capath or cadata but the verify mode is\n            # CERT_OPTIONAL or CERT_REQUIRED. Let's try to load default system\n            # root CA certificates for the given purpose. This may fail silently.\n            context.load_default_certs(purpose)\n        # OpenSSL 1.1.1 keylog file\n        if hasattr(context, 'keylog_filename'):\n            keylogfile = os.environ.get('SSLKEYLOGFILE')\n            if keylogfile and not sys.flags.ignore_environment:\n>               context.keylog_filename = keylogfile\nE               OSError: [Errno 30] Read-only file system: 'test'\n\n/usr/local/lib/python3.11/ssl.py:780: OSError\n=========================== short test summary info ============================\nSKIPPED [1] tests/client/test_auth.py:273: netrc files without a password are valid from Python >= 3.11\n================== 4 failed, 1412 passed, 1 skipped in 8.45s ===================\n"
+  },
+  "candidates": [],
+  "head_revision": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+  "notes": [
+    "Baseline did not pass; mutation candidates were not executed."
+  ],
+  "operator_set_version": "v0.2",
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 56,
+      "end_line": 34,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_FILE\")",
+      "id": "httpx/_config.py:34:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 34,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    },
+    {
+      "column": 13,
+      "end_column": 57,
+      "end_line": 36,
+      "expression": "trust_env and os.environ.get(\"SSL_CERT_DIR\")",
+      "id": "httpx/_config.py:36:13:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 36,
+      "original_operator": "and",
+      "path": "httpx/_config.py",
+      "replacement_operator": "or",
+      "symbol": "create_ssl_context"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/httpx-version-028:80960fa",
+    "image_identity": "diffmosaic/httpx-version-028@sha256:25fa8f3a7594168566de00615d5a813ec3034a87199cdaeb95a2986e5e5b4433",
+    "limits": {
+      "cpu_limit": 1.0,
+      "memory_limit": "1g",
+      "pids_limit": 256,
+      "timeout_seconds": 120
+    },
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ],
+    "working_directory": "/workspace"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 0,
+    "inconclusive": 0,
+    "killed": 0,
+    "mutation_adequacy": null,
+    "survived": 0
+  }
+}

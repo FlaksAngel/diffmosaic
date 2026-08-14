@@ -1,0 +1,24 @@
+# Build this recipe only from the reviewed source checkout named by a v0.2 profile.
+# The final local image identity, not this mutable build input, is what a frozen
+# study records. DiffMosaic never invokes docker build itself.
+
+ARG PYTHON_IMAGE=python:3.11-slim
+FROM ${PYTHON_IMAGE}
+
+ARG REQUIREMENTS_FILE
+
+ENV VIRTUAL_ENV=/opt/diffmosaic-venv
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_CACHE_DIR=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /workspace
+COPY . /workspace
+
+RUN test -n "${REQUIREMENTS_FILE}" \
+    && test -f "${REQUIREMENTS_FILE}" \
+    && python -m venv "${VIRTUAL_ENV}" \
+    && "${VIRTUAL_ENV}/bin/python" -m pip install -r "${REQUIREMENTS_FILE}"
+
+CMD ["python", "-m", "pytest"]

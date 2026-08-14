@@ -23,21 +23,27 @@ dependencies, or use the working tree as a sandbox input.
 ## Isolation model
 
 For the head revision, DiffMosaic creates an in-memory `git archive`, safely
-extracts regular files into a temporary directory, writes one mutated source
-file only in that directory, then invokes Docker with these controls:
+extracts regular files into a temporary directory, materialises only symbolic
+links whose targets remain inside that archive, writes one mutated source file
+only in that directory, then invokes Docker with these controls:
 
 - `--network none`;
 - `--read-only` root filesystem;
 - `--cap-drop ALL` and `no-new-privileges`;
 - configurable CPU, memory, PID and wall-clock limits;
 - a `noexec`, `nosuid`, `nodev` temporary filesystem;
-- a read-only temporary bind-mounted `/workspace` deleted after each invocation.
+- a read-only temporary bind-mounted `/workspace` deleted after each invocation;
+- a recorded working directory: `/workspace` by default, or `/tmp` only when
+  a reviewed command uses explicit `/workspace/...` paths and needs relative
+  temporary files.
 
-The original repository is never modified. The test process may write only to
-the constrained `/tmp` filesystem; DiffMosaic disables Python bytecode writes.
-For pytest commands it also redirects the pytest cache to `/tmp`, so projects
-that treat cache-write warnings as errors remain compatible with the read-only
-workspace.
+The original repository is never modified. Source is always read-only. The
+test process may write to the constrained `/tmp` filesystem; DiffMosaic
+disables Python bytecode writes. For pytest commands it also redirects the
+pytest cache to `/tmp`, so projects that treat cache-write warnings as errors
+remain compatible with the read-only workspace. A test that needs a relative
+temporary file can use the recorded `/tmp` working directory, but it must not
+make the source mount writable.
 Projects whose tests require a writable source tree are outside this runner's
 current scope. Projects that require an untracked source file generated during
 image preparation are also outside scope: a clean `git archive` deliberately

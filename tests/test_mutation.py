@@ -4,6 +4,7 @@ import pytest
 
 from diffmosaic.diff import parse_unified_diff
 from diffmosaic.mutation import (
+    available_operator_sets,
     build_mutation_candidate,
     collect_mutation_sites,
     plan_mutations_from_deltas,
@@ -83,3 +84,37 @@ def test_plan_mutations_rejects_non_positive_limit() -> None:
             head_revision="head",
             max_candidates=0,
         )
+
+
+def test_versioned_operator_sets_preserve_v0_1_and_extend_v0_2() -> None:
+    source = """def classify(value, values):
+    if value is None or value not in values:
+        return value + 1
+    return value
+"""
+
+    legacy_sites = collect_mutation_sites("logic.py", source, {2, 3})
+    extended_sites = collect_mutation_sites("logic.py", source, {2, 3}, operator_set="v0.2")
+
+    assert available_operator_sets() == ("v0.1", "v0.2")
+    assert {(site.kind, site.original_operator) for site in legacy_sites} == {
+        ("boolean_operator", "or"),
+    }
+    assert {(site.kind, site.original_operator, site.replacement_operator) for site in extended_sites} == {
+        ("binary_operator", "+", "-"),
+        ("boolean_operator", "or", "and"),
+        ("comparison_operator", "is", "is not"),
+        ("comparison_operator", "not in", "in"),
+    }
+
+
+def test_mutation_plan_records_operator_set_version() -> None:
+    plan = plan_mutations_from_deltas(
+        [],
+        lambda path: SOURCE,
+        base_revision="base",
+        head_revision="head",
+        operator_set="v0.2",
+    )
+
+    assert plan.to_dict()["operator_set_version"] == "v0.2"

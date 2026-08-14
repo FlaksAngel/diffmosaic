@@ -2,6 +2,25 @@
 
 All notable changes to DiffMosaic are documented here.
 
+## 0.10.0 - 2026-08-14
+
+- Recorded and validated the Docker working directory (`/workspace` or `/tmp`)
+  as a frozen execution control, while preserving the read-only source mount.
+- Accepted empty `executed_lines` lists and the `0` sentinel emitted by
+  `coverage.py` for measured files without executable statements.
+- Extended v0.2 image profiles with reviewed setuptools-scm version inputs
+  for source trees whose build context deliberately excludes `.git` metadata.
+- Materialised in-archive Git symbolic links as contained files or directories
+  for mutation workspaces, while continuing to reject external link targets.
+- Added versioned mutation-operator sets: the reproducible legacy `v0.1` set
+  and the extended `v0.2` set.
+- Added schema `0.2` study manifests with local artifact checksums, frozen
+  execution limits and reviewed equivalent-mutant exclusions.
+- Added `evaluate` for deterministic symbol-level study tables and baseline
+  comparison, plus opt-in `reproduce` for a frozen study subject.
+- Added `screen` for an auditable, newest-first static scan of a bounded local
+  Git history before environment preparation or mutation execution.
+
 ## 0.9.0 - 2026-08-14
 
 - Added a reviewed, narrowly scoped `setuptools-scm` version input to image

@@ -1,0 +1,129 @@
+{
+  "base_revision": "c1c1e0e25f855be68caf1d1a1dfa832a25acbf58",
+  "baseline": {
+    "no_test_file_changed": false
+  },
+  "head_revision": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+  "items": [
+    {
+      "changed_lines": [
+        811
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          811
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.build_class",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    },
+    {
+      "changed_lines": [
+        1050
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1050
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder._make_getstate_setstate.slots_setstate",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    },
+    {
+      "changed_lines": [
+        1602
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1602
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "attrs.wrap",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    },
+    {
+      "changed_lines": [
+        2675,
+        2683
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          2675,
+          2683
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "Attribute.__setstate__",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    },
+    {
+      "changed_lines": [
+        3115
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          3115
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "Factory.__setstate__",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    },
+    {
+      "changed_lines": [
+        52,
+        56
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          52,
+          56
+        ],
+        "status": "available"
+      },
+      "kind": "function",
+      "path": "src/attr/converters.py",
+      "qualified_name": "optional",
+      "reasons": [],
+      "review_level": "low",
+      "review_score": 0
+    }
+  ],
+  "limitations": [
+    "A score prioritises review; it does not estimate defect probability.",
+    "Test-path changes are a repository-level heuristic and are not linked to a symbol.",
+    "Missing or ambiguous coverage is absence of evidence, not evidence that code was untested."
+  ],
+  "method": "fixed-rule review prioritisation; not a defect prediction",
+  "schema_version": "0.1",
+  "summary": {
+    "changed_production_symbols": 6,
+    "high_priority": 0,
+    "low_priority": 6,
+    "medium_priority": 0,
+    "unmapped_changed_lines": 0
+  }
+}

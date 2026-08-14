@@ -1,0 +1,417 @@
+{
+  "base_revision": "c1c1e0e25f855be68caf1d1a1dfa832a25acbf58",
+  "changed_files": [
+    {
+      "changed_new_lines": [
+        111,
+        124,
+        125,
+        126,
+        127,
+        131
+      ],
+      "changed_old_line_count": 4,
+      "new_path": ".github/workflows/ci.yml",
+      "old_path": ".github/workflows/ci.yml"
+    },
+    {
+      "changed_new_lines": [
+        1
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "changelog.d/1603.change.md",
+      "old_path": null
+    },
+    {
+      "changed_new_lines": [
+        13,
+        49,
+        170,
+        171,
+        172,
+        173,
+        278,
+        279,
+        280,
+        281
+      ],
+      "changed_old_line_count": 13,
+      "new_path": "pyproject.toml",
+      "old_path": "pyproject.toml"
+    },
+    {
+      "changed_new_lines": [],
+      "changed_old_line_count": 1,
+      "new_path": "src/attr/_compat.py",
+      "old_path": "src/attr/_compat.py"
+    },
+    {
+      "changed_new_lines": [
+        811,
+        1050,
+        1602,
+        2675,
+        2683,
+        3115
+      ],
+      "changed_old_line_count": 13,
+      "new_path": "src/attr/_make.py",
+      "old_path": "src/attr/_make.py"
+    },
+    {
+      "changed_new_lines": [
+        52,
+        56
+      ],
+      "changed_old_line_count": 4,
+      "new_path": "src/attr/converters.py",
+      "old_path": "src/attr/converters.py"
+    },
+    {
+      "changed_new_lines": [
+        9
+      ],
+      "changed_old_line_count": 3,
+      "new_path": "tests/conftest.py",
+      "old_path": "tests/conftest.py"
+    },
+    {
+      "changed_new_lines": [
+        71,
+        72,
+        73,
+        165
+      ],
+      "changed_old_line_count": 2,
+      "new_path": "tests/strategies.py",
+      "old_path": "tests/strategies.py"
+    },
+    {
+      "changed_new_lines": [
+        10
+      ],
+      "changed_old_line_count": 4,
+      "new_path": "tests/test_abc.py",
+      "old_path": "tests/test_abc.py"
+    },
+    {
+      "changed_new_lines": [
+        32,
+        33,
+        34,
+        35,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        85,
+        86,
+        87,
+        88,
+        89,
+        355,
+        356,
+        357
+      ],
+      "changed_old_line_count": 10,
+      "new_path": "tests/test_dunders.py",
+      "old_path": "tests/test_dunders.py"
+    },
+    {
+      "changed_new_lines": [
+        121,
+        122,
+        123,
+        364,
+        365,
+        366,
+        374
+      ],
+      "changed_old_line_count": 3,
+      "new_path": "tests/test_funcs.py",
+      "old_path": "tests/test_funcs.py"
+    },
+    {
+      "changed_new_lines": [
+        120,
+        121,
+        122,
+        123,
+        124,
+        158,
+        159,
+        160,
+        1958,
+        1959,
+        1960,
+        1962,
+        2007,
+        2008,
+        2009,
+        2026,
+        2027,
+        2028,
+        2032,
+        2313
+      ],
+      "changed_old_line_count": 24,
+      "new_path": "tests/test_make.py",
+      "old_path": "tests/test_make.py"
+    },
+    {
+      "changed_new_lines": [
+        308,
+        338
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "tests/test_next_gen.py",
+      "old_path": "tests/test_next_gen.py"
+    },
+    {
+      "changed_new_lines": [
+        20,
+        26
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "tests/utils.py",
+      "old_path": "tests/utils.py"
+    },
+    {
+      "changed_new_lines": [
+        5,
+        9,
+        10,
+        11,
+        36,
+        41,
+        53,
+        55,
+        61
+      ],
+      "changed_old_line_count": 11,
+      "new_path": "tox.ini",
+      "old_path": "tox.ini"
+    },
+    {
+      "changed_new_lines": [
+        3,
+        5,
+        6,
+        7,
+        8,
+        101,
+        103,
+        109,
+        110,
+        112,
+        117,
+        121,
+        128,
+        130,
+        140,
+        142,
+        148,
+        152,
+        154,
+        155,
+        160,
+        163,
+        168,
+        171,
+        176,
+        178,
+        183,
+        185,
+        197,
+        206,
+        215,
+        242,
+        251,
+        259,
+        266,
+        273,
+        292,
+        552,
+        564,
+        565,
+        566,
+        602,
+        718,
+        721,
+        861,
+        876,
+        877,
+        878,
+        1069,
+        1075,
+        1089,
+        1090,
+        1091,
+        1097,
+        1264,
+        1280,
+        1322,
+        1338,
+        1583,
+        1618,
+        1743,
+        1744,
+        1745,
+        1923,
+        1926,
+        1930,
+        1934,
+        1954,
+        1957,
+        1961,
+        1965,
+        1985,
+        1986,
+        1989,
+        1993,
+        1997,
+        2017,
+        2031,
+        2099,
+        2186,
+        2243
+      ],
+      "changed_old_line_count": 812,
+      "new_path": "uv.lock",
+      "old_path": "uv.lock"
+    }
+  ],
+  "changed_symbols": [
+    {
+      "changed_lines": [
+        811
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          811
+        ],
+        "status": "available"
+      },
+      "end_line": 821,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.build_class",
+      "start_line": 800
+    },
+    {
+      "changed_lines": [
+        1050
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1050
+        ],
+        "status": "available"
+      },
+      "end_line": 1062,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder._make_getstate_setstate.slots_setstate",
+      "start_line": 1042
+    },
+    {
+      "changed_lines": [
+        1602
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1602
+        ],
+        "status": "available"
+      },
+      "end_line": 1605,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "attrs.wrap",
+      "start_line": 1474
+    },
+    {
+      "changed_lines": [
+        2675,
+        2683
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          2675,
+          2683
+        ],
+        "status": "available"
+      },
+      "end_line": 2683,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "Attribute.__setstate__",
+      "start_line": 2668
+    },
+    {
+      "changed_lines": [
+        3115
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          3115
+        ],
+        "status": "available"
+      },
+      "end_line": 3116,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "Factory.__setstate__",
+      "start_line": 3111
+    },
+    {
+      "changed_lines": [
+        52,
+        56
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          52,
+          56
+        ],
+        "status": "available"
+      },
+      "end_line": 61,
+      "kind": "function",
+      "path": "src/attr/converters.py",
+      "qualified_name": "optional",
+      "start_line": 19
+    }
+  ],
+  "changed_test_files": [
+    "tests/conftest.py",
+    "tests/strategies.py",
+    "tests/test_abc.py",
+    "tests/test_dunders.py",
+    "tests/test_funcs.py",
+    "tests/test_make.py",
+    "tests/test_next_gen.py",
+    "tests/utils.py"
+  ],
+  "head_revision": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+  "notes": [
+    "src/attr/_compat.py: deletion-only change; no head-revision lines to map."
+  ],
+  "schema_version": "0.1",
+  "summary": {
+    "changed_files": 16,
+    "changed_production_symbols": 6,
+    "changed_test_files": 8,
+    "unmapped_changed_lines": 0
+  },
+  "unmapped_changes": []
+}

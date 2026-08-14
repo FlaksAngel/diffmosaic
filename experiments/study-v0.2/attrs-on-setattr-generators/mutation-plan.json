@@ -1,0 +1,23 @@
+{
+  "base_revision": "d3a98cf05ab15769003dcca3eae91cdd6504b83b",
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "column": 15,
+      "end_column": 45,
+      "end_line": 121,
+      "expression": "f not in _IS_GENERATOR_RESULTS",
+      "id": "src/attr/_compat.py:121:15:comparison_operator:not in-to-in",
+      "kind": "comparison_operator",
+      "line": 121,
+      "original_operator": "not in",
+      "path": "src/attr/_compat.py",
+      "replacement_operator": "in",
+      "symbol": "_lazy_is_generator.is_gen"
+    }
+  ],
+  "head_revision": "4b5b295bb815bf845fa3570bf63781a88212db40",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "schema_version": "0.1"
+}

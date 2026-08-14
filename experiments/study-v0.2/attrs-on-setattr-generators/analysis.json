@@ -1,0 +1,712 @@
+{
+  "base_revision": "d3a98cf05ab15769003dcca3eae91cdd6504b83b",
+  "changed_files": [
+    {
+      "changed_new_lines": [
+        1
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "changelog.d/1592.change.md",
+      "old_path": null
+    },
+    {
+      "changed_new_lines": [
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "docs/examples.md",
+      "old_path": "docs/examples.md"
+    },
+    {
+      "changed_new_lines": [
+        388
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "docs/init.md",
+      "old_path": "docs/init.md"
+    },
+    {
+      "changed_new_lines": [
+        7,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "src/attr/_compat.py",
+      "old_path": "src/attr/_compat.py"
+    },
+    {
+      "changed_new_lines": [
+        28,
+        162,
+        163,
+        164,
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1195,
+        1197,
+        1199,
+        1200,
+        1201,
+        1202,
+        1203,
+        1204,
+        1205,
+        1206,
+        1207,
+        1208,
+        1209,
+        1210,
+        1211,
+        1212,
+        1213,
+        1214,
+        1217,
+        1218
+      ],
+      "changed_old_line_count": 5,
+      "new_path": "src/attr/_make.py",
+      "old_path": "src/attr/_make.py"
+    },
+    {
+      "changed_new_lines": [
+        111,
+        112,
+        113,
+        114,
+        336,
+        337,
+        338,
+        579,
+        583,
+        584,
+        585,
+        586,
+        602,
+        603,
+        604
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "src/attr/_next_gen.py",
+      "old_path": "src/attr/_next_gen.py"
+    },
+    {
+      "changed_new_lines": [
+        15,
+        16,
+        17
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "src/attr/setters.py",
+      "old_path": "src/attr/setters.py"
+    },
+    {
+      "changed_new_lines": [
+        10,
+        60,
+        61,
+        62,
+        63
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "src/attrs/__init__.pyi",
+      "old_path": "src/attrs/__init__.pyi"
+    },
+    {
+      "changed_new_lines": [
+        11,
+        12,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "tests/test_compat.py",
+      "old_path": "tests/test_compat.py"
+    },
+    {
+      "changed_new_lines": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332
+      ],
+      "changed_old_line_count": 0,
+      "new_path": "tests/test_setattr.py",
+      "old_path": "tests/test_setattr.py"
+    },
+    {
+      "changed_new_lines": [
+        10,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        152
+      ],
+      "changed_old_line_count": 1,
+      "new_path": "typing-examples/baseline.py",
+      "old_path": "typing-examples/baseline.py"
+    }
+  ],
+  "changed_symbols": [
+    {
+      "changed_lines": [
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        127,
+        128
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          109,
+          128
+        ],
+        "status": "available"
+      },
+      "end_line": 128,
+      "kind": "function",
+      "path": "src/attr/_compat.py",
+      "qualified_name": "_lazy_is_generator",
+      "start_line": 109
+    },
+    {
+      "changed_lines": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          117,
+          118,
+          120,
+          121,
+          122,
+          123,
+          124,
+          126
+        ],
+        "status": "available"
+      },
+      "end_line": 126,
+      "kind": "function",
+      "path": "src/attr/_compat.py",
+      "qualified_name": "_lazy_is_generator.is_gen",
+      "start_line": 117
+    },
+    {
+      "changed_lines": [
+        162,
+        163,
+        164
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 215,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "attrib",
+      "start_line": 105
+    },
+    {
+      "changed_lines": [
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1218
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1178
+        ],
+        "status": "available"
+      },
+      "end_line": 1223,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.add_setattr",
+      "start_line": 1173
+    },
+    {
+      "changed_lines": [
+        1195,
+        1197,
+        1199,
+        1200,
+        1201,
+        1202,
+        1203,
+        1204,
+        1205,
+        1206,
+        1207,
+        1208,
+        1209,
+        1210,
+        1211,
+        1212,
+        1213,
+        1214,
+        1217
+      ],
+      "coverage": {
+        "executed_changed_lines": [
+          1195,
+          1197,
+          1199,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205,
+          1206,
+          1207,
+          1208,
+          1210,
+          1211,
+          1212,
+          1214,
+          1217
+        ],
+        "status": "available"
+      },
+      "end_line": 1217,
+      "kind": "function",
+      "path": "src/attr/_make.py",
+      "qualified_name": "_ClassBuilder.add_setattr.__setattr__",
+      "start_line": 1193
+    },
+    {
+      "changed_lines": [
+        111,
+        112,
+        113,
+        114,
+        336,
+        337,
+        338
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 428,
+      "kind": "function",
+      "path": "src/attr/_next_gen.py",
+      "qualified_name": "define",
+      "start_line": 23
+    },
+    {
+      "changed_lines": [
+        579,
+        583,
+        584,
+        585,
+        586,
+        602,
+        603,
+        604
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 625,
+      "kind": "function",
+      "path": "src/attr/_next_gen.py",
+      "qualified_name": "field",
+      "start_line": 435
+    },
+    {
+      "changed_lines": [
+        15,
+        16,
+        17
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "available"
+      },
+      "end_line": 29,
+      "kind": "function",
+      "path": "src/attr/setters.py",
+      "qualified_name": "pipe",
+      "start_line": 11
+    },
+    {
+      "changed_lines": [
+        133,
+        134,
+        135,
+        136
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "missing"
+      },
+      "end_line": 136,
+      "kind": "function",
+      "path": "typing-examples/baseline.py",
+      "qualified_name": "gen_on_setattr_hook",
+      "start_line": 133
+    },
+    {
+      "changed_lines": [
+        152
+      ],
+      "coverage": {
+        "executed_changed_lines": [],
+        "status": "missing"
+      },
+      "end_line": 152,
+      "kind": "class",
+      "path": "typing-examples/baseline.py",
+      "qualified_name": "ValidatedSetter2",
+      "start_line": 140
+    }
+  ],
+  "changed_test_files": [
+    "tests/test_compat.py",
+    "tests/test_setattr.py"
+  ],
+  "head_revision": "4b5b295bb815bf845fa3570bf63781a88212db40",
+  "notes": [],
+  "schema_version": "0.1",
+  "summary": {
+    "changed_files": 11,
+    "changed_production_symbols": 10,
+    "changed_test_files": 2,
+    "unmapped_changed_lines": 10
+  },
+  "unmapped_changes": [
+    {
+      "line": 7,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 104,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 105,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 106,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 107,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 108,
+      "path": "src/attr/_compat.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 28,
+      "path": "src/attr/_make.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 10,
+      "path": "typing-examples/baseline.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 137,
+      "path": "typing-examples/baseline.py",
+      "reason": "outside_named_python_symbol"
+    },
+    {
+      "line": 138,
+      "path": "typing-examples/baseline.py",
+      "reason": "outside_named_python_symbol"
+    }
+  ]
+}

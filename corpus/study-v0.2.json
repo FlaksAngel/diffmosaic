@@ -1,0 +1,254 @@
+{
+  "schema_version": "0.2",
+  "study_id": "diffmosaic-study-v0-2",
+  "status": "preliminary",
+  "operator_set": "v0.2",
+  "evaluation": {
+    "weak_adequacy_threshold": 0.8,
+    "minimum_conclusive_candidates": 1
+  },
+  "inclusion_criteria": [
+    "The subject is a public Python repository with a documented permissive license.",
+    "The selected head commit changes production Python code and has a distinct fixed parent or declared base commit.",
+    "The test command is explicit and reproducible without secrets or network access at execution time.",
+    "The subject has a preserved v0.2 mutation plan, coverage artifact, priority report and mutation result produced from the exact recorded revisions.",
+    "Selection occurs under the documented sampling rule before mutation outcomes are interpreted."
+  ],
+  "sampling_rule": "For each repository in the fixed four-project frame, retain the first two eligible revisions in its committed newest-first 120-commit static screen; if fewer than two are eligible, retain every eligible revision and do not replace it with a later project-specific choice.",
+  "subjects": [
+    {
+      "id": "attrs-drop-python-39",
+      "role": "study",
+      "repository_url": "https://github.com/python-attrs/attrs",
+      "license": "MIT",
+      "base_commit": "c1c1e0e25f855be68caf1d1a1dfa832a25acbf58",
+      "head_commit": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": "diffmosaic/attrs-drop-python-39:9b98a73",
+      "docker_image_identity": "diffmosaic/attrs-drop-python-39@sha256:8e158abc70c27d0561875fc9fe5b3605d5cb1d4a017c517c80e0b0186de24345",
+      "execution": {
+        "working_directory": "/workspace",
+        "timeout_seconds": 120,
+        "memory_limit": "1g",
+        "cpu_limit": 1.0,
+        "pids_limit": 256
+      },
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 1,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/attrs-screening.json",
+        "sha256": "94327fb8b7fc363df36a9d513ccedd6c6d6a1f3761796ec0e8c1c5a5e647a79c",
+        "ordinal": 19
+      },
+      "artifacts": {
+        "analysis": {
+          "path": "experiments/study-v0.2/attrs-drop-python-39/analysis.json",
+          "sha256": "e190a4b453a61230813e252001fc2493a9b6c72187561a4e3d838a72b4d6661d"
+        },
+        "priority": {
+          "path": "experiments/study-v0.2/attrs-drop-python-39/priority.json",
+          "sha256": "ec5395c82e12d6f58772a86298f63e4260a120e0ce1824557ed79895e6d24e89"
+        },
+        "coverage": {
+          "path": "experiments/study-v0.2/attrs-drop-python-39/coverage.json",
+          "sha256": "4392bc6037c4ab0b348471dba4742279ca38d71f8b5732f9c8dd7dc7328bb666"
+        },
+        "mutation_plan": {
+          "path": "experiments/study-v0.2/attrs-drop-python-39/mutation-plan.json",
+          "sha256": "4707e5fb555b1cceff2b926ed238c8e33c1bd4cea0d22bad9ebc7171a380a138"
+        },
+        "mutation_results": {
+          "path": "experiments/study-v0.2/attrs-drop-python-39/mutation-results.json",
+          "sha256": "8e633bdc662021b2fdc5fba21fe883a8d46546a640f07c9383c01eb3a7000c03"
+        }
+      },
+      "selection_rationale": "First eligible symbol-level candidate in the fixed newest-first attrs history screen."
+    },
+    {
+      "id": "attrs-on-setattr-generators",
+      "role": "study",
+      "repository_url": "https://github.com/python-attrs/attrs",
+      "license": "MIT",
+      "base_commit": "d3a98cf05ab15769003dcca3eae91cdd6504b83b",
+      "head_commit": "4b5b295bb815bf845fa3570bf63781a88212db40",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": "diffmosaic/attrs-on-setattr-generators:4b5b295",
+      "docker_image_identity": "diffmosaic/attrs-on-setattr-generators@sha256:69ea58b0d3d87b29987f66c3b54f262b64c7af44cdd21f37ead78e7464c0c161",
+      "execution": {
+        "working_directory": "/workspace",
+        "timeout_seconds": 120,
+        "memory_limit": "1g",
+        "cpu_limit": 1.0,
+        "pids_limit": 256
+      },
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 1,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/attrs-screening.json",
+        "sha256": "94327fb8b7fc363df36a9d513ccedd6c6d6a1f3761796ec0e8c1c5a5e647a79c",
+        "ordinal": 24
+      },
+      "artifacts": {
+        "analysis": {
+          "path": "experiments/study-v0.2/attrs-on-setattr-generators/analysis.json",
+          "sha256": "c4298456eabfd5c2fd91dc6a42b93bab85a3936baf1d956c0047e7f64f540029"
+        },
+        "priority": {
+          "path": "experiments/study-v0.2/attrs-on-setattr-generators/priority.json",
+          "sha256": "1ef93716fdd15e50b9a54e0fc4d47ef455871310233bb770e0e22fbdfb7d54cc"
+        },
+        "coverage": {
+          "path": "experiments/study-v0.2/attrs-on-setattr-generators/coverage.json",
+          "sha256": "d07cab2e5c3f216cd7e47b20316dda48d66f0bb9b7baaa3aeb093675fd94b5d4"
+        },
+        "mutation_plan": {
+          "path": "experiments/study-v0.2/attrs-on-setattr-generators/mutation-plan.json",
+          "sha256": "813f7085f130efc51c701aa4354a0842cde90a328a6a6f6e4cf4aab9f3ff093b"
+        },
+        "mutation_results": {
+          "path": "experiments/study-v0.2/attrs-on-setattr-generators/mutation-results.json",
+          "sha256": "6d37c656b618384f155fa8c1228ff04b905812afdafaaaa7fb3393bf71121cb1"
+        }
+      },
+      "selection_rationale": "Second eligible symbol-level candidate in the fixed newest-first attrs history screen."
+    },
+    {
+      "id": "httpx-version-028",
+      "role": "candidate",
+      "repository_url": "https://github.com/encode/httpx",
+      "license": "BSD-3-Clause",
+      "base_commit": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+      "head_commit": "80960fa31918d7663c3f4c3ad61661cf0e80628f",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest", "/workspace/tests/test_config.py", "-q"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "execution": {
+        "working_directory": "/tmp",
+        "timeout_seconds": 120,
+        "memory_limit": "1g",
+        "cpu_limit": 1.0,
+        "pids_limit": 256
+      },
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 2,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/httpx-screening.json",
+        "sha256": "96f20a56227a27d2a29f1b5a84b16e937909dd5d74e4fa4f4ee9c3c39c7285ef",
+        "ordinal": 30
+      },
+      "selection_rationale": "First eligible symbol-level candidate in the fixed newest-first HTTPX history screen."
+    },
+    {
+      "id": "httpx-extensions-annotation",
+      "role": "candidate",
+      "repository_url": "https://github.com/encode/httpx",
+      "license": "BSD-3-Clause",
+      "base_commit": "ce7e14da27abba6574be9b3ea7cd5990556a9343",
+      "head_commit": "a33c87852b8a0dddc65e5f739af1e0a6fca4b91f",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 2,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/httpx-screening.json",
+        "sha256": "96f20a56227a27d2a29f1b5a84b16e937909dd5d74e4fa4f4ee9c3c39c7285ef",
+        "ordinal": 31
+      },
+      "selection_rationale": "Second eligible symbol-level candidate in the fixed newest-first HTTPX history screen."
+    },
+    {
+      "id": "jinja-loader-separator",
+      "role": "candidate",
+      "repository_url": "https://github.com/pallets/jinja",
+      "license": "BSD-3-Clause",
+      "base_commit": "7f936deac07ff78a131e29bf8ca8d3527c62a0c4",
+      "head_commit": "997f7f524396d616edf8a62d21fb5d8dac6c7814",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 7,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/jinja-screening.json",
+        "sha256": "f62ae91c8c7e4758425573cadcb43d0cf667e6c17a6214165de1c685d7bf99c2",
+        "ordinal": 20
+      },
+      "selection_rationale": "Only eligible symbol-level candidate in the fixed newest-first Jinja history screen."
+    },
+    {
+      "id": "requests-protocol-hasattr",
+      "role": "excluded",
+      "repository_url": "https://github.com/psf/requests",
+      "license": "Apache-2.0",
+      "base_commit": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+      "head_commit": "6f66281a1d6326b1b9c4ac09ca30de0fc4e6ef43",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 2,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/requests-screening.json",
+        "sha256": "f25f22bf5b41c6d177bafb9bf3da8fea77523bcce72cf4d0ddd69a9d67ac7289",
+        "ordinal": 15
+      },
+      "exclusion_reason": "The pre-recorded full pytest baseline requires outbound timeout probes, which correctly fail under the study's network=none sandbox policy.",
+      "selection_rationale": "First eligible symbol-level candidate in the fixed newest-first Requests history screen."
+    },
+    {
+      "id": "requests-file-wrapper-detection",
+      "role": "candidate",
+      "repository_url": "https://github.com/psf/requests",
+      "license": "Apache-2.0",
+      "base_commit": "661970d171d9c3e12e4c789c4768db647d8c4da0",
+      "head_commit": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+      "python_version": "3.11",
+      "test_command": ["python", "-m", "pytest"],
+      "docker_image": null,
+      "docker_image_identity": null,
+      "mutation_screening": {
+        "planner_version": "0.10.0",
+        "max_candidates": 20,
+        "candidate_count": 1,
+        "outcome": "eligible"
+      },
+      "screening_report": {
+        "path": "experiments/study-v0.2/requests-screening.json",
+        "sha256": "f25f22bf5b41c6d177bafb9bf3da8fea77523bcce72cf4d0ddd69a9d67ac7289",
+        "ordinal": 16
+      },
+      "selection_rationale": "Second eligible symbol-level candidate in the fixed newest-first Requests history screen."
+    }
+  ]
+}

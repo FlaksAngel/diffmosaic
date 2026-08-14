@@ -8,6 +8,8 @@ and an explicit allow-execution flag in the CLI.
 from __future__ import annotations
 
 import io
+import os
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -23,12 +25,48 @@ class MutationExecutionError(RuntimeError):
     """Raised when the runner cannot create a controlled mutation experiment."""
 
 
+def _docker_cli() -> str:
+    """Locate Docker without requiring a terminal restart after a user install."""
+
+    if docker_from_path := shutil.which("docker"):
+        return docker_from_path
+    if os.name == "nt":
+        local_app_data = os.environ.get("LOCALAPPDATA")
+        if local_app_data:
+            user_install = (
+                Path(local_app_data)
+                / "Programs"
+                / "DockerDesktop"
+                / "resources"
+                / "bin"
+                / "docker.exe"
+            )
+            if user_install.is_file():
+                return str(user_install)
+    raise MutationExecutionError("Docker CLI is not installed or is not on PATH.")
+
+
+def _docker_environment(docker_cli: str) -> dict[str, str]:
+    """Expose Docker Desktop credential helpers beside a discovered user CLI."""
+
+    environment = os.environ.copy()
+    helper_directory = str(Path(docker_cli).parent)
+    current_path = environment.get("PATH", "")
+    path_parts = current_path.split(os.pathsep) if current_path else []
+    if helper_directory not in path_parts:
+        environment["PATH"] = helper_directory + (
+            os.pathsep + current_path if current_path else ""
+        )
+    return environment
+
+
 @dataclass(frozen=True)
 class DockerSandboxConfig:
     """Resource and isolation limits for a single test-suite invocation."""
 
     image: str
     test_command: tuple[str, ...]
+    working_directory: str = "/workspace"
     timeout_seconds: int = 120
     memory_limit: str = "1g"
     cpu_limit: float = 1.0
@@ -40,6 +78,8 @@ class DockerSandboxConfig:
             raise ValueError("A non-empty Docker image is required.")
         if not self.test_command or any(not argument for argument in self.test_command):
             raise ValueError("A test command is required.")
+        if self.working_directory not in {"/workspace", "/tmp"}:
+            raise ValueError("working_directory must be /workspace or /tmp.")
         if not 1 <= self.timeout_seconds <= 1800:
             raise ValueError("timeout_seconds must be between 1 and 1800.")
         if not 0 < self.cpu_limit <= 4:
@@ -80,11 +120,17 @@ class MutationExecutionReport:
     head_revision: str
     image: str
     test_command: tuple[str, ...]
+    working_directory: str
     image_identity: str
     baseline: ExecutionResult
     planned_candidates: list[MutationCandidate] = field(default_factory=list)
     candidates: list[ExecutionResult] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    operator_set_version: str = "v0.1"
+    timeout_seconds: int = 120
+    memory_limit: str = "1g"
+    cpu_limit: float = 1.0
+    pids_limit: int = 256
 
     def to_dict(self) -> dict[str, object]:
         killed = sum(item.outcome == "killed" for item in self.candidates)
@@ -94,12 +140,20 @@ class MutationExecutionReport:
             "schema_version": "0.1",
             "base_revision": self.base_revision,
             "head_revision": self.head_revision,
+            "operator_set_version": self.operator_set_version,
             "sandbox": {
                 "image": self.image,
                 "image_identity": self.image_identity,
                 "test_command": list(self.test_command),
+                "working_directory": self.working_directory,
                 "network": "none",
                 "root_filesystem": "read_only",
+                "limits": {
+                    "timeout_seconds": self.timeout_seconds,
+                    "memory_limit": self.memory_limit,
+                    "cpu_limit": self.cpu_limit,
+                    "pids_limit": self.pids_limit,
+                },
             },
             "baseline": self.baseline.to_dict(),
             "planned_candidates": [
@@ -154,7 +208,7 @@ def build_docker_command(
         "--mount",
         mount,
         "--workdir",
-        "/workspace",
+        config.working_directory,
     ]
     if container_name:
         command.extend(["--name", container_name])
@@ -191,7 +245,13 @@ def classify_container_completion(
 
 
 def safe_extract_git_archive(archive_bytes: bytes, destination: Path) -> None:
-    """Extract regular Git archive members while rejecting traversal and links."""
+    """Extract safe archive content and materialise contained symbolic links.
+
+    Git archives can legitimately contain links used by tests, for example to a
+    bundled certificate. Links are never created on the host: an in-root link
+    target is copied as a regular file or directory instead. Absolute, missing,
+    external, and special entries remain invalid.
+    """
 
     destination.mkdir(parents=True, exist_ok=True)
     root = destination.resolve()
@@ -201,23 +261,53 @@ def safe_extract_git_archive(archive_bytes: bytes, destination: Path) -> None:
         raise MutationExecutionError("Git archive could not be read as a tar file.") from exc
 
     with archive:
+        links: list[tarfile.TarInfo] = []
         for member in archive.getmembers():
             target = (root / member.name).resolve()
             if not target.is_relative_to(root):
                 raise MutationExecutionError("Git archive contains an unsafe path.")
+            if member.issym():
+                links.append(member)
+                continue
             if not (member.isfile() or member.isdir()):
                 raise MutationExecutionError(
                     f"Git archive contains unsupported non-regular entry: {member.name}"
                 )
-            archive.extract(member, root)
+            if member.isdir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            source_file = archive.extractfile(member)
+            if source_file is None:
+                raise MutationExecutionError(f"Git archive member cannot be read: {member.name}")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with source_file, target.open("wb") as destination_file:
+                shutil.copyfileobj(source_file, destination_file)
+
+        for member in links:
+            link_target = Path(member.linkname)
+            if link_target.is_absolute():
+                raise MutationExecutionError("Git archive contains an unsafe symbolic link target.")
+            target = (root / member.name).resolve()
+            source = (target.parent / link_target).resolve()
+            if not source.is_relative_to(root) or not source.exists():
+                raise MutationExecutionError("Git archive contains an unsafe symbolic link target.")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if source.is_file():
+                shutil.copyfile(source, target)
+            elif source.is_dir():
+                shutil.copytree(source, target)
+            else:
+                raise MutationExecutionError("Git archive symbolic link target is unsupported.")
 
 
-def _require_docker_image(image: str) -> str:
+def inspect_local_docker_image(image: str) -> str:
     """Verify Docker and return the local image's digest or immutable image ID."""
 
     try:
+        docker_cli = _docker_cli()
+        docker_environment = _docker_environment(docker_cli)
         version = subprocess.run(
-            ["docker", "version", "--format", "{{.Server.Version}}"],
+            [docker_cli, "version", "--format", "{{.Server.Version}}"],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -225,9 +315,8 @@ def _require_docker_image(image: str) -> str:
             timeout=15,
             check=False,
             stdin=subprocess.DEVNULL,
+            env=docker_environment,
         )
-    except FileNotFoundError as exc:
-        raise MutationExecutionError("Docker CLI is not installed or is not on PATH.") from exc
     except subprocess.TimeoutExpired as exc:
         raise MutationExecutionError("Docker did not respond within 15 seconds.") from exc
 
@@ -239,7 +328,7 @@ def _require_docker_image(image: str) -> str:
     try:
         image_check = subprocess.run(
             [
-                "docker",
+                docker_cli,
                 "image",
                 "inspect",
                 "--format",
@@ -253,6 +342,7 @@ def _require_docker_image(image: str) -> str:
             timeout=15,
             check=False,
             stdin=subprocess.DEVNULL,
+            env=docker_environment,
         )
     except subprocess.TimeoutExpired as exc:
         raise MutationExecutionError("Docker image inspection exceeded 15 seconds.") from exc
@@ -312,8 +402,10 @@ def _remove_timed_out_container(container_name: str) -> str:
     """Best-effort cleanup, limited to the random name created for this run."""
 
     try:
+        docker_cli = _docker_cli()
+        docker_environment = _docker_environment(docker_cli)
         completed = subprocess.run(
-            ["docker", "rm", "--force", container_name],
+            [docker_cli, "rm", "--force", container_name],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -321,8 +413,9 @@ def _remove_timed_out_container(container_name: str) -> str:
             timeout=15,
             check=False,
             stdin=subprocess.DEVNULL,
+            env=docker_environment,
         )
-    except (FileNotFoundError, subprocess.TimeoutExpired):
+    except (MutationExecutionError, subprocess.TimeoutExpired):
         return "DiffMosaic could not confirm cleanup of the timed-out container."
     if completed.returncode != 0:
         detail = completed.stderr.strip() or completed.stdout.strip()
@@ -349,6 +442,8 @@ def _run_in_fresh_workspace(
             target.write_text(candidate.mutated_source, encoding="utf-8")
 
         command = build_docker_command(config, workspace, container_name=container_name)
+        docker_cli = _docker_cli()
+        command[0] = docker_cli
         started = time.monotonic()
         try:
             completed = subprocess.run(
@@ -360,6 +455,7 @@ def _run_in_fresh_workspace(
                 timeout=config.timeout_seconds + 15,
                 check=False,
                 stdin=subprocess.DEVNULL,
+                env=_docker_environment(docker_cli),
             )
         except subprocess.TimeoutExpired as exc:
             duration = time.monotonic() - started
@@ -387,10 +483,17 @@ def run_mutation_plan(
     repo: Path,
     plan: MutationPlan,
     config: DockerSandboxConfig,
+    *,
+    expected_image_identity: str | None = None,
 ) -> MutationExecutionReport:
     """Run a baseline then each candidate against an immutable archived revision."""
 
-    image_identity = _require_docker_image(config.image)
+    image_identity = inspect_local_docker_image(config.image)
+    if expected_image_identity is not None and image_identity != expected_image_identity:
+        raise MutationExecutionError(
+            "Docker image identity does not match the frozen study subject: "
+            f"expected {expected_image_identity}, found {image_identity}."
+        )
     base_commit = _resolve_git_commit(repo, plan.base_revision)
     head_commit = _resolve_git_commit(repo, plan.head_revision)
     archive_bytes = _read_git_archive(repo, head_commit, config.max_archive_bytes)
@@ -400,10 +503,16 @@ def run_mutation_plan(
         head_revision=head_commit,
         image=config.image,
         test_command=config.test_command,
+        working_directory=config.working_directory,
         image_identity=image_identity,
         baseline=baseline,
         planned_candidates=list(plan.candidates),
         notes=list(plan.notes),
+        operator_set_version=plan.operator_set_version,
+        timeout_seconds=config.timeout_seconds,
+        memory_limit=config.memory_limit,
+        cpu_limit=config.cpu_limit,
+        pids_limit=config.pids_limit,
     )
     if baseline.outcome != "passed":
         report.notes.append("Baseline did not pass; mutation candidates were not executed.")

@@ -1,0 +1,71 @@
+{
+  "base_revision": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+  "baseline": {
+    "candidate_id": null,
+    "duration_seconds": 81.719,
+    "exit_code": 1,
+    "outcome": "failed",
+    "stderr_tail": "[2026-08-14 09:21:02,383] WARNING in core: flasgger is not installed; serving the static landing page at / and skipping the Swagger UI and /spec.json.\n127.0.0.1 - - [14/Aug/2026 09:21:24] \"POST /post HTTP/1.1\" 200 373\n",
+    "stdout_tail": "tionError(\"HTTPConnection(host='10.255.255.1', port=80): Failed to establish a new connection: [Errno 101] Network is unreachable\"))\n\nsrc/requests/adapters.py:729: ConnectionError\n=============================== warnings summary ===============================\ntests/test_requests.py::TestRequests::test_set_basicauth[42-42]\ntests/test_requests.py::TestRequests::test_set_basicauth[42-42]\n  /workspace/src/requests/auth.py:45: DeprecationWarning: Non-string usernames will no longer be supported in Requests 3.0.0. Please convert the object you've passed in (42) to a string or bytes object in the near future to avoid problems.\n    warnings.warn(\n\ntests/test_requests.py::TestRequests::test_set_basicauth[42-42]\ntests/test_requests.py::TestRequests::test_set_basicauth[42-42]\n  /workspace/src/requests/auth.py:55: DeprecationWarning: Non-string passwords will no longer be supported in Requests 3.0.0. Please convert the object you've passed in (<class 'int'>) to a string or bytes object in the near future to avoid problems.\n    warnings.warn(\n\ntests/test_requests.py::TestRequests::test_set_basicauth[None-None]\ntests/test_requests.py::TestRequests::test_set_basicauth[None-None]\n  /workspace/src/requests/auth.py:45: DeprecationWarning: Non-string usernames will no longer be supported in Requests 3.0.0. Please convert the object you've passed in (None) to a string or bytes object in the near future to avoid problems.\n    warnings.warn(\n\ntests/test_requests.py::TestRequests::test_set_basicauth[None-None]\ntests/test_requests.py::TestRequests::test_set_basicauth[None-None]\n  /workspace/src/requests/auth.py:55: DeprecationWarning: Non-string passwords will no longer be supported in Requests 3.0.0. Please convert the object you've passed in (<class 'NoneType'>) to a string or bytes object in the near future to avoid problems.\n    warnings.warn(\n\ntests/test_requests.py::TestPreparingURLs::test_different_connection_pool_for_tls_settings_verify_True\ntests/test_requests.py::TestPreparingURLs::test_different_connection_pool_for_tls_settings_verify_bundle_expired_cert\ntests/test_requests.py::TestPreparingURLs::test_different_connection_pool_for_tls_settings_verify_bundle_unexpired_cert\ntests/test_requests.py::TestPreparingURLs::test_different_connection_pool_for_mtls_settings\n  /opt/diffmosaic-venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'localhost'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\n    warnings.warn(\n\ntests/test_utils.py::TestContentEncodingDetection::test_none\ntests/test_utils.py::TestContentEncodingDetection::test_pragmas[<meta charset=\"UTF-8\">]\ntests/test_utils.py::TestContentEncodingDetection::test_pragmas[<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\">]\ntests/test_utils.py::TestContentEncodingDetection::test_pragmas[<meta http-equiv=\"Content-type\" content=\"text/html;charset=UTF-8\" />]\ntests/test_utils.py::TestContentEncodingDetection::test_pragmas[<?xml version=\"1.0\" encoding=\"UTF-8\"?>]\ntests/test_utils.py::TestContentEncodingDetection::test_precedence\n  /workspace/src/requests/utils.py:527: DeprecationWarning: In requests 3.0, get_encodings_from_content will be removed. For more information, please see the discussion on issue #2266. (This warning should only appear once.)\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED tests/test_requests.py::TestTimeout::test_connect_timeout[timeout0] - ...\nFAILED tests/test_requests.py::TestTimeout::test_connect_timeout[timeout1] - ...\nFAILED tests/test_requests.py::TestTimeout::test_total_timeout_connect[timeout0]\nFAILED tests/test_requests.py::TestTimeout::test_total_timeout_connect[timeout1]\n= 4 failed, 615 passed, 15 skipped, 1 xfailed, 18 warnings in 80.24s (0:01:20) =\n"
+  },
+  "candidates": [],
+  "head_revision": "6f66281a1d6326b1b9c4ac09ca30de0fc4e6ef43",
+  "notes": [
+    "Baseline did not pass; mutation candidates were not executed."
+  ],
+  "operator_set_version": "v0.2",
+  "planned_candidates": [
+    {
+      "column": 11,
+      "end_column": 64,
+      "end_line": 34,
+      "expression": "isinstance(obj, SupportsRead) or hasattr(obj, \"read\")",
+      "id": "src/requests/_types.py:34:11:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 34,
+      "original_operator": "or",
+      "path": "src/requests/_types.py",
+      "replacement_operator": "and",
+      "symbol": "has_read"
+    },
+    {
+      "column": 23,
+      "end_column": 72,
+      "end_line": 641,
+      "expression": "isinstance(data, basestring) or _t.has_read(data)",
+      "id": "src/requests/models.py:641:23:boolean_operator:or-to-and",
+      "kind": "boolean_operator",
+      "line": 641,
+      "original_operator": "or",
+      "path": "src/requests/models.py",
+      "replacement_operator": "and",
+      "symbol": "PreparedRequest.prepare_body"
+    }
+  ],
+  "sandbox": {
+    "image": "diffmosaic/requests-protocol-hasattr:6f66281",
+    "image_identity": "diffmosaic/requests-protocol-hasattr@sha256:9794561cbdb76f667185752567e5564f41ff90654cbb0b2c252f5f69cfeb42f0",
+    "limits": {
+      "cpu_limit": 1.0,
+      "memory_limit": "1g",
+      "pids_limit": 256,
+      "timeout_seconds": 120
+    },
+    "network": "none",
+    "root_filesystem": "read_only",
+    "test_command": [
+      "python",
+      "-m",
+      "pytest"
+    ],
+    "working_directory": "/workspace"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "candidate_count": 0,
+    "inconclusive": 0,
+    "killed": 0,
+    "mutation_adequacy": null,
+    "survived": 0
+  }
+}

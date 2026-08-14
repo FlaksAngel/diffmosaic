@@ -2,19 +2,31 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e ".[dev]"
-      - run: python -m pytest
+      - name: Install the package and test dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Run unit tests
+        run: python -m pytest -q
+      - name: Validate committed research manifests without execution
+        run: |
+          python -m diffmosaic corpus-validate --manifest corpus/pilot-v0.1.json --format markdown
+          python -m diffmosaic corpus-validate --manifest corpus/study-v0.2.json --verify-artifacts --format markdown

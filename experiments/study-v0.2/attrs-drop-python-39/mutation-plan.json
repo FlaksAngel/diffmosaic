@@ -1,0 +1,23 @@
+{
+  "base_revision": "c1c1e0e25f855be68caf1d1a1dfa832a25acbf58",
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "column": 11,
+      "end_column": 71,
+      "end_line": 1602,
+      "expression": "match_args and not _has_own_attribute(cls, \"__match_args__\")",
+      "id": "src/attr/_make.py:1602:11:boolean_operator:and-to-or",
+      "kind": "boolean_operator",
+      "line": 1602,
+      "original_operator": "and",
+      "path": "src/attr/_make.py",
+      "replacement_operator": "or",
+      "symbol": "attrs.wrap"
+    }
+  ],
+  "head_revision": "9b98a730bf71cabae9bcedb8a3aac72289c23733",
+  "notes": [],
+  "operator_set_version": "v0.2",
+  "schema_version": "0.1"
+}

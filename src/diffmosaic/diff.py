@@ -133,3 +133,24 @@ def read_file_at_revision(repo: Path, revision: str, path: str) -> str:
     """Return one UTF-8 source file from a Git revision."""
 
     return _run_git(repo, "show", f"{revision}:{path}")
+
+
+def read_first_parent_non_merge_revisions(repo: Path, max_count: int) -> list[tuple[str, str]]:
+    """Return newest-first `(commit, parent)` pairs without mutating a repository."""
+
+    if max_count < 1:
+        raise ValueError("max_count must be at least 1.")
+    raw = _run_git(
+        repo,
+        "log",
+        "--first-parent",
+        "--no-merges",
+        f"--max-count={max_count}",
+        "--format=%H %P",
+    )
+    revisions: list[tuple[str, str]] = []
+    for line in raw.splitlines():
+        parts = line.split()
+        if len(parts) == 2:
+            revisions.append((parts[0], parts[1]))
+    return revisions
